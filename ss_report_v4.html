@@ -86,6 +86,10 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
 <header class="hdr">
   <div class="hdr-ttl"><span class="hdr-badge">SS</span>SS事業部　営業ダッシュボード</div>
   <div style="display:flex;align-items:center;gap:12px;">
+    <a href="closing.html" target="_blank"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:#dc2626;color:#fff;border-radius:5px;font-size:12px;font-weight:700;text-decoration:none;">
+      🎯 当月クロージング
+    </a>
     <a href="https://nanbara-cloud.github.io/h2tyosan/yosan.html" target="_blank"
        style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--primary);color:#fff;border-radius:5px;font-size:12px;font-weight:700;text-decoration:none;">
       📊 予算進捗
@@ -109,6 +113,7 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
   <a class="na active" href="#kpi">月次KPI</a>
   <a class="na" href="#finder">月別ファインダー</a>
   <a class="na" href="#mrr">保有売上・チャーン</a>
+  <a class="na" href="#closing">当月クロージング</a>
   <a class="na" href="#pipeline">パイプライン</a>
   <a class="na" href="#topics">週間トピック</a>
 </nav>
@@ -209,6 +214,65 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
       </tr></thead><tbody id="churnTb"></tbody></table></div>
     </div>
   </section>
+
+  <!-- 当月クロージング管理 -->
+  <section class="sec" id="closing">
+    <div class="sec-ttl">当月クロージング管理
+      <span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">締結日または回答予定日が当月の案件</span>
+    </div>
+
+    <!-- 月選択 -->
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
+      <span class="fl">対象月：</span>
+      <select class="ysel" id="clYear" onchange="onClYear()"></select>
+      <select class="ysel" id="clMonth" onchange="renderClosing()"></select>
+      <span class="fl" style="margin-left:8px;">担当者：</span>
+      <button class="fbl active" onclick="setClF('all',this)">全員</button>
+      <button class="fbl" onclick="setClF('南原龍司',this)">南原</button>
+      <button class="fbl" onclick="setClF('田中莉奈',this)">田中</button>
+      <button class="fbl" onclick="setClF('中岡世里菜',this)">中岡</button>
+      <button class="fbl" onclick="setClF('高橋広輝',this)">高橋</button>
+    </div>
+
+    <!-- サマリーカード -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;" id="clCards">
+      <div class="sc"><div class="sc-lbl">契約完了（当月）</div><div class="sc-val" id="cl-juc" style="color:var(--danger)">—</div><div class="sc-unit" id="cl-juc-u"></div></div>
+      <div class="sc"><div class="sc-lbl">見込み（当月内回答予定）</div><div class="sc-val" id="cl-mik" style="color:var(--success)">—</div><div class="sc-unit" id="cl-mik-u"></div></div>
+      <div class="sc"><div class="sc-lbl">合計件数</div><div class="sc-val" id="cl-all">—</div></div>
+      <div class="sc"><div class="sc-lbl">当月契約売上合計</div><div class="sc-val" id="cl-uriage" style="color:var(--primary)">—</div></div>
+    </div>
+
+    <!-- 見込み -->
+    <div style="margin-bottom:16px;">
+      <div style="font-size:12px;font-weight:700;color:var(--success);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+        <span style="display:inline-block;width:3px;height:14px;background:var(--success);border-radius:2px;"></span>
+        見込み案件 <span id="cl-mik-cnt" style="font-weight:400;color:var(--muted);"></span>
+      </div>
+      <div class="tw tws">
+        <table class="dt"><thead><tr>
+          <th>担当</th><th>屋号 / 法人名</th><th>見込みランク</th>
+          <th class="r">月額単価</th><th>アポ経路</th>
+          <th>商談予定日</th><th>回答予定日</th>
+        </tr></thead><tbody id="clMikTb"></tbody></table>
+      </div>
+    </div>
+
+    <!-- 契約完了 -->
+    <div>
+      <div style="font-size:12px;font-weight:700;color:var(--danger);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+        <span style="display:inline-block;width:3px;height:14px;background:var(--danger);border-radius:2px;"></span>
+        契約完了案件 <span id="cl-juc-cnt" style="font-weight:400;color:var(--muted);"></span>
+      </div>
+      <div class="tw tws">
+        <table class="dt"><thead><tr>
+          <th>担当</th><th>屋号 / 法人名</th><th>アポ経路</th>
+          <th>締結日</th><th>課金開始日</th>
+          <th class="r">月額単価</th><th class="r">契約期間</th><th class="r">契約売上</th>
+        </tr></thead><tbody id="clJucTb"></tbody></table>
+      </div>
+    </div>
+  </section>
+
   <section class="sec" id="pipeline">
     <div class="sec-ttl">パイプライン</div>
     <div class="pipe-wrap">
@@ -513,23 +577,146 @@ function toggleAcc(id){
 }
 
 function buildPipeYearSel(){
+  const now=new Date();
+  const curYM=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
   const mset=new Set();
   pipeData.forEach(r=>{if(!r.shodan_d)return;const d=new Date(r.shodan_d.replace(/\//g,'-'));mset.add(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'));});
   months.slice(-12).forEach(m=>mset.add(m));
   const pYears=[...new Set([...mset].map(m=>m.split('-')[0]))].sort((a,b)=>b-a);
   const ys=document.getElementById('pyear');
-  ys.innerHTML=pYears.map(y=>'<option value="'+y+'">'+y+'年</option>').join('');
-  onPipeYear();
+  const curY=now.getFullYear().toString();
+  ys.innerHTML=pYears.map(y=>'<option value="'+y+'"'+(y===curY?' selected':'')+'>'+y+'年</option>').join('');
+  onPipeYear(curYM);
 }
-function onPipeYear(){
+function onPipeYear(defaultYM){
   const y=document.getElementById('pyear').value;
+  const now=new Date();
+  const curYM=defaultYM||(now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0'));
   const mset=new Set();
   pipeData.forEach(r=>{if(!r.shodan_d)return;const d=new Date(r.shodan_d.replace(/\//g,'-'));const m=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');if(m.startsWith(y))mset.add(m);});
   months.filter(m=>m.startsWith(y)).forEach(m=>mset.add(m));
   const ms=[...mset].filter(m=>m.startsWith(y)).sort().reverse();
   const ms2=document.getElementById('pmonth');
-  ms2.innerHTML='<option value="all">全月</option>'+ms.map(m=>'<option value="'+m+'">'+parseInt(m.split('-')[1])+'月</option>').join('');
+  ms2.innerHTML='<option value="all">全月</option>'+ms.map(m=>'<option value="'+m+'"'+(m===curYM?' selected':'')+'>'+parseInt(m.split('-')[1])+'月</option>').join('');
   renderPipe();
+}
+
+// ============================================================
+// 当月クロージング管理
+// ============================================================
+let clFilter='all';
+
+function buildClosingSel(){
+  const now=new Date();
+  const curYM=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+  const mset=new Set();
+  pipeData.forEach(r=>{
+    if(r.ans_d) mset.add(r.ans_d.replace(/\//g,'-').slice(0,7));
+    if(r.shodan_d) mset.add(r.shodan_d.replace(/\//g,'-').slice(0,7));
+  });
+  juchuData.forEach(r=>{if(r.keiyaku_d) mset.add(r.keiyaku_d.replace(/\//g,'-').slice(0,7));});
+  const allM=[...mset].filter(m=>/^\d{4}-\d{2}$/.test(m)).sort().reverse();
+  const years=[...new Set(allM.map(m=>m.slice(0,4)))].sort((a,b)=>b-a);
+  const curY=now.getFullYear().toString();
+  const ys=document.getElementById('clYear');
+  ys.innerHTML=years.map(y=>'<option value="'+y+'"'+(y===curY?' selected':'')+'>'+y+'年</option>').join('');
+  buildClosingMonthSel(curY, allM, curYM);
+}
+function buildClosingMonthSel(y, allM, defaultYM){
+  const ms=(allM||[]).filter(m=>m.startsWith(y));
+  const ms2=document.getElementById('clMonth');
+  const now=new Date();
+  const curYM=defaultYM||(now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0'));
+  ms2.innerHTML=ms.map(m=>'<option value="'+m+'"'+(m===curYM?' selected':'')+'>'+(parseInt(m.split('-')[1]))+'月</option>').join('');
+  renderClosing();
+}
+function onClYear(){
+  const y=document.getElementById('clYear').value;
+  const mset=new Set();
+  pipeData.forEach(r=>{
+    if(r.ans_d) mset.add(r.ans_d.replace(/\//g,'-').slice(0,7));
+    if(r.shodan_d) mset.add(r.shodan_d.replace(/\//g,'-').slice(0,7));
+  });
+  juchuData.forEach(r=>{if(r.keiyaku_d) mset.add(r.keiyaku_d.replace(/\//g,'-').slice(0,7));});
+  const allM=[...mset].filter(m=>/^\d{4}-\d{2}$/.test(m)).sort().reverse();
+  buildClosingMonthSel(y, allM, null);
+}
+function setClF(v,btn){clFilter=v;document.querySelectorAll('#closing .fbl').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderClosing();}
+
+function mOf(d){if(!d)return'';return d.replace(/\//g,'-').slice(0,7);}
+
+function renderClosing(){
+  const selYM=document.getElementById('clMonth').value;
+  if(!selYM)return;
+
+  // 見込み：回答予定日 or 商談予定日が当月
+  const mikRows=pipeData.filter(r=>{
+    if(r.status!=='見込み')return false;
+    if(clFilter!=='all'&&r.person!==clFilter)return false;
+    return mOf(r.ans_d)===selYM||mOf(r.shodan_d)===selYM;
+  });
+
+  // 契約完了：締結日が当月
+  const jucRows=juchuData.filter(r=>{
+    if(clFilter!=='all'&&r.person!==clFilter)return false;
+    return mOf(r.keiyaku_d)===selYM;
+  });
+
+  const jucU=jucRows.reduce((s,r)=>s+(r.price*r.term),0);
+  const jucMRR=jucRows.reduce((s,r)=>s+r.price,0);
+
+  // サマリー更新
+  document.getElementById('cl-juc').textContent=jucRows.length||'0';
+  document.getElementById('cl-juc-u').textContent=jucMRR>0?'月額合計 ¥'+jucMRR.toLocaleString():'';
+  document.getElementById('cl-mik').textContent=mikRows.length||'0';
+  const mikMRR=mikRows.reduce((s,r)=>s+(r.price||0),0);
+  document.getElementById('cl-mik-u').textContent=mikMRR>0?'月額合計 ¥'+mikMRR.toLocaleString():'未確定';
+  document.getElementById('cl-all').textContent=(jucRows.length+mikRows.length)||'0';
+  document.getElementById('cl-uriage').textContent=jucU>0?'¥'+jucU.toLocaleString():'—';
+
+  // 見込みテーブル
+  document.getElementById('cl-mik-cnt').textContent=mikRows.length?mikRows.length+'件':'';
+  const mikTb=document.getElementById('clMikTb');mikTb.innerHTML='';
+  if(!mikRows.length){
+    mikTb.innerHTML='<tr><td colspan="7" class="nodata">当月内に回答予定・商談予定の見込み案件はありません</td></tr>';
+  } else {
+    mikRows.forEach(r=>{
+      const i=MAIN.indexOf(r.person);const dc=i>=0?DCLS[i]:'d5';
+      const rc={'S':'rs','A':'ra','B':'rb','C':'rc','D':'rd'}[r.rank]||'';
+      const anHit=mOf(r.ans_d)===selYM;
+      const shHit=mOf(r.shodan_d)===selYM;
+      const tr=document.createElement('tr');
+      tr.innerHTML='<td><span class="md"><span class="dot '+dc+'"></span>'+r.person+'</span></td>'
+        +'<td><strong>'+(r.name||'—')+'</strong></td>'
+        +'<td><span class="'+rc+'">'+(r.rank||'—')+'</span></td>'
+        +'<td class="r">'+(r.price>0?'¥'+r.price.toLocaleString():'—')+'</td>'
+        +'<td><span class="rtag">'+(r.route||'—')+'</span></td>'
+        +'<td style="'+(shHit?'color:var(--danger);font-weight:700;':'color:var(--muted);')+'">'+(r.shodan_d||'—')+'</td>'
+        +'<td style="'+(anHit?'color:var(--danger);font-weight:700;':'color:var(--muted);')+'">'+(r.ans_d||'—')+'</td>';
+      mikTb.appendChild(tr);
+    });
+  }
+
+  // 契約完了テーブル
+  document.getElementById('cl-juc-cnt').textContent=jucRows.length?jucRows.length+'件':'';
+  const jucTb=document.getElementById('clJucTb');jucTb.innerHTML='';
+  if(!jucRows.length){
+    jucTb.innerHTML='<tr><td colspan="8" class="nodata">当月の契約完了案件はありません</td></tr>';
+  } else {
+    jucRows.forEach(r=>{
+      const i=MAIN.indexOf(r.person);const dc=i>=0?DCLS[i]:'d5';
+      const tr=document.createElement('tr');
+      tr.innerHTML='<td><span class="md"><span class="dot '+dc+'"></span>'+r.person+'</span></td>'
+        +'<td><strong>'+(r.name||'—')+'</strong></td>'
+        +'<td><span class="rtag">'+(r.route||'—')+'</span></td>'
+        +'<td style="color:var(--danger);font-weight:700;">'+(r.keiyaku_d||'—')+'</td>'
+        +'<td>'+(r.kakin_d||'—')+'</td>'
+        +'<td class="r">'+(r.price>0?'¥'+r.price.toLocaleString():'—')+'</td>'
+        +'<td class="r">'+r.term+'ヶ月</td>'
+        +'<td class="r"><strong style="color:var(--danger)">'+(r.price>0?'¥'+(r.price*r.term).toLocaleString():'—')+'</strong></td>';
+      jucTb.appendChild(tr);
+    });
+  }
 }
 function renderPipe(){
   const selM=document.getElementById('pmonth').value;
@@ -664,7 +851,7 @@ function swTab(id,btn){document.querySelectorAll('.tab-pane').forEach(e=>e.class
 document.querySelectorAll('.na').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.querySelectorAll('.na').forEach(x=>x.classList.remove('active'));a.classList.add('active');const el=document.getElementById(a.getAttribute('href').slice(1));if(el)el.scrollIntoView({behavior:'smooth',block:'start'});});});
 function setWeek(){const now=new Date();const mon=new Date(now);mon.setDate(now.getDate()-((now.getDay()||7)-1));const sun=new Date(mon);sun.setDate(mon.getDate()+6);const f=d=>(d.getMonth()+1)+'/'+d.getDate();document.getElementById('wkLbl').textContent='（'+f(mon)+'〜'+f(sun)+'の週）';}
 function fmtN(n){if(n>=10000)return(n/10000).toFixed(1)+'万';return n.toLocaleString();}
-function boot(){buildYearSel();renderKPI(currentMonth);renderFinder();buildPipeYearSel();buildJuchuYearSel();renderJuchu();}
+function boot(){buildYearSel();renderKPI(currentMonth);renderFinder();buildPipeYearSel();buildJuchuYearSel();buildClosingSel();renderJuchu();}
 months=Object.keys(kpiData).sort();currentMonth=months[months.length-1];
 setWeek();boot();
 document.getElementById('updAt').textContent='最終更新: 2026年4月6日 15:50（実データ更新）';
