@@ -64,6 +64,11 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
 .churn-drop{margin-top:6px;text-align:left;}
 .churn-item{display:flex;justify-content:space-between;align-items:center;padding:4px 8px;border-radius:4px;background:#fef2f2;border-left:2px solid var(--danger);margin-bottom:3px;font-size:11px;color:var(--text);white-space:normal;}
 .churn-item span{color:var(--danger);font-weight:700;margin-left:8px;white-space:nowrap;}
+/* 概算・確定バッジ */
+.est-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;margin-left:8px;vertical-align:middle;}
+.est-badge.est{background:#fff7ed;color:var(--warn);border:1px solid #fed7aa;}
+.est-badge.confirmed{background:#f0fdf4;color:var(--success);border:1px solid #bbf7d0;}
+.mrr-status-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6;}
 
 /* 目標 vs 実績 */
 .tgt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
@@ -89,6 +94,10 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
 <header class="hdr">
   <div class="hdr-ttl"><span class="hdr-badge">SS</span>SS事業部　営業ダッシュボード</div>
   <div style="display:flex;align-items:center;gap:12px;">
+    <a href="https://nanbara-cloud.github.io/cf/cashflow.html" target="_blank"
+       style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:#7c3aed;color:#fff;border-radius:5px;font-size:12px;font-weight:700;text-decoration:none;">
+      💹 キャッシュフロー
+    </a>
     <a href="https://nanbara-cloud.github.io/h2tyosan/yosan.html" target="_blank"
        style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--primary);color:#fff;border-radius:5px;font-size:12px;font-weight:700;text-decoration:none;">
       📊 予算進捗
@@ -204,26 +213,10 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
       <span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">ユニーク店舗 × 月額単価ベース</span>
     </div>
 
-    <!-- 現在稼働サマリー -->
-    <div class="mrr-grid" style="margin-bottom:16px;">
-      <div class="mrr-c">
-        <div class="mrr-lbl">総保有MRR（現在稼働中）</div>
-        <div class="mrr-val">¥7,571,661</div>
-        <div class="mrr-sub">463店舗 稼働中</div>
-      </div>
-      <div class="mrr-c">
-        <div class="mrr-lbl">2026年4月 解約MRR</div>
-        <div class="mrr-val" style="color:var(--danger);">¥143,000</div>
-        <div class="mrr-sub">5件（田中4件・中岡1件）</div>
-      </div>
-      <div class="mrr-c">
-        <div class="mrr-lbl">当月チャーンレート（4月）</div>
-        <div class="mrr-val" style="color:var(--success);">1.9%</div>
-        <div class="mrr-sub">解約MRR ÷ 総保有MRR</div>
-      </div>
-    </div>
+    <!-- 現在稼働サマリー（概算/確定 JS制御） -->
+    <div id="mrrSummaryWrap"></div>
 
-    <!-- 担当者別 現在保有MRR -->
+    <!-- 担当者別 現在保有MRR（JS制御） -->
     <div class="tw tws" style="margin-bottom:20px;">
       <table class="dt"><thead><tr>
         <th>担当者</th>
@@ -233,125 +226,98 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
         <th class="r">4月解約MRR</th>
         <th class="r">チャーンレート</th>
       </tr></thead>
-      <tbody>
-        <tr>
-          <td><span class="md"><span class="dot d1"></span>南原龍司</span></td>
-          <td class="r"><strong>¥1,173,600</strong></td>
-          <td class="r">194件</td>
-          <td class="r">—</td>
-          <td class="r">—</td>
-          <td class="r"><strong style="color:var(--success);">0.0%</strong></td>
-        </tr>
-        <tr>
-          <td><span class="md"><span class="dot d2"></span>田中莉奈</span></td>
-          <td class="r"><strong>¥2,682,158</strong></td>
-          <td class="r">130件</td>
-          <td class="r">
-            <span class="churn-toggle" onclick="toggleChurn('churn-tanaka')" style="color:var(--danger);cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:4px;">
-              4件 <span id="arr-tanaka" style="font-size:9px;transition:transform .2s;display:inline-block;">▼</span>
-            </span>
-            <div id="churn-tanaka" class="churn-drop" style="display:none;">
-              <div class="churn-item">CLOUDNINE 烏丸御池 パーソナルトレーニングジム<span>¥35,000</span></div>
-              <div class="churn-item">健康堂整骨院 蒲田院<span>¥30,000</span></div>
-              <div class="churn-item">MOGU<span>¥30,000</span></div>
-              <div class="churn-item">createur miju【クレアトゥール ミジュ】<span>¥13,000</span></div>
-            </div>
-          </td>
-          <td class="r" style="color:var(--danger);">¥108,000</td>
-          <td class="r"><strong style="color:var(--warn);">3.9%</strong></td>
-        </tr>
-        <tr>
-          <td><span class="md"><span class="dot d3"></span>中岡世里菜</span></td>
-          <td class="r"><strong>¥2,644,403</strong></td>
-          <td class="r">88件</td>
-          <td class="r">
-            <span class="churn-toggle" onclick="toggleChurn('churn-nakaoka')" style="color:var(--danger);cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:4px;">
-              1件 <span id="arr-nakaoka" style="font-size:9px;transition:transform .2s;display:inline-block;">▼</span>
-            </span>
-            <div id="churn-nakaoka" class="churn-drop" style="display:none;">
-              <div class="churn-item">メルコヘアデザイン<span>¥35,000</span></div>
-            </div>
-          </td>
-          <td class="r" style="color:var(--danger);">¥35,000</td>
-          <td class="r"><strong style="color:var(--success);">1.3%</strong></td>
-        </tr>
-        <tr>
-          <td><span class="md"><span class="dot d4"></span>高橋広輝</span></td>
-          <td class="r"><strong>¥831,500</strong></td>
-          <td class="r">46件</td>
-          <td class="r">—</td>
-          <td class="r">—</td>
-          <td class="r"><strong style="color:var(--success);">0.0%</strong></td>
-        </tr>
-        <tr>
-          <td><span class="md"><span class="dot d5"></span>その他</span></td>
-          <td class="r">¥240,000</td>
-          <td class="r">5件</td>
-          <td class="r">—</td><td class="r">—</td>
-          <td class="r">0.0%</td>
-        </tr>
-        <tr class="tot">
-          <td><strong>合計</strong></td>
-          <td class="r"><strong>¥7,571,661</strong></td>
-          <td class="r"><strong>463件</strong></td>
-          <td class="r" style="color:var(--danger);"><strong>5件</strong></td>
-          <td class="r" style="color:var(--danger);"><strong>¥143,000</strong></td>
-          <td class="r"><strong style="color:var(--success);">1.9%</strong></td>
-        </tr>
+      <tbody id="mrrPersonTb">
+        <!-- JS で描画 -->
       </tbody></table>
     </div>
 
-    <!-- 月別MRR推移（年タブ切り替え） -->
+    <!-- 月別MRR推移 -->
     <div style="font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
       <span style="display:inline-block;width:3px;height:16px;background:var(--primary);border-radius:2px;"></span>
       月別MRR推移
-      <span style="font-size:11px;font-weight:400;color:var(--muted);">※チャーン率 = 解約MRR ÷ 稼働MRR（ユニーク店舗×月額単価）　※2026年4月は集計途中</span>
+      <span style="font-size:11px;font-weight:400;color:var(--muted);">※ユニーク店舗×月額単価ベース　※2026年4月は集計途中</span>
     </div>
     <div style="background:var(--white);border:1px solid var(--border);border-radius:7px;overflow:hidden;">
-      <div class="tab-row">
-        <button class="tab-btn active" onclick="swTab('mrrTab2025',this)">2025年</button>
-        <button class="tab-btn" onclick="swTab('mrrTab2026',this)">2026年</button>
+
+      <!-- 上段：表示モード切り替え -->
+      <div class="tab-row" id="mrrModeRow">
+        <button class="tab-btn active" onclick="mrrSwMode('mrrByMonth')">📅 月別比較</button>
+        <button class="tab-btn" onclick="mrrSwMode('mrrByPerson')">👤 個人別推移</button>
       </div>
 
-      <!-- 2025年 -->
-      <div class="tab-pane active" id="mrrTab2025">
+      <!-- ① 月別比較ビュー -->
+      <div id="mrrByMonth">
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--border);">
+          <span class="fl">対象月：</span>
+          <select class="ysel" id="mrrMonthSel" onchange="renderMrrMonth()"><option value="2025-04">2025年4月</option><option value="2025-05">2025年5月</option><option value="2025-06">2025年6月</option><option value="2025-07">2025年7月</option><option value="2025-08">2025年8月</option><option value="2025-09">2025年9月</option><option value="2025-10">2025年10月</option><option value="2025-11">2025年11月</option><option value="2025-12">2025年12月</option><option value="2026-01">2026年1月</option><option value="2026-02">2026年2月</option><option value="2026-03">2026年3月</option><option value="2026-04">2026年4月</option>
+          </select>
+        </div>
         <div class="tws">
-          <table class="dt"><thead><tr>
-            <th>月</th><th class="r">稼働MRR</th><th class="r">稼働件数</th>
-            <th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th>
-          </tr></thead><tbody>
-            <tr><td><strong>2025年4月</strong></td><td class="r">¥9,125,996</td><td class="r">716件</td><td class="r">¥185,000</td><td class="r">11件</td><td class="r"><strong style="color:var(--success);">2.0%</strong></td></tr>
-            <tr><td><strong>2025年5月</strong></td><td class="r">¥9,152,796</td><td class="r">733件</td><td class="r">¥298,500</td><td class="r">16件</td><td class="r"><strong style="color:var(--success);">3.2%</strong></td></tr>
-            <tr><td><strong>2025年6月</strong></td><td class="r">¥9,159,696</td><td class="r">742件</td><td class="r" style="color:var(--warn);">¥484,800</td><td class="r">44件</td><td class="r"><strong style="color:var(--warn);">5.0%</strong></td></tr>
-            <tr><td><strong>2025年7月</strong></td><td class="r">¥8,938,096</td><td class="r">701件</td><td class="r">¥345,000</td><td class="r">14件</td><td class="r"><strong style="color:var(--success);">3.7%</strong></td></tr>
-            <tr><td><strong>2025年8月</strong></td><td class="r">¥8,415,588</td><td class="r">586件</td><td class="r">¥222,000</td><td class="r">9件</td><td class="r"><strong style="color:var(--success);">2.6%</strong></td></tr>
-            <tr><td><strong>2025年9月</strong></td><td class="r">¥8,693,588</td><td class="r">690件</td><td class="r" style="color:var(--danger);">¥808,000</td><td class="r">147件</td><td class="r"><strong style="color:var(--danger);">8.5%</strong></td></tr>
-            <tr><td><strong>2025年10月</strong></td><td class="r">¥7,970,388</td><td class="r">554件</td><td class="r" style="color:var(--warn);">¥328,000</td><td class="r">44件</td><td class="r"><strong style="color:var(--warn);">4.0%</strong></td></tr>
-            <tr><td><strong>2025年11月</strong></td><td class="r">¥7,999,388</td><td class="r">512件</td><td class="r" style="color:var(--warn);">¥420,000</td><td class="r">42件</td><td class="r"><strong style="color:var(--warn);">5.0%</strong></td></tr>
-            <tr><td><strong>2025年12月</strong></td><td class="r">¥7,659,288</td><td class="r">473件</td><td class="r" style="color:var(--warn);">¥399,500</td><td class="r">44件</td><td class="r"><strong style="color:var(--warn);">5.0%</strong></td></tr>
-          </tbody></table>
+          <table class="dt" id="mrrMonthTb">
+            <thead><tr><th>担当者</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead>
+            <tbody id="mrrMonthBody"></tbody>
+          </table>
         </div>
       </div>
 
-      <!-- 2026年 -->
-      <div class="tab-pane" id="mrrTab2026">
-        <div class="tws">
-          <table class="dt"><thead><tr>
-            <th>月</th><th class="r">稼働MRR</th><th class="r">稼働件数</th>
-            <th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th>
-          </tr></thead><tbody>
-            <tr><td><strong>2026年1月</strong></td><td class="r">¥7,375,188</td><td class="r">435件</td><td class="r">¥248,500</td><td class="r">24件</td><td class="r"><strong style="color:var(--success);">3.3%</strong></td></tr>
-            <tr><td><strong>2026年2月</strong></td><td class="r">¥7,230,888</td><td class="r">411件</td><td class="r">¥160,500</td><td class="r">18件</td><td class="r"><strong style="color:var(--success);">2.2%</strong></td></tr>
-            <tr><td><strong>2026年3月</strong></td><td class="r">¥7,154,988</td><td class="r">442件</td><td class="r">¥132,600</td><td class="r">7件</td><td class="r"><strong style="color:var(--success);">1.8%</strong></td></tr>
-            <tr>
-              <td><strong>2026年4月</strong><span style="font-size:10px;color:var(--muted);margin-left:6px;">集計途中</span></td>
-              <td class="r">¥7,571,661</td><td class="r">463件</td>
-              <td class="r" style="color:var(--success);">¥143,000</td><td class="r">5件</td>
-              <td class="r"><strong style="color:var(--success);">1.9%</strong></td>
-            </tr>
-          </tbody></table>
+      <!-- ② 個人別推移ビュー -->
+      <div id="mrrByPerson" style="display:none;">
+        <!-- 担当者タブ -->
+        <div class="tab-row" id="mrrPersonRow" style="background:var(--bg);border-bottom:1px solid var(--border);">
+          <button class="tab-btn active" onclick="mrrSwPerson('mrrPAll')">全体</button>
+          <button class="tab-btn" onclick="mrrSwPerson('mrrP0')"><span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:var(--c1);display:inline-block;"></span>南原</span></button>
+          <button class="tab-btn" onclick="mrrSwPerson('mrrP1')"><span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:var(--c2);display:inline-block;"></span>田中</span></button>
+          <button class="tab-btn" onclick="mrrSwPerson('mrrP2')"><span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:var(--c3);display:inline-block;"></span>中岡</span></button>
+          <button class="tab-btn" onclick="mrrSwPerson('mrrP3')"><span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:var(--c4);display:inline-block;"></span>高橋</span></button>
         </div>
-      </div>
+
+        <!-- 全体 -->
+        <div id="mrrPAll">
+          <div class="tab-row" id="mrrPAllYRow">
+            <button class="tab-btn active" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrPAllY25','mrrPAllYRow')">2025年</button>
+            <button class="tab-btn" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrPAllY26','mrrPAllYRow')">2026年</button>
+          </div>
+          <div id="mrrPAllY25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年4月</strong></td><td class="r">¥9,125,996</td><td class="r">716件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥207,273<span style="font-size:10px;color:var(--muted);margin-left:3px;">23件</span></td><td class="r" style="color:var(--success)">¥185,000</td><td class="r">11件</td><td class="r"><strong style="color:var(--success);">2.0%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥9,152,796</td><td class="r">733件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥258,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">31件</span></td><td class="r" style="color:var(--warn)">¥298,500</td><td class="r">16件</td><td class="r"><strong style="color:var(--warn);">3.2%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥9,159,696</td><td class="r">742件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥225,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">21件</span></td><td class="r" style="color:var(--warn)">¥484,800</td><td class="r">44件</td><td class="r"><strong style="color:var(--warn);">5.0%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥8,938,096</td><td class="r">701件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥169,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">6件</span></td><td class="r" style="color:var(--warn)">¥345,000</td><td class="r">14件</td><td class="r"><strong style="color:var(--warn);">3.7%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥8,415,588</td><td class="r">586件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥166,092<span style="font-size:10px;color:var(--muted);margin-left:3px;">6件</span></td><td class="r" style="color:var(--success)">¥222,000</td><td class="r">9件</td><td class="r"><strong style="color:var(--success);">2.6%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥8,693,588</td><td class="r">690件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥119,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">5件</span></td><td class="r" style="color:var(--danger)">¥808,000</td><td class="r">147件</td><td class="r"><strong style="color:var(--danger);">8.5%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥7,970,388</td><td class="r">554件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥163,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">11件</span></td><td class="r" style="color:var(--warn)">¥328,000</td><td class="r">44件</td><td class="r"><strong style="color:var(--warn);">4.0%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥7,999,388</td><td class="r">512件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥369,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--warn)">¥420,000</td><td class="r">42件</td><td class="r"><strong style="color:var(--warn);">5.0%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥7,659,288</td><td class="r">473件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥89,100<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--warn)">¥399,500</td><td class="r">44件</td><td class="r"><strong style="color:var(--warn);">5.0%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrPAllY26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥7,375,188</td><td class="r">435件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥117,300<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--warn)">¥248,500</td><td class="r">24件</td><td class="r"><strong style="color:var(--warn);">3.3%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥7,230,888</td><td class="r">411件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥191,300<span style="font-size:10px;color:var(--muted);margin-left:3px;">7件</span></td><td class="r" style="color:var(--success)">¥160,500</td><td class="r">18件</td><td class="r"><strong style="color:var(--success);">2.2%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥7,154,988</td><td class="r">442件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥228,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">34件</span></td><td class="r" style="color:var(--success)">¥132,600</td><td class="r">7件</td><td class="r"><strong style="color:var(--success);">1.8%</strong></td></tr><tr><td><strong>2026年4月</strong><span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></td><td class="r">¥7,571,661</td><td class="r">463件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥62,273<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥143,000</td><td class="r">5件</td><td class="r"><strong style="color:var(--success);">1.9%</strong></td></tr></tbody></table></div></div>
+        </div>
+        <!-- 南原 -->
+        <div id="mrrP0" style="display:none;">
+          <div class="tab-row" id="mrrP0YRow">
+            <button class="tab-btn active" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP0Y25','mrrP0YRow')">2025年</button>
+            <button class="tab-btn" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP0Y26','mrrP0YRow')">2026年</button>
+          </div>
+          <div id="mrrP0Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年4月</strong></td><td class="r">¥1,925,000</td><td class="r">367件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥75,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">18件</span></td><td class="r" style="color:var(--warn)">¥86,000</td><td class="r">5件</td><td class="r"><strong style="color:var(--warn);">4.3%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥1,915,000</td><td class="r">387件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥81,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">25件</span></td><td class="r" style="color:var(--danger)">¥154,000</td><td class="r">11件</td><td class="r"><strong style="color:var(--danger);">7.4%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥1,924,000</td><td class="r">392件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥83,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">16件</span></td><td class="r" style="color:var(--warn)">¥63,000</td><td class="r">21件</td><td class="r"><strong style="color:var(--warn);">3.2%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥1,846,000</td><td class="r">370件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥12,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">0.6%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥1,576,000</td><td class="r">281件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥40,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">2.5%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥1,809,000</td><td class="r">368件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥15,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--danger)">¥531,000</td><td class="r">129件</td><td class="r"><strong style="color:var(--danger);">22.7%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥1,293,000</td><td class="r">241件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥3,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--danger)">¥140,000</td><td class="r">36件</td><td class="r"><strong style="color:var(--danger);">9.8%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥1,141,000</td><td class="r">204件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--danger)">¥144,000</td><td class="r">29件</td><td class="r"><strong style="color:var(--danger);">11.2%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥1,042,600</td><td class="r">177件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥21,600<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--danger)">¥125,000</td><td class="r">9件</td><td class="r"><strong style="color:var(--danger);">10.7%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP0Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥998,600</td><td class="r">169件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥70,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥27,000</td><td class="r">9件</td><td class="r"><strong style="color:var(--success);">2.6%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥952,600</td><td class="r">158件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--danger)">¥71,000</td><td class="r">13件</td><td class="r"><strong style="color:var(--danger);">6.9%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥1,160,600</td><td class="r">185件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥170,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">24件</span></td><td class="r" style="color:var(--success)">¥24,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">2.0%</strong></td></tr><tr><td><strong>2026年4月</strong><span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></td><td class="r">¥426,000</td><td class="r">30件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr></tbody></table></div></div>
+        </div>
+        <!-- 田中 -->
+        <div id="mrrP1" style="display:none;">
+          <div class="tab-row" id="mrrP1YRow">
+            <button class="tab-btn active" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP1Y25','mrrP1YRow')">2025年</button>
+            <button class="tab-btn" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP1Y26','mrrP1YRow')">2026年</button>
+          </div>
+          <div id="mrrP1Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年4月</strong></td><td class="r">¥2,001,766</td><td class="r">99件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥48,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥2,058,766</td><td class="r">101件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥57,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥35,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.7%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥2,132,766</td><td class="r">108件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥84,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">3件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥2,194,766</td><td class="r">102件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥92,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">3件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥2,335,858</td><td class="r">108件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥136,092<span style="font-size:10px;color:var(--muted);margin-left:3px;">5件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥2,357,858</td><td class="r">108件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥2,482,858</td><td class="r">117件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥125,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">9件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥2,479,858</td><td class="r">117件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥2,577,358</td><td class="r">121件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥67,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">3件</span></td><td class="r" style="color:var(--success)">¥30,000</td><td class="r">6件</td><td class="r"><strong style="color:var(--success);">1.2%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP1Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥2,604,658</td><td class="r">122件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,300<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥2,698,658</td><td class="r">121件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥153,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">5件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥2,741,658</td><td class="r">122件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥13,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--success)">¥10,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">0.4%</strong></td></tr><tr><td><strong>2026年4月</strong><span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></td><td class="r">¥1,199,592</td><td class="r">45件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--danger)">¥108,000</td><td class="r">4件</td><td class="r"><strong style="color:var(--danger);">8.3%</strong></td></tr></tbody></table></div></div>
+        </div>
+        <!-- 中岡 -->
+        <div id="mrrP2" style="display:none;">
+          <div class="tab-row" id="mrrP2YRow">
+            <button class="tab-btn active" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP2Y25','mrrP2YRow')">2025年</button>
+            <button class="tab-btn" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP2Y26','mrrP2YRow')">2026年</button>
+          </div>
+          <div id="mrrP2Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年4月</strong></td><td class="r">¥2,215,730</td><td class="r">81件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥54,273<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥2,335,730</td><td class="r">85件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥120,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥2,363,730</td><td class="r">86件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥28,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥2,440,730</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥77,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">3件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥2,440,730</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥35,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.4%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥2,470,730</td><td class="r">90件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥65,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥2,435,730</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥35,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.4%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥2,678,130</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥312,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥30,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.1%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥2,683,130</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP2Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥2,678,630</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥20,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--success)">¥70,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">2.5%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥2,608,630</td><td class="r">87件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥2,326,230</td><td class="r">86件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年4月</strong><span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></td><td class="r">¥1,609,503</td><td class="r">56件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥62,273<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥35,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">2.1%</strong></td></tr></tbody></table></div></div>
+        </div>
+        <!-- 高橋 -->
+        <div id="mrrP3" style="display:none;">
+          <div class="tab-row" id="mrrP3YRow">
+            <button class="tab-btn active" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP3Y25','mrrP3YRow')">2025年</button>
+            <button class="tab-btn" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP3Y26','mrrP3YRow')">2026年</button>
+          </div>
+          <div id="mrrP3Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年4月</strong></td><td class="r">¥814,500</td><td class="r">38件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥811,300</td><td class="r">36件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥813,700</td><td class="r">36件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥12,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.5%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥826,100</td><td class="r">37件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥814,500</td><td class="r">38件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥834,500</td><td class="r">37件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥12,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥874,300</td><td class="r">41件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥35,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥873,900</td><td class="r">40件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥870,700</td><td class="r">39件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP3Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥870,300</td><td class="r">38件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥881,500</td><td class="r">40件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥10,800<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥926,500</td><td class="r">49件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥45,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">9件</span></td><td class="r" style="color:var(--danger)">¥98,600</td><td class="r">5件</td><td class="r"><strong style="color:var(--danger);">9.6%</strong></td></tr><tr><td><strong>2026年4月</strong><span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></td><td class="r">¥365,200</td><td class="r">13件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr></tbody></table></div></div>
+        </div>
+
+      </div><!-- /mrrByPerson -->
     </div>
   </section>
 
@@ -987,6 +953,160 @@ function processBilling(){
   });
 }
 
+
+
+// ============================================================
+// MRR 概算/確定ロジック
+// ============================================================
+const MRR_RECORD_CNT = {"2025-04":716,"2025-05":733,"2025-06":742,"2025-07":701,"2025-08":586,"2025-09":690,"2025-10":554,"2025-11":512,"2025-12":473,"2026-01":435,"2026-02":411,"2026-03":442,"2026-04":144};
+
+function isMrrConfirmed(m) {
+  var a=m.split('-'),y=parseInt(a[0]),mo=parseInt(a[1]);
+  var pm=(mo>1?y+'-'+String(mo-1).padStart(2,'0'):(y-1)+'-12');
+  var cur=MRR_RECORD_CNT[m]||0,prev=MRR_RECORD_CNT[pm]||0;
+  if(prev===0)return{confirmed:true,rate:100};
+  return{confirmed:(cur/prev>=0.90),rate:Math.round(cur/prev*100)};
+}
+
+const MRR_ESTIMATE_APR = {
+  total:{mrr:7011988,cnt:437,churn_mrr:143000,churn_cnt:5},
+  persons:{
+    '南原龍司':{mrr:1160600,cnt:185,churn_mrr:0,churn_cnt:0},
+    '田中莘奈':{mrr:2633658,cnt:118,churn_mrr:108000,churn_cnt:4},
+    '中岡世里菜':{mrr:2291230,cnt:85,churn_mrr:35000,churn_cnt:1},
+    '高橋広輝':{mrr:926500,cnt:49,churn_mrr:0,churn_cnt:0}
+  }
+};
+const MRR_CONFIRMED_APR = {
+  total:{mrr:7571661,cnt:463,churn_mrr:143000,churn_cnt:5},
+  persons:{
+    '南原龍司':{mrr:1173600,cnt:194,churn_mrr:0,churn_cnt:0},
+    '田中莘奈':{mrr:2682158,cnt:130,churn_mrr:108000,churn_cnt:4},
+    '中岡世里菜':{mrr:2644403,cnt:88,churn_mrr:35000,churn_cnt:1},
+    '高橋広輝':{mrr:831500,cnt:46,churn_mrr:0,churn_cnt:0}
+  }
+};
+const CHURN_DETAIL_APR = {
+  '田中莘奈':['CLOUDNINE 烏丸御池 パーソナルトレーニングジム|¥35,000','健康堂整骨院 蒲田院|¥30,000','MOGU|¥30,000','createur miju【クレアトゥール ミジュ】|¥13,000'],
+  '中岡世里菜':['メルコヘアデザイン|¥35,000']
+};
+
+function renderMrrSummary() {
+  var curM='2026-04';
+  var chk=isMrrConfirmed(curM);
+  var isEst=!chk.confirmed;
+  var D=isEst?MRR_ESTIMATE_APR:MRR_CONFIRMED_APR;
+  var totalMrr=D.total.mrr,totalCnt=D.total.cnt,churnMrr=D.total.churn_mrr,churnCnt=D.total.churn_cnt;
+  var chRate=(churnMrr/(totalMrr+churnMrr)*100).toFixed(1);
+  var badge=isEst
+    ?'<span class="est-badge est">⚡概算 '+chk.rate+'%</span>'
+    :'<span class="est-badge confirmed">✅ 確定</span>';
+  var note=isEst
+    ?'<div class="mrr-status-note">概算 = 前月稼働―当月解約<br>入力率 '+chk.rate+'%（90%以上で確定に切替）</div>'
+    :'<div class="mrr-status-note">入力率 '+chk.rate+'% ― 確定値として表示中</div>';
+
+  var wrap=document.getElementById('mrrSummaryWrap');
+  if(!wrap)return;
+  wrap.innerHTML='<div class="mrr-grid" style="margin-bottom:16px;">'
+    +'<div class="mrr-c"><div class="mrr-lbl">4月 保有MRR'+badge+'</div>'
+    +'<div class="mrr-val">¥'+totalMrr.toLocaleString()+'</div>'
+    +'<div class="mrr-sub">'+totalCnt+'店舗</div>'+note+'</div>'
+    +'<div class="mrr-c"><div class="mrr-lbl">4月 解約MRR</div>'
+    +'<div class="mrr-val" style="color:var(--danger);">¥'+churnMrr.toLocaleString()+'</div>'
+    +'<div class="mrr-sub">'+churnCnt+'件（田中4件・中岡１件）</div></div>'
+    +'<div class="mrr-c"><div class="mrr-lbl">当月チャーンレート（4月）</div>'
+    +'<div class="mrr-val" style="color:var(--success);">'+chRate+'%</div>'
+    +'<div class="mrr-sub">解約MRR ÷ 保有MRR</div></div>'
+    +'</div>';
+
+  var tb=document.getElementById('mrrPersonTb');
+  if(!tb)return;
+  tb.innerHTML='';
+  var PNAMES=['南原龍司','田中莘奈','中岡世里菜','高橋広輝'];
+  var PDCLS=['d1','d2','d3','d4'];
+  PNAMES.forEach(function(sn,i){
+    var pd=D.persons[sn]||{mrr:0,cnt:0,churn_mrr:0,churn_cnt:0};
+    var base=pd.mrr+pd.churn_mrr;
+    var rate=base>0?(pd.churn_mrr/base*100).toFixed(1):'0.0';
+    var rc=parseFloat(rate)<=3?'var(--success)':parseFloat(rate)<=6?'var(--warn)':'var(--danger)';
+    var churnCell='';
+    if(pd.churn_cnt>0){
+      var did='chid-'+i,aid='arid-'+i;
+      var items=(CHURN_DETAIL_APR[sn]||[]).map(function(s){var p=s.lastIndexOf('|');return'<div class="churn-item">'+s.slice(0,p)+'<span>'+s.slice(p+1)+'</span></div>';}).join('');
+      churnCell='<span onclick="toggleChurnIdx(\u0022'+did+'\u0022,\u0022'+aid+'\u0022)" style="color:var(--danger);cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:4px;">'+pd.churn_cnt+'\u4ef6 <span id="'+aid+'" style="font-size:9px;transition:transform .2s;display:inline-block;">\u25bc</span></span><div id="'+did+'" class="churn-drop" style="display:none;">'+items+'</div>';
+    }else{churnCell='—';}
+    var mrrTxt=isEst?'¥'+pd.mrr.toLocaleString()+'<span style="font-size:10px;color:var(--warn);margin-left:4px;">概算</span>':'¥'+pd.mrr.toLocaleString();
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td><span class="md"><span class="dot '+PDCLS[i]+'"></span>'+sn+'</span></td>'
+      +'<td class="r"><strong>'+mrrTxt+'</strong></td><td class="r">'+pd.cnt+'件</td>'
+      +'<td class="r">'+churnCell+'</td>'
+      +'<td class="r" style="color:'+(pd.churn_mrr>0?'var(--danger)':'var(--muted)')+'">'+(pd.churn_mrr>0?'¥'+pd.churn_mrr.toLocaleString():'—')+'</td>'
+      +'<td class="r"><strong style="color:'+rc+';">'+rate+'%</strong></td>';
+    tb.appendChild(tr);
+  });
+  var otherMrr=isEst?0:240000;
+  var tr2=document.createElement('tr');
+  tr2.innerHTML='<td><span class="md"><span class="dot d5"></span>その他</span></td>'
+    +'<td class="r">¥'+otherMrr.toLocaleString()+'</td><td class="r">'+(isEst?'—':'5件')+'</td><td class="r">—</td><td class="r">—</td><td class="r">0.0%</td>';
+  tb.appendChild(tr2);
+  var totMrr2=isEst?totalMrr:MRR_CONFIRMED_APR.total.mrr;
+  var totCnt2=isEst?totalCnt:MRR_CONFIRMED_APR.total.cnt;
+  var totR=(churnMrr/(totMrr2+churnMrr)*100).toFixed(1);
+  var trc=parseFloat(totR)<=3?'var(--success)':parseFloat(totR)<=6?'var(--warn)':'var(--danger)';
+  var tot=document.createElement('tr');tot.className='tot';
+  tot.innerHTML='<td><strong>合計 '+badge+'</strong></td>'
+    +'<td class="r"><strong>¥'+totMrr2.toLocaleString()+'</strong></td>'
+    +'<td class="r"><strong>'+totCnt2+'件</strong></td>'
+    +'<td class="r" style="color:var(--danger);"><strong>'+churnCnt+'件</strong></td>'
+    +'<td class="r" style="color:var(--danger);"><strong>¥'+churnMrr.toLocaleString()+'</strong></td>'
+    +'<td class="r"><strong style="color:'+trc+';">'+totR+'%</strong></td>';
+  tb.appendChild(tot);
+}
+
+function toggleChurnIdx(id,aid){
+  var el=document.getElementById(id),ar=document.getElementById(aid);
+  var open=el.style.display==='none';
+  el.style.display=open?'block':'none';
+  if(ar)ar.style.transform=open?'rotate(180deg)':'';
+}
+
+const MRR_DATA = {"2025-04": {"南原龍司": {"mrr": 1925000, "cnt": 367, "churn_mrr": 86000, "churn_cnt": 5, "rate": 4.3, "new_mrr": 75000, "new_cnt": 18}, "田中莉奈": {"mrr": 2001766, "cnt": 99, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 48000, "new_cnt": 2}, "中岡世里菜": {"mrr": 2215730, "cnt": 81, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 54273, "new_cnt": 2}, "高橋広輝": {"mrr": 814500, "cnt": 38, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "その他": {"mrr": 2169000, "cnt": 131, "churn_mrr": 99000, "churn_cnt": 6, "rate": 4.4}}, "2025-05": {"南原龍司": {"mrr": 1915000, "cnt": 387, "churn_mrr": 154000, "churn_cnt": 11, "rate": 7.4, "new_mrr": 81000, "new_cnt": 25}, "田中莉奈": {"mrr": 2058766, "cnt": 101, "churn_mrr": 35000, "churn_cnt": 1, "rate": 1.7, "new_mrr": 57000, "new_cnt": 2}, "中岡世里菜": {"mrr": 2335730, "cnt": 85, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 120000, "new_cnt": 4}, "高橋広輝": {"mrr": 811300, "cnt": 36, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "その他": {"mrr": 2032000, "cnt": 124, "churn_mrr": 109500, "churn_cnt": 4, "rate": 5.1}}, "2025-06": {"南原龍司": {"mrr": 1924000, "cnt": 392, "churn_mrr": 63000, "churn_cnt": 21, "rate": 3.2, "new_mrr": 83000, "new_cnt": 16}, "田中莉奈": {"mrr": 2132766, "cnt": 108, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 84000, "new_cnt": 3}, "中岡世里菜": {"mrr": 2363730, "cnt": 86, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 28000, "new_cnt": 1}, "高橋広輝": {"mrr": 813700, "cnt": 36, "churn_mrr": 12000, "churn_cnt": 1, "rate": 1.5, "new_mrr": 0, "new_cnt": 0}, "その他": {"mrr": 1925500, "cnt": 120, "churn_mrr": 409800, "churn_cnt": 22, "rate": 17.5}}, "2025-07": {"南原龍司": {"mrr": 1846000, "cnt": 370, "churn_mrr": 12000, "churn_cnt": 1, "rate": 0.6, "new_mrr": 0, "new_cnt": 0}, "田中莉奈": {"mrr": 2194766, "cnt": 102, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 92000, "new_cnt": 3}, "中岡世里菜": {"mrr": 2440730, "cnt": 89, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 77000, "new_cnt": 3}, "高橋広輝": {"mrr": 826100, "cnt": 37, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "その他": {"mrr": 1630500, "cnt": 103, "churn_mrr": 333000, "churn_cnt": 13, "rate": 17.0}}, "2025-08": {"南原龍司": {"mrr": 1576000, "cnt": 281, "churn_mrr": 40000, "churn_cnt": 2, "rate": 2.5, "new_mrr": 0, "new_cnt": 0}, "田中莉奈": {"mrr": 2335858, "cnt": 108, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 136092, "new_cnt": 5}, "中岡世里菜": {"mrr": 2440730, "cnt": 89, "churn_mrr": 35000, "churn_cnt": 1, "rate": 1.4, "new_mrr": 0, "new_cnt": 0}, "高橋広輝": {"mrr": 814500, "cnt": 38, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "その他": {"mrr": 1248500, "cnt": 70, "churn_mrr": 147000, "churn_cnt": 6, "rate": 10.5}}, "2025-09": {"南原龍司": {"mrr": 1809000, "cnt": 368, "churn_mrr": 531000, "churn_cnt": 129, "rate": 22.7, "new_mrr": 15000, "new_cnt": 1}, "田中莉奈": {"mrr": 2357858, "cnt": 108, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 27000, "new_cnt": 1}, "中岡世里菜": {"mrr": 2470730, "cnt": 90, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 65000, "new_cnt": 2}, "高橋広輝": {"mrr": 834500, "cnt": 37, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 12400, "new_cnt": 1}, "その他": {"mrr": 1221500, "cnt": 87, "churn_mrr": 277000, "churn_cnt": 18, "rate": 18.5}}, "2025-10": {"南原龍司": {"mrr": 1293000, "cnt": 241, "churn_mrr": 140000, "churn_cnt": 36, "rate": 9.8, "new_mrr": 3000, "new_cnt": 1}, "田中莉奈": {"mrr": 2482858, "cnt": 117, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 125000, "new_cnt": 9}, "中岡世里菜": {"mrr": 2435730, "cnt": 89, "churn_mrr": 35000, "churn_cnt": 1, "rate": 1.4, "new_mrr": 0, "new_cnt": 0}, "高橋広輝": {"mrr": 874300, "cnt": 41, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 35000, "new_cnt": 1}, "その他": {"mrr": 884500, "cnt": 66, "churn_mrr": 153000, "churn_cnt": 7, "rate": 14.7}}, "2025-11": {"南原龍司": {"mrr": 1141000, "cnt": 204, "churn_mrr": 144000, "churn_cnt": 29, "rate": 11.2, "new_mrr": 0, "new_cnt": 0}, "田中莉奈": {"mrr": 2479858, "cnt": 117, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 27000, "new_cnt": 1}, "中岡世里菜": {"mrr": 2678130, "cnt": 89, "churn_mrr": 30000, "churn_cnt": 1, "rate": 1.1, "new_mrr": 312400, "new_cnt": 2}, "高橋広輝": {"mrr": 873900, "cnt": 40, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "その他": {"mrr": 826500, "cnt": 62, "churn_mrr": 246000, "churn_cnt": 12, "rate": 22.9}}, "2025-12": {"南原龍司": {"mrr": 1042600, "cnt": 177, "churn_mrr": 125000, "churn_cnt": 9, "rate": 10.7, "new_mrr": 21600, "new_cnt": 1}, "田中莉奈": {"mrr": 2577358, "cnt": 121, "churn_mrr": 30000, "churn_cnt": 6, "rate": 1.2, "new_mrr": 67500, "new_cnt": 3}, "中岡世里菜": {"mrr": 2683130, "cnt": 89, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "高橋広輝": {"mrr": 870700, "cnt": 39, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "その他": {"mrr": 485500, "cnt": 47, "churn_mrr": 244500, "churn_cnt": 29, "rate": 33.5}}, "2026-01": {"南原龍司": {"mrr": 998600, "cnt": 169, "churn_mrr": 27000, "churn_cnt": 9, "rate": 2.6, "new_mrr": 70000, "new_cnt": 2}, "田中莉奈": {"mrr": 2604658, "cnt": 122, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 27300, "new_cnt": 1}, "中岡世里菜": {"mrr": 2678630, "cnt": 89, "churn_mrr": 70000, "churn_cnt": 2, "rate": 2.5, "new_mrr": 20000, "new_cnt": 1}, "高橋広輝": {"mrr": 870300, "cnt": 38, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "その他": {"mrr": 223000, "cnt": 17, "churn_mrr": 151500, "churn_cnt": 13, "rate": 40.5}}, "2026-02": {"南原龍司": {"mrr": 952600, "cnt": 158, "churn_mrr": 71000, "churn_cnt": 13, "rate": 6.9, "new_mrr": 27000, "new_cnt": 1}, "田中莉奈": {"mrr": 2698658, "cnt": 121, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 153500, "new_cnt": 5}, "中岡世里菜": {"mrr": 2608630, "cnt": 87, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "高橋広輝": {"mrr": 881500, "cnt": 40, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 10800, "new_cnt": 1}, "その他": {"mrr": 89500, "cnt": 5, "churn_mrr": 89500, "churn_cnt": 5, "rate": 50.0}}, "2026-03": {"南原龍司": {"mrr": 1160600, "cnt": 185, "churn_mrr": 24000, "churn_cnt": 1, "rate": 2.0, "new_mrr": 170000, "new_cnt": 24}, "田中莉奈": {"mrr": 2741658, "cnt": 122, "churn_mrr": 10000, "churn_cnt": 1, "rate": 0.4, "new_mrr": 13500, "new_cnt": 1}, "中岡世里菜": {"mrr": 2326230, "cnt": 86, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "高橋広輝": {"mrr": 926500, "cnt": 49, "churn_mrr": 98600, "churn_cnt": 5, "rate": 9.6, "new_mrr": 45000, "new_cnt": 9}, "その他": {"mrr": 0, "cnt": 0, "churn_mrr": 0, "churn_cnt": 0, "rate": 0}}, "2026-04": {"南原龍司": {"mrr": 426000, "cnt": 30, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "田中莉奈": {"mrr": 1199592, "cnt": 45, "churn_mrr": 108000, "churn_cnt": 4, "rate": 8.3, "new_mrr": 0, "new_cnt": 0}, "中岡世里菜": {"mrr": 1609503, "cnt": 56, "churn_mrr": 35000, "churn_cnt": 1, "rate": 2.1, "new_mrr": 62273, "new_cnt": 2}, "高橋広輝": {"mrr": 365200, "cnt": 13, "churn_mrr": 0, "churn_cnt": 0, "rate": 0.0, "new_mrr": 0, "new_cnt": 0}, "その他": {"mrr": 0, "cnt": 0, "churn_mrr": 0, "churn_cnt": 0, "rate": 0}}};
+const MRR_MAIN=['南原龍司','田中莉奈','中岡世里菜','高橋広輝'];
+const MRR_DCLS=['d1','d2','d3','d4'];
+function mrrSwMode(id){['mrrByMonth','mrrByPerson'].forEach(x=>document.getElementById(x).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('#mrrModeRow .tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');if(id==='mrrByMonth')renderMrrMonth();}
+function mrrSwPerson(id){['mrrPAll','mrrP0','mrrP1','mrrP2','mrrP3'].forEach(x=>document.getElementById(x).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('#mrrPersonRow .tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+function mrrSwYear(id,rowId){const row=document.getElementById(rowId);const prefix=id.replace(/Y2[0-9]+$/,'');['25','26'].forEach(y=>{const el=document.getElementById(prefix+'Y'+y);if(el)el.style.display='none';});document.getElementById(id).style.display='block';row.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+function renderMrrMonth(){
+  var m=document.getElementById('mrrMonthSel').value;
+  var tb=document.getElementById('mrrMonthBody');tb.innerHTML='';
+  var tM=0,tC=0,tNM=0,tNC=0,tCM=0,tCC=0;
+  MRR_MAIN.forEach(function(sn,i){
+    var pd=(MRR_DATA[m]&&MRR_DATA[m][sn])||{mrr:0,cnt:0,new_mrr:0,new_cnt:0,churn_mrr:0,churn_cnt:0,rate:0};
+    tM+=pd.mrr;tC+=pd.cnt;tNM+=(pd.new_mrr||0);tNC+=(pd.new_cnt||0);tCM+=pd.churn_mrr;tCC+=pd.churn_cnt;
+    var rv=pd.rate;
+    var rc=rv<=3?'var(--success)':rv<=6?'var(--warn)':'var(--danger)';
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td><span class="md"><span class="dot '+MRR_DCLS[i]+'"></span>'+sn+'</span></td>'
+      +'<td class="r"><strong>\u00a5'+pd.mrr.toLocaleString()+'</strong></td>'
+      +'<td class="r">'+pd.cnt+'\u4ef6</td>'
+      +'<td class="r" style="color:var(--primary);font-weight:700;">+\u00a5'+(pd.new_mrr||0).toLocaleString()+'<span style="font-size:10px;color:var(--muted);margin-left:3px;">'+(pd.new_cnt||0)+'\u4ef6</span></td>'
+      +'<td class="r" style="color:'+(pd.churn_mrr>0?rc:'var(--muted)')+'">\u00a5'+pd.churn_mrr.toLocaleString()+'</td>'
+      +'<td class="r">'+pd.churn_cnt+'\u4ef6</td>'
+      +'<td class="r"><strong style="color:'+rc+';">'+rv+'%</strong></td>';
+    tb.appendChild(tr);
+  });
+  var tot=document.createElement('tr');tot.className='tot';
+  var tv=tM>0?((tCM/(tM+tCM))*100).toFixed(1):0;
+  var rct=tv<=3?'var(--success)':tv<=6?'var(--warn)':'var(--danger)';
+  tot.innerHTML='<td><strong>\u5408\u8a08</strong></td><td class="r"><strong>\u00a5'+tM.toLocaleString()+'</strong></td><td class="r"><strong>'+tC+'\u4ef6</strong></td>'
+    +'<td class="r" style="color:var(--primary);font-weight:700;">+\u00a5'+tNM.toLocaleString()+'<span style="font-size:10px;color:var(--muted);margin-left:3px;">'+tNC+'\u4ef6</span></td>'
+    +'<td class="r" style="color:var(--danger)"><strong>\u00a5'+tCM.toLocaleString()+'</strong></td><td class="r"><strong>'+tCC+'\u4ef6</strong></td>'
+    +'<td class="r"><strong style="color:'+rct+';">'+tv+'%</strong></td>';
+  tb.appendChild(tot);
+}
+function mrrSwPerson(id){['mrrPAll','mrrP0','mrrP1','mrrP2','mrrP3'].forEach(x=>document.getElementById(x).style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('#mrrPersonRow .tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+function mrrSwYear(id,rowId){const row=document.getElementById(rowId);const prefix=id.replace(/Y2[0-9]+$/,'');['25','26'].forEach(y=>{const el=document.getElementById(prefix+'Y'+y);if(el)el.style.display='none';});document.getElementById(id).style.display='block';row.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');}
+
 function swTab(id,btn){document.querySelectorAll('.tab-pane').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 function toggleChurn(id){
   const el=document.getElementById(id);
@@ -999,7 +1119,7 @@ function toggleChurn(id){
 document.querySelectorAll('.na').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.querySelectorAll('.na').forEach(x=>x.classList.remove('active'));a.classList.add('active');const el=document.getElementById(a.getAttribute('href').slice(1));if(el)el.scrollIntoView({behavior:'smooth',block:'start'});});});
 function setWeek(){const now=new Date();const mon=new Date(now);mon.setDate(now.getDate()-((now.getDay()||7)-1));const sun=new Date(mon);sun.setDate(mon.getDate()+6);const f=d=>(d.getMonth()+1)+'/'+d.getDate();document.getElementById('wkLbl').textContent='（'+f(mon)+'〜'+f(sun)+'の週）';}
 function fmtN(n){if(n>=10000)return(n/10000).toFixed(1)+'万';return n.toLocaleString();}
-function boot(){buildYearSel();renderKPI(currentMonth);renderFinder();buildPipeYearSel();buildJuchuYearSel();buildClosingSel();renderJuchu();}
+function boot(){buildYearSel();renderKPI(currentMonth);renderFinder();buildPipeYearSel();buildJuchuYearSel();buildClosingSel();renderJuchu();renderMrrSummary();}
 months=Object.keys(kpiData).sort();currentMonth=months[months.length-1];
 setWeek();boot();
 document.getElementById('updAt').textContent='最終更新: 2026年4月14日（実データ更新）';
