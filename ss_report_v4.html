@@ -295,8 +295,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
     <!-- 担当者別 MRR（月選択 + JS制御） -->
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
       <span class="fl">月を選択：</span>
-      <select class="ysel" id="mrrPersonYear" onchange="onMrrPersonYear()"></select>
-      <select class="ysel" id="mrrPersonMonth" onchange="renderMrrPerson()"></select>
+      <select class="ysel" id="mrrPersonYear" onchange="onMrrPersonYear()" style="display:none;"></select>
+      <select class="ysel" id="mrrPersonMonth" onchange="renderMrrPerson()" style="display:none;"></select>
       <span id="mrrPersonBadgeWrap" style="margin-left:4px;"></span>
     </div>
     <div class="tw tws" style="margin-bottom:20px;">
@@ -331,8 +331,7 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
       <!-- ① 月別比較ビュー -->
       <div id="mrrByMonth">
         <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--border);">
-          <span class="fl">対象月：</span>
-          <select class="ysel" id="mrrMonthSel" onchange="renderMrrMonth()"></select>
+          <select class="ysel" id="mrrMonthSel" onchange="renderMrrMonth()" style="display:none;"></select>
         </div>
         <div class="tws">
           <table class="dt" id="mrrMonthTb">
@@ -440,8 +439,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
     <!-- 月選択 -->
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
       <span class="fl">対象月：</span>
-      <select class="ysel" id="clYear" onchange="onClYear()"></select>
-      <select class="ysel" id="clMonth" onchange="renderClosing()"></select>
+      <select class="ysel" id="clYear" onchange="onClYear()" style="display:none;"></select>
+      <select class="ysel" id="clMonth" onchange="renderClosing()" style="display:none;"></select>
       <span class="fl" style="margin-left:8px;">担当者：</span>
       <button class="fbl active" onclick="setClF('all',this)">全員</button>
       <button class="fbl" onclick="setClF('南原龍司',this)">南原</button>
@@ -499,8 +498,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
       <div class="tab-pane active" id="tActive">
         <div class="fbar">
           <span class="fl">商談予定月：</span>
-          <select class="ysel" id="pyear" onchange="onPipeYear()"></select>
-          <select class="ysel" id="pmonth" onchange="renderPipe()"><option value="all">全月</option></select>
+          <select class="ysel" id="pyear" onchange="onPipeYear()" style="display:none;"></select>
+          <select class="ysel" id="pmonth" onchange="renderPipe()" style="display:none;"><option value="all">全月</option></select>
           <span class="fl" style="margin-left:8px;">ステータス：</span>
           <button class="fbl active" onclick="setPF('all',this)">すべて</button>
           <button class="fbl" onclick="setPF('見込み',this)">見込み</button>
@@ -517,8 +516,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
       <div class="tab-pane" id="tJuchu">
         <div class="fbar">
           <span class="fl">締結月：</span>
-          <select class="ysel" id="jyear" onchange="onJuchuYear()"></select>
-          <select class="ysel" id="jmonth" onchange="renderJuchu()"><option value="all">全月</option></select>
+          <select class="ysel" id="jyear" onchange="onJuchuYear()" style="display:none;"></select>
+          <select class="ysel" id="jmonth" onchange="renderJuchu()" style="display:none;"><option value="all">全月</option></select>
           <span class="fl" style="margin-left:6px;">担当：</span>
           <button class="fbl active" onclick="setJF('all',this)">全員</button>
           <button class="fbl" onclick="setJF('南原龍司',this)">南原</button>
@@ -554,8 +553,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
         <!-- フィルター -->
         <div class="fbar">
           <span class="fl">商談月：</span>
-          <select class="ysel" id="swwYear" onchange="onRouteYear('SWW')"></select>
-          <select class="ysel" id="swwMonth" onchange="renderRoute('SWW')"><option value="all">全月</option></select>
+          <select class="ysel" id="swwYear" onchange="onRouteYear('SWW')" style="display:none;"></select>
+          <select class="ysel" id="swwMonth" onchange="renderRoute('SWW')" style="display:none;"><option value="all">全月</option></select>
           <span class="fl" style="margin-left:8px;">担当者：</span>
           <button class="fbl active" onclick="setRouteF('SWW','all',this)">全員</button>
           <button class="fbl" onclick="setRouteF('SWW','南原龍司',this)">南原</button>
@@ -592,8 +591,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
       <div id="routeInquiry" style="display:none;">
         <div class="fbar">
           <span class="fl">商談月：</span>
-          <select class="ysel" id="inqYear" onchange="onRouteYear('INQ')"></select>
-          <select class="ysel" id="inqMonth" onchange="renderRoute('INQ')"><option value="all">全月</option></select>
+          <select class="ysel" id="inqYear" onchange="onRouteYear('INQ')" style="display:none;"></select>
+          <select class="ysel" id="inqMonth" onchange="renderRoute('INQ')" style="display:none;"><option value="all">全月</option></select>
           <span class="fl" style="margin-left:8px;">担当者：</span>
           <button class="fbl active" onclick="setRouteF('INQ','all',this)">全員</button>
           <button class="fbl" onclick="setRouteF('INQ','南原龍司',this)">南原</button>
@@ -717,23 +716,78 @@ function onYearChange(){
   const curYM=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
   const y=document.getElementById('yearSel').value;
   const ms=months.filter(m=>m.startsWith(y)&&m<=curYM);
-  if(ms.length){currentMonth=ms[ms.length-1];}
+  if(ms.length){ currentMonth=ms[ms.length-1]; }
   buildMonthBtns(y);
-  renderKPI(currentMonth);
+  setGlobalMonth(currentMonth);
 }
 function buildMonthBtns(year){
   const now=new Date();
   const curYM=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
   const ms=months.filter(m=>m.startsWith(year)&&m<=curYM);
-  const c=document.getElementById('mbtns');c.innerHTML='';
+  const c=document.getElementById('mbtns'); c.innerHTML='';
   ms.forEach(m=>{
     const mo=parseInt(m.split('-')[1]);
     const btn=document.createElement('button');
     btn.className='mbtn'+(m===currentMonth?' active':'');
     btn.textContent=mo+'月';
-    btn.onclick=()=>{currentMonth=m;document.querySelectorAll('#mbtns .mbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderKPI(m);};
+    btn.onclick=()=>{
+      currentMonth=m;
+      document.querySelectorAll('#mbtns .mbtn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      setGlobalMonth(m);
+    };
     c.appendChild(btn);
   });
+}
+
+// ★ グローバル月変更：1箇所変更で全セクション連動
+function setGlobalMonth(m){
+  currentMonth = m;
+  const y = m.split('-')[0];
+  const mo = m.split('-')[1];
+
+  // KPI・累積
+  renderKPI(m);
+  renderCumKPI();
+
+  // MRR月別ビュー
+  var mrrSel = document.getElementById('mrrMonthSel');
+  if(mrrSel){ mrrSel.value = m; renderMrrMonth(); }
+
+  // MRR個人別ビュー
+  var pyearSel = document.getElementById('mrrPersonYear');
+  var pmonthSel = document.getElementById('mrrPersonMonth');
+  if(pyearSel){ pyearSel.value = y; }
+  if(pmonthSel){ pmonthSel.value = m; renderMrrPerson(); }
+
+  // クロージング管理
+  var clY = document.getElementById('clYear');
+  var clM = document.getElementById('clMonth');
+  if(clY){ clY.value = y; }
+  if(clM){ clM.value = m; renderClosing(); }
+
+  // パイプライン
+  var pyear = document.getElementById('pyear');
+  var pmonth = document.getElementById('pmonth');
+  if(pyear){ pyear.value = y; }
+  if(pmonth){ pmonth.value = m; renderPipe(); }
+
+  // 受注一覧
+  var jyear = document.getElementById('jyear');
+  var jmonth = document.getElementById('jmonth');
+  if(jyear){ jyear.value = y; }
+  if(jmonth){ jmonth.value = m; renderJuchu(); }
+
+  // SWW・問い合わせ
+  var swwY = document.getElementById('swwYear');
+  var swwM = document.getElementById('swwMonth');
+  if(swwY){ swwY.value = y; }
+  if(swwM){ swwM.value = m; renderRoute('SWW'); }
+
+  var inqY = document.getElementById('inqYear');
+  var inqM = document.getElementById('inqMonth');
+  if(inqY){ inqY.value = y; }
+  if(inqM){ inqM.value = m; renderRoute('INQ'); }
 }
 
 // 月次目標値
