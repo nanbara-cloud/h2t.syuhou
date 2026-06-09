@@ -184,29 +184,58 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
     <!-- 累積KPI（2026/4〜2027/3） -->
     <div style="font-size:11px;font-weight:700;color:var(--muted);margin:14px 0 8px;letter-spacing:.04em;">📊 累積実績（2026年4月〜2027年3月）</div>
     <div class="tgt-grid" id="cumGrid">
+      <!-- 契約売上累積 -->
       <div class="tgt-card" style="background:linear-gradient(135deg,#f0fdf4 0%,#fff 100%);">
-        <div class="tgt-head">
-          <div class="tgt-lbl" style="color:var(--success);">契約売上 累積 <span style="font-weight:400;font-size:10px;color:var(--muted);">月額単価合計</span></div>
-          <div class="tgt-nums"><span class="tgt-act" id="cum-act-u" style="color:var(--success);">—</span><span class="tgt-sep">/</span><span class="tgt-goal" id="cum-goal-u">年間目標 —</span></div>
+        <div class="tgt-lbl" style="color:var(--success);margin-bottom:6px;">契約売上 累積 <span style="font-weight:400;font-size:10px;color:var(--muted);">月額単価合計</span></div>
+        <div style="font-size:20px;font-weight:700;color:var(--success);margin-bottom:8px;" id="cum-act-u">—</div>
+        <!-- ①当月ペース -->
+        <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:2px;">📅 当月ペース目標</div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;">
+          <span id="cum-pace-goal-u" style="color:var(--muted);">—</span>
+          <span id="cum-pace-rate-u" style="font-weight:700;">—</span>
         </div>
-        <div class="pbar-wrap"><div class="pbar" id="cum-pbar-u" style="background:var(--success)"></div></div>
-        <div class="tgt-rate" id="cum-rate-u">—</div>
+        <div class="pbar-wrap" style="margin-bottom:8px;"><div class="pbar" id="cum-pbar-pace-u" style="background:var(--success)"></div></div>
+        <!-- ②年間目標 -->
+        <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:2px;">📆 年間目標</div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;">
+          <span id="cum-year-goal-u" style="color:var(--muted);">—</span>
+          <span id="cum-year-rate-u" style="font-weight:700;">—</span>
+        </div>
+        <div class="pbar-wrap"><div class="pbar" id="cum-pbar-year-u" style="background:#86efac"></div></div>
       </div>
+      <!-- 解約金額累積 -->
       <div class="tgt-card" style="background:linear-gradient(135deg,#fef2f2 0%,#fff 100%);">
-        <div class="tgt-head">
-          <div class="tgt-lbl" style="color:var(--danger);">解約金額 累積 <span style="font-weight:400;font-size:10px;color:var(--muted);">低いほど良</span></div>
-          <div class="tgt-nums"><span class="tgt-act" id="cum-act-c" style="color:var(--danger);">—</span><span class="tgt-sep">/</span><span class="tgt-goal" id="cum-goal-c">年間予算 —</span></div>
+        <div class="tgt-lbl" style="color:var(--danger);margin-bottom:6px;">解約金額 累積 <span style="font-weight:400;font-size:10px;color:var(--muted);">低いほど良</span></div>
+        <div style="font-size:20px;font-weight:700;color:var(--danger);margin-bottom:8px;" id="cum-act-c">—</div>
+        <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:2px;">📅 当月ペース予算</div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;">
+          <span id="cum-pace-goal-c" style="color:var(--muted);">—</span>
+          <span id="cum-pace-rate-c" style="font-weight:700;">—</span>
         </div>
-        <div class="pbar-wrap"><div class="pbar" id="cum-pbar-c" style="background:var(--danger)"></div></div>
-        <div class="tgt-rate" id="cum-rate-c">—</div>
+        <div class="pbar-wrap" style="margin-bottom:8px;"><div class="pbar" id="cum-pbar-pace-c" style="background:var(--danger)"></div></div>
+        <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:2px;">📆 年間予算</div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;">
+          <span id="cum-year-goal-c" style="color:var(--muted);">—</span>
+          <span id="cum-year-rate-c" style="font-weight:700;">—</span>
+        </div>
+        <div class="pbar-wrap"><div class="pbar" id="cum-pbar-year-c" style="background:#fca5a5"></div></div>
       </div>
+      <!-- 純増売上累積 -->
       <div class="tgt-card" style="background:linear-gradient(135deg,#eff6ff 0%,#fff 100%);">
-        <div class="tgt-head">
-          <div class="tgt-lbl" style="color:var(--primary);">純増売上 累積 <span style="font-weight:400;font-size:10px;color:var(--muted);">契約−解約</span></div>
-          <div class="tgt-nums"><span class="tgt-act" id="cum-act-n" style="color:var(--primary);">—</span><span class="tgt-sep">/</span><span class="tgt-goal" id="cum-goal-n">年間目標 —</span></div>
+        <div class="tgt-lbl" style="color:var(--primary);margin-bottom:6px;">純増売上 累積 <span style="font-weight:400;font-size:10px;color:var(--muted);">契約−解約</span></div>
+        <div style="font-size:20px;font-weight:700;color:var(--primary);margin-bottom:8px;" id="cum-act-n">—</div>
+        <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:2px;">📅 当月ペース目標</div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;">
+          <span id="cum-pace-goal-n" style="color:var(--muted);">—</span>
+          <span id="cum-pace-rate-n" style="font-weight:700;">—</span>
         </div>
-        <div class="pbar-wrap"><div class="pbar" id="cum-pbar-n" style="background:var(--primary)"></div></div>
-        <div class="tgt-rate" id="cum-rate-n">—</div>
+        <div class="pbar-wrap" style="margin-bottom:8px;"><div class="pbar" id="cum-pbar-pace-n" style="background:var(--primary)"></div></div>
+        <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:2px;">📆 年間目標</div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;">
+          <span id="cum-year-goal-n" style="color:var(--muted);">—</span>
+          <span id="cum-year-rate-n" style="font-weight:700;">—</span>
+        </div>
+        <div class="pbar-wrap"><div class="pbar" id="cum-pbar-year-n" style="background:#93c5fd"></div></div>
       </div>
     </div>
 
@@ -1507,60 +1536,93 @@ function renderRoute(key){
 function boot(){buildYearSel();renderKPI(currentMonth);renderCumKPI();renderFinder();buildPipeYearSel();buildJuchuYearSel();buildClosingSel();renderJuchu();renderMrrSummary();buildMrrPersonSel();buildMrrMonthSel();renderKGI();buildRouteYearSel('SWW');buildRouteYearSel('INQ');}
 
 function renderCumKPI(){
-  // 対象期間：2026-04〜2027-03
-  var CUM_MONTHS = Object.keys(BUDGET).sort();
-  var today = currentMonth; // 現在月
+  var CUM_MONTHS = Object.keys(BUDGET).sort(); // 2026-04〜2027-03
+  var today = currentMonth;
 
   // 実績：2026-04〜現在月までの累積
-  var actU = 0, actC = 0;
+  var actU=0, actC=0;
   CUM_MONTHS.forEach(function(m){
-    if(m > today) return;
+    if(m>today) return;
     MAIN.forEach(function(p){
-      var d = kpiData[m] && kpiData[m][p];
-      if(d) actU += (d.price_sum || 0);
-      var md = MRR_DATA[m] && MRR_DATA[m][p];
-      if(md) actC += (md.churn_mrr || 0);
+      var d=kpiData[m]&&kpiData[m][p]; if(d) actU+=(d.price_sum||0);
+      var md=MRR_DATA[m]&&MRR_DATA[m][p]; if(md) actC+=(md.churn_mrr||0);
     });
   });
+  var actN = actU - actC;
 
-  // 目標：全12ヶ月の累積
-  var tgtU = CUM_MONTHS.reduce(function(s,m){ return s+(BUDGET[m]?BUDGET[m].new_mrr:0); }, 0);
-  var tgtC = CUM_MONTHS.reduce(function(s,m){ return s+(BUDGET[m]?BUDGET[m].churn:0); }, 0);
-  var tgtN = tgtU - tgtC; // 純増目標
-  var actN = actU - actC; // 純増実績
+  // 当月ペース目標：経過月のBUDGET合計
+  var paceU = CUM_MONTHS.reduce(function(s,m){ return m<=today?s+(BUDGET[m]?BUDGET[m].new_mrr:0):s; }, 0);
+  var paceC = CUM_MONTHS.reduce(function(s,m){ return m<=today?s+(BUDGET[m]?BUDGET[m].churn:0):s; }, 0);
+  var paceN = paceU - paceC;
 
-  // 経過月数（進捗割合）
-  var elapsed = CUM_MONTHS.filter(function(m){ return m<=today; }).length;
-  var total   = CUM_MONTHS.length; // 12
-  var progress = elapsed / total; // 期待達成率
+  // 年間目標
+  var yearU = CUM_MONTHS.reduce(function(s,m){ return s+(BUDGET[m]?BUDGET[m].new_mrr:0); }, 0);
+  var yearC = CUM_MONTHS.reduce(function(s,m){ return s+(BUDGET[m]?BUDGET[m].churn:0); }, 0);
+  var yearN = yearU - yearC;
 
-  function setC(actId, goalId, pbarId, rateId, act, tgt, isChurn){
-    var el=document.getElementById(actId); if(el) el.textContent='¥'+act.toLocaleString();
-    var ge=document.getElementById(goalId); if(ge) ge.textContent='年間'+(isChurn?'予算':'目標')+' ¥'+tgt.toLocaleString();
-    var rate = tgt>0 ? Math.round(act/tgt*100) : 0;
-    var bar  = document.getElementById(pbarId);
-    if(bar){ bar.style.width=Math.min(rate,100)+'%'; }
-    var re=document.getElementById(rateId);
-    if(re){
-      if(isChurn){
-        // 解約：実績が予算以下なら良い
-        var paceExpect = Math.round(tgt*progress);
-        var ok = act <= paceExpect;
-        re.textContent = rate+'% （ペース比: '+(ok?'✓ 予算内':'✗ ペース超過')+'）';
-        re.style.color = ok ? 'var(--success)' : 'var(--danger)';
-        if(bar) bar.style.background = ok ? 'var(--success)' : 'var(--danger)';
-      } else {
-        var paceStr = Math.round(progress*100)+'%進捗時の期待値 ¥'+Math.round(tgt*progress).toLocaleString();
-        var onPace = act >= tgt*progress*0.9;
-        re.textContent = rate+'% 達成 | '+(onPace?'✓ ペース通り':'△ ペース遅れ');
-        re.style.color = rate>=100?'var(--success)':onPace?'var(--primary)':'var(--warn)';
-      }
-    }
+  function setEl(id, val){ var e=document.getElementById(id); if(e) e.textContent=val; }
+  function setBar(id, pct, color){
+    var e=document.getElementById(id);
+    if(e){ e.style.width=Math.min(Math.max(pct,0),100)+'%'; if(color) e.style.background=color; }
+  }
+  function okColor(act, tgt, isChurn){
+    if(isChurn) return act<=tgt?'var(--success)':'var(--danger)';
+    return act>=tgt?'var(--success)':act>=tgt*0.8?'var(--warn)':'var(--primary)';
+  }
+  function diffStr(act, tgt, isChurn){
+    var diff = act - tgt;
+    if(isChurn) diff = tgt - act; // 解約は予算-実績（マイナスが良い）
+    var sign = diff >= 0 ? '+' : '';
+    var color = diff >= 0 ? 'var(--success)' : 'var(--danger)';
+    if(isChurn){ color = diff >= 0 ? 'var(--success)' : 'var(--danger)'; }
+    return '<span style="color:'+color+';font-weight:700;">'+sign+'¥'+(isChurn?(tgt-act):(act-tgt)).toLocaleString()+'</span>';
   }
 
-  setC('cum-act-u','cum-goal-u','cum-pbar-u','cum-rate-u', actU, tgtU, false);
-  setC('cum-act-c','cum-goal-c','cum-pbar-c','cum-rate-c', actC, tgtC, true);
-  setC('cum-act-n','cum-goal-n','cum-pbar-n','cum-rate-n', actN, tgtN, false);
+  // 契約売上
+  setEl('cum-act-u','¥'+actU.toLocaleString());
+  setEl('cum-pace-goal-u','当月ペース ¥'+paceU.toLocaleString());
+  var rpu=paceU>0?Math.round(actU/paceU*100):0;
+  var diffU_pace = actU - paceU;
+  var el_pu = document.getElementById('cum-pace-rate-u');
+  if(el_pu){ el_pu.innerHTML = rpu+'% '+(actU>=paceU?'✓':'△')+' <span style="color:'+(diffU_pace>=0?'var(--success)':'var(--danger)')+';">'+(diffU_pace>=0?'+':'')+diffU_pace.toLocaleString()+'円</span>'; el_pu.style.color='inherit'; }
+  setBar('cum-pbar-pace-u', rpu, okColor(actU,paceU,false));
+  setEl('cum-year-goal-u','年間目標 ¥'+yearU.toLocaleString());
+  var ryu=yearU>0?Math.round(actU/yearU*100):0;
+  var diffU_year = actU - yearU;
+  var el_yu = document.getElementById('cum-year-rate-u');
+  if(el_yu){ el_yu.innerHTML = ryu+'% <span style="color:var(--muted);">'+(diffU_year>=0?'+':'')+diffU_year.toLocaleString()+'円</span>'; el_yu.style.color='inherit'; }
+  setBar('cum-pbar-year-u', ryu, '#86efac');
+
+  // 解約金額
+  setEl('cum-act-c','¥'+actC.toLocaleString());
+  setEl('cum-pace-goal-c','当月ペース予算 ¥'+paceC.toLocaleString());
+  var rpc=paceC>0?Math.round(actC/paceC*100):0;
+  var diffC_pace = paceC - actC; // プラスが良い（予算より少ない）
+  var churnPaceOk=actC<=paceC;
+  var el_pc = document.getElementById('cum-pace-rate-c');
+  if(el_pc){ el_pc.innerHTML = rpc+'% '+(churnPaceOk?'✓ 予算内':'✗ 超過')+' <span style="color:'+(churnPaceOk?'var(--success)':'var(--danger)')+';">'+(churnPaceOk?'▼':'▲')+'¥'+Math.abs(diffC_pace).toLocaleString()+'</span>'; el_pc.style.color='inherit'; }
+  setBar('cum-pbar-pace-c', rpc, churnPaceOk?'var(--success)':'var(--danger)');
+  setEl('cum-year-goal-c','年間予算 ¥'+yearC.toLocaleString());
+  var ryc=yearC>0?Math.round(actC/yearC*100):0;
+  var diffC_year = yearC - actC;
+  var el_yc = document.getElementById('cum-year-rate-c');
+  if(el_yc){ el_yc.innerHTML = ryc+'% <span style="color:var(--muted);">残予算 ¥'+diffC_year.toLocaleString()+'</span>'; el_yc.style.color='inherit'; }
+  setBar('cum-pbar-year-c', ryc, '#fca5a5');
+
+  // 純増売上
+  setEl('cum-act-n','¥'+actN.toLocaleString());
+  setEl('cum-pace-goal-n','当月ペース ¥'+paceN.toLocaleString());
+  var rpn=paceN>0?Math.round(actN/paceN*100):0;
+  var diffN_pace = actN - paceN;
+  var el_pn = document.getElementById('cum-pace-rate-n');
+  if(el_pn){ el_pn.innerHTML = rpn+'% '+(actN>=paceN?'✓':'△')+' <span style="color:'+(diffN_pace>=0?'var(--success)':'var(--danger)')+';">'+(diffN_pace>=0?'+':'')+diffN_pace.toLocaleString()+'円</span>'; el_pn.style.color='inherit'; }
+  setBar('cum-pbar-pace-n', rpn, okColor(actN,paceN,false));
+  setEl('cum-year-goal-n','年間目標 ¥'+yearN.toLocaleString());
+  var ryn=yearN>0?Math.round(actN/yearN*100):0;
+  var diffN_year = actN - yearN;
+  var el_yn = document.getElementById('cum-year-rate-n');
+  if(el_yn){ el_yn.innerHTML = ryn+'% <span style="color:var(--muted);">'+(diffN_year>=0?'+':'')+diffN_year.toLocaleString()+'円</span>'; el_yn.style.color='inherit'; }
+  setBar('cum-pbar-year-n', ryn, '#93c5fd');
 }
 
 // KGI進捗：4月概算MRR基準（4月利用分発生案件）→ 10月利用分（9月末時点）+¥200,000
