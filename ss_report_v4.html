@@ -485,17 +485,17 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
     <div class="tp-card" style="display:flex;flex-direction:column;gap:16px;">
       <div>
         <div class="tp-lbl">📋 今週のトピック</div>
-        <div class="tp-text" id="tp1">1. ウェビナー2回目（残消化）7/16 実施、現状21人参加予定
-2. ツール展開用の広告 約¥50,000 でテスト運用開始</div>
+        <div class="tp-text" id="tp1">1. 展示会計画（田中の方でいくつか候補　別紙参照）
+2. Appmart株式会社さんと協業（https://bizcan.jp/）</div>
       </div>
       <div style="border-top:1px solid var(--border);padding-top:14px;">
         <div class="tp-lbl">🎯 次週アクション</div>
-        <div class="tp-text" id="tp2">1. LINEキャンペーンの二次アプローチ
-2. 広告まわり整理</div>
+        <div class="tp-text" id="tp2">1. AI活用レポートの作成方法について（営業側）
+2. ビズカンのような協業先を探す</div>
       </div>
       <div style="border-top:1px solid var(--border);padding-top:14px;">
         <div class="tp-lbl">💬 その他相談事項</div>
-        <div class="tp-text" id="tp3">2月頃に東京開催展示会への出展予定</div>
+        <div class="tp-text" id="tp3">特になし</div>
       </div>
     </div>
   </section>
@@ -1513,26 +1513,18 @@ function toggleRouteTable(tableId, arrId){
 
 function renderSWWSummary(selM){
   var wrap=document.getElementById('swwSummaryWrap');
-  if(!wrap||typeof STATIC_SWW_DATA==='undefined')return;
-  var months=selM&&selM!=='all'?[selM]:Object.keys(STATIC_SWW_DATA).sort();
-  var total=0,seika=0,taishogai=0,seika_amt=0;
-  months.forEach(function(m){
-    var d=STATIC_SWW_DATA[m];
-    if(!d)return;
-    total+=d.total;seika+=d.seika;taishogai+=d.taisho_gai||0;seika_amt+=d.seika_amt||0;
-  });
-  var label=selM&&selM!=='all'?selM.split('-')[0]+'年'+parseInt(selM.split('-')[1])+'月':'全期間';
-  var eff=total-taishogai;
-  var seikaPct=eff>0?Math.round(seika/eff*100):0;
-  var swwCost=seika*30000;
-  wrap.innerHTML=
-    '<div style="font-size:11px;font-weight:700;color:var(--muted);margin-bottom:8px;">📊 SWW成果サマリー（'+label+'）</div>'
-    +'<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;">'
-    +'<div style="text-align:center;"><div style="font-size:10px;color:var(--muted);">合計商談数</div><div style="font-size:20px;font-weight:700;">'+total+'件</div></div>'
-    +'<div style="text-align:center;"><div style="font-size:10px;color:var(--success);font-weight:700;">✅ SWW成果件数</div><div style="font-size:20px;font-weight:700;color:var(--success);">'+seika+'件</div><div style="font-size:10px;color:var(--muted);">成功率 '+seikaPct+'%（対象外除く）</div></div>'
-    +'<div style="text-align:center;"><div style="font-size:10px;color:var(--danger);font-weight:700;">💸 SWWコスト</div><div style="font-size:20px;font-weight:700;color:var(--danger);">¥'+swwCost.toLocaleString()+'</div><div style="font-size:10px;color:var(--muted);">成果件数×¥30,000</div></div>'
-    +'<div style="text-align:center;"><div style="font-size:10px;color:var(--primary);font-weight:700;">💰 売上見込み（A以上）</div><div style="font-size:20px;font-weight:700;color:var(--primary);">'+(seika_amt>0?'¥'+seika_amt.toLocaleString():'—')+'</div><div style="font-size:10px;color:var(--muted);">ランクA/S × 単価 × 期間</div></div>'
-    +'<div style="text-align:center;"><div style="font-size:10px;color:var(--muted);">対象外</div><div style="font-size:20px;font-weight:700;color:var(--muted);">'+taishogai+'件</div><div style="font-size:10px;color:var(--muted);">前確NG含む</div></div>'
+  if(!wrap) return;
+  // SWWは現在アクティブ停止中 → 過去累計を固定表示
+  var swwCost = 900000;
+  var swwJuchu = 4;
+  var swwUriage = (3*10000*12) + (1*40000*12); // ¥360,000+¥480,000=¥840,000
+  wrap.innerHTML =
+    '<div style="font-size:11px;font-weight:700;color:var(--muted);margin-bottom:10px;">📊 SWW 過去累計実績 <span style="background:#fef3c7;color:#92400e;border-radius:4px;padding:2px 8px;font-size:10px;margin-left:6px;">現在 停止中</span></div>'
+    +'<div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;">'
+    +'<div style="text-align:center;"><div style="font-size:10px;color:var(--danger);font-weight:700;">💸 総コスト</div><div style="font-size:20px;font-weight:700;color:var(--danger);">¥'+swwCost.toLocaleString()+'</div><div style="font-size:10px;color:var(--muted);">成果件数×¥30,000</div></div>'
+    +'<div style="text-align:center;"><div style="font-size:10px;color:var(--success);font-weight:700;">✅ 受注件数</div><div style="font-size:20px;font-weight:700;color:var(--success);">'+swwJuchu+'件</div><div style="font-size:10px;color:var(--muted);">ツール3件 / 代行1件</div></div>'
+    +'<div style="text-align:center;"><div style="font-size:10px;color:var(--primary);font-weight:700;">💰 受注売上合計</div><div style="font-size:20px;font-weight:700;color:var(--primary);">¥'+swwUriage.toLocaleString()+'</div><div style="font-size:10px;color:var(--muted);">ツール¥10,000×3×12ヶ月<br>代行¥40,000×1×12ヶ月</div></div>'
+    +'<div style="text-align:center;"><div style="font-size:10px;color:var(--danger);font-weight:700;">📉 収支</div><div style="font-size:20px;font-weight:700;color:var(--danger);">-¥'+(swwCost-swwUriage).toLocaleString()+'</div><div style="font-size:10px;color:var(--muted);">コスト−売上</div></div>'
     +'</div>';
 }
 
