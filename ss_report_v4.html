@@ -507,8 +507,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
     <!-- 担当者別 MRR（月選択 + JS制御） -->
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
       <span class="fl">月を選択：</span>
-      <select class="ysel" id="mrrPersonYear" onchange="onMrrPersonYear()" style="display:none;"></select>
-      <select class="ysel" id="mrrPersonMonth" onchange="renderMrrPerson()" style="display:none;"></select>
+      <select class="ysel" id="mrrPersonYear" onchange="onMrrPersonYear()"></select>
+      <select class="ysel" id="mrrPersonMonth" onchange="renderMrrPerson()"></select>
       <span id="mrrPersonBadgeWrap" style="margin-left:4px;"></span>
     </div>
     <div class="tw tws" style="margin-bottom:20px;">
@@ -530,7 +530,7 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
     <div style="font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
       <span style="display:inline-block;width:3px;height:16px;background:var(--primary);border-radius:2px;"></span>
       月別MRR推移
-      <span style="font-size:11px;font-weight:400;color:var(--muted);">※ユニーク店舗×月額単価ベース　※2026年4月は集計途中</span>
+      <span style="font-size:11px;font-weight:400;color:var(--muted);">※ユニーク店舗×月額単価ベース　※2026年10月は集計途中</span>
     </div>
     <div style="background:var(--white);border:1px solid var(--border);border-radius:7px;overflow:hidden;">
 
@@ -543,7 +543,7 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
       <!-- ① 月別比較ビュー -->
       <div id="mrrByMonth">
         <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--border);">
-          <select class="ysel" id="mrrMonthSel" onchange="renderMrrMonth()" style="display:none;"></select>
+          <select class="ysel" id="mrrMonthSel" onchange="renderMrrMonth()"></select>
         </div>
         <div class="tws">
           <table class="dt" id="mrrMonthTb">
@@ -570,8 +570,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
             <button class="tab-btn active" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrPAllY25','mrrPAllYRow')">2025年</button>
             <button class="tab-btn" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrPAllY26','mrrPAllYRow')">2026年</button>
           </div>
-          <div id="mrrPAllY25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年4月</strong></td><td class="r">¥9,125,996</td><td class="r">716件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥207,273<span style="font-size:10px;color:var(--muted);margin-left:3px;">23件</span></td><td class="r" style="color:var(--success)">¥185,000</td><td class="r">11件</td><td class="r"><strong style="color:var(--success);">2.0%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥9,152,796</td><td class="r">733件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥258,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">31件</span></td><td class="r" style="color:var(--warn)">¥298,500</td><td class="r">16件</td><td class="r"><strong style="color:var(--warn);">3.2%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥9,159,696</td><td class="r">742件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥225,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">21件</span></td><td class="r" style="color:var(--warn)">¥484,800</td><td class="r">44件</td><td class="r"><strong style="color:var(--warn);">5.0%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥8,938,096</td><td class="r">701件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥169,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">6件</span></td><td class="r" style="color:var(--warn)">¥345,000</td><td class="r">14件</td><td class="r"><strong style="color:var(--warn);">3.7%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥8,415,588</td><td class="r">586件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥166,092<span style="font-size:10px;color:var(--muted);margin-left:3px;">6件</span></td><td class="r" style="color:var(--success)">¥222,000</td><td class="r">9件</td><td class="r"><strong style="color:var(--success);">2.6%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥8,693,588</td><td class="r">690件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥119,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">5件</span></td><td class="r" style="color:var(--danger)">¥808,000</td><td class="r">147件</td><td class="r"><strong style="color:var(--danger);">8.5%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥7,970,388</td><td class="r">554件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥163,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">11件</span></td><td class="r" style="color:var(--warn)">¥328,000</td><td class="r">44件</td><td class="r"><strong style="color:var(--warn);">4.0%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥7,999,388</td><td class="r">512件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥369,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--warn)">¥420,000</td><td class="r">42件</td><td class="r"><strong style="color:var(--warn);">5.0%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥7,659,288</td><td class="r">473件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥89,100<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--warn)">¥399,500</td><td class="r">44件</td><td class="r"><strong style="color:var(--warn);">5.0%</strong></td></tr></tbody></table></div></div>
-          <div id="mrrPAllY26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥7,375,188</td><td class="r">435件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥117,300<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--warn)">¥248,500</td><td class="r">24件</td><td class="r"><strong style="color:var(--warn);">3.3%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥7,230,888</td><td class="r">411件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥191,300<span style="font-size:10px;color:var(--muted);margin-left:3px;">7件</span></td><td class="r" style="color:var(--success)">¥160,500</td><td class="r">18件</td><td class="r"><strong style="color:var(--success);">2.2%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥7,154,988</td><td class="r">442件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥228,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">34件</span></td><td class="r" style="color:var(--success)">¥132,600</td><td class="r">7件</td><td class="r"><strong style="color:var(--success);">1.8%</strong></td></tr><tr><td><strong>2026年4月</strong><span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></td><td class="r">¥7,571,661</td><td class="r">463件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥62,273<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥143,000</td><td class="r">5件</td><td class="r"><strong style="color:var(--success);">1.9%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrPAllY25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年1月</strong></td><td class="r">¥8,840,519</td><td class="r">577件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥157,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">51件</span></td><td class="r" style="color:var(--success)">¥143,546</td><td class="r">15件</td><td class="r"><strong style="color:var(--success);">1.6%</strong></td></tr><tr><td><strong>2025年2月</strong></td><td class="r">¥9,183,053</td><td class="r">616件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥613,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">54件</span></td><td class="r" style="color:var(--success)">¥139,000</td><td class="r">9件</td><td class="r"><strong style="color:var(--success);">1.5%</strong></td></tr><tr><td><strong>2025年3月</strong></td><td class="r">¥9,058,483</td><td class="r">638件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥334,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">35件</span></td><td class="r" style="color:var(--success)">¥153,000</td><td class="r">6件</td><td class="r"><strong style="color:var(--success);">1.7%</strong></td></tr><tr><td><strong>2025年4月</strong></td><td class="r">¥9,183,376</td><td class="r">650件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥219,273<span style="font-size:10px;color:var(--muted);margin-left:3px;">23件</span></td><td class="r" style="color:var(--success)">¥116,000</td><td class="r">7件</td><td class="r"><strong style="color:var(--success);">1.3%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥9,628,476</td><td class="r">673件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥272,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">31件</span></td><td class="r" style="color:var(--success)">¥151,500</td><td class="r">11件</td><td class="r"><strong style="color:var(--success);">1.6%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥9,590,476</td><td class="r">686件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥235,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">26件</span></td><td class="r" style="color:var(--success)">¥152,000</td><td class="r">30件</td><td class="r"><strong style="color:var(--success);">1.6%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥9,639,636</td><td class="r">652件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥199,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">7件</span></td><td class="r" style="color:var(--success)">¥94,000</td><td class="r">4件</td><td class="r"><strong style="color:var(--success);">1.0%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥9,440,992</td><td class="r">544件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥181,092<span style="font-size:10px;color:var(--muted);margin-left:3px;">7件</span></td><td class="r" style="color:var(--success)">¥75,000</td><td class="r">3件</td><td class="r"><strong style="color:var(--success);">0.8%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥9,839,558</td><td class="r">653件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥440,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">113件</span></td><td class="r" style="color:var(--warn)">¥588,000</td><td class="r">139件</td><td class="r"><strong style="color:var(--warn);">6.0%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥9,862,168</td><td class="r">559件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥168,600<span style="font-size:10px;color:var(--muted);margin-left:3px;">14件</span></td><td class="r" style="color:var(--success)">¥218,000</td><td class="r">40件</td><td class="r"><strong style="color:var(--success);">2.2%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥10,211,168</td><td class="r">521件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥369,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--warn)">¥337,000</td><td class="r">39件</td><td class="r"><strong style="color:var(--warn);">3.3%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥10,098,968</td><td class="r">482件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥154,100<span style="font-size:10px;color:var(--muted);margin-left:3px;">6件</span></td><td class="r" style="color:var(--warn)">¥334,500</td><td class="r">42件</td><td class="r"><strong style="color:var(--warn);">3.3%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrPAllY26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥9,690,498</td><td class="r">446件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥117,300<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--success)">¥183,000</td><td class="r">20件</td><td class="r"><strong style="color:var(--success);">1.9%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥9,376,798</td><td class="r">425件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥183,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">9件</span></td><td class="r" style="color:var(--success)">¥160,500</td><td class="r">18件</td><td class="r"><strong style="color:var(--success);">1.7%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥9,466,498</td><td class="r">448件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥293,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">42件</span></td><td class="r" style="color:var(--success)">¥132,600</td><td class="r">7件</td><td class="r"><strong style="color:var(--success);">1.4%</strong></td></tr><tr><td><strong>2026年4月</strong></td><td class="r">¥9,444,271</td><td class="r">446件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥314,673<span style="font-size:10px;color:var(--muted);margin-left:3px;">15件</span></td><td class="r" style="color:var(--success)">¥185,000</td><td class="r">9件</td><td class="r"><strong style="color:var(--success);">2.0%</strong></td></tr><tr><td><strong>2026年5月</strong></td><td class="r">¥9,659,771</td><td class="r">460件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥261,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">33件</span></td><td class="r" style="color:var(--success)">¥163,000</td><td class="r">6件</td><td class="r"><strong style="color:var(--success);">1.7%</strong></td></tr><tr><td><strong>2026年6月</strong></td><td class="r">¥9,560,852</td><td class="r">470件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥330,200<span style="font-size:10px;color:var(--muted);margin-left:3px;">20件</span></td><td class="r" style="color:var(--success)">¥227,000</td><td class="r">10件</td><td class="r"><strong style="color:var(--success);">2.4%</strong></td></tr><tr><td><strong>2026年7月</strong></td><td class="r">¥9,356,051</td><td class="r">471件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥107,600<span style="font-size:10px;color:var(--muted);margin-left:3px;">14件</span></td><td class="r" style="color:var(--success)">¥218,592</td><td class="r">10件</td><td class="r"><strong style="color:var(--success);">2.3%</strong></td></tr><tr><td><strong>2026年8月</strong></td><td class="r">¥9,415,259</td><td class="r">472件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥397,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">18件</span></td><td class="r" style="color:var(--success)">¥70,000</td><td class="r">4件</td><td class="r"><strong style="color:var(--success);">0.7%</strong></td></tr><tr><td><strong>2026年9月</strong></td><td class="r">¥9,442,459</td><td class="r">456件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥217,300<span style="font-size:10px;color:var(--muted);margin-left:3px;">14件</span></td><td class="r" style="color:var(--success)">¥134,546</td><td class="r">6件</td><td class="r"><strong style="color:var(--success);">1.4%</strong></td></tr><tr><td><strong>2026年10月<span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></strong></td><td class="r">¥3,459,157</td><td class="r">141件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥60,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">6件</span></td><td class="r" style="color:var(--success)">¥65,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">1.9%</strong></td></tr></tbody></table></div></div>
         </div>
         <!-- 南原 -->
         <div id="mrrP0" style="display:none;">
@@ -579,8 +579,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
             <button class="tab-btn active" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP0Y25','mrrP0YRow')">2025年</button>
             <button class="tab-btn" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP0Y26','mrrP0YRow')">2026年</button>
           </div>
-          <div id="mrrP0Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年4月</strong></td><td class="r">¥1,925,000</td><td class="r">367件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥75,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">18件</span></td><td class="r" style="color:var(--warn)">¥86,000</td><td class="r">5件</td><td class="r"><strong style="color:var(--warn);">4.3%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥1,915,000</td><td class="r">387件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥81,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">25件</span></td><td class="r" style="color:var(--danger)">¥154,000</td><td class="r">11件</td><td class="r"><strong style="color:var(--danger);">7.4%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥1,924,000</td><td class="r">392件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥83,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">16件</span></td><td class="r" style="color:var(--warn)">¥63,000</td><td class="r">21件</td><td class="r"><strong style="color:var(--warn);">3.2%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥1,846,000</td><td class="r">370件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥12,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">0.6%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥1,576,000</td><td class="r">281件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥40,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">2.5%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥1,809,000</td><td class="r">368件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥15,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--danger)">¥531,000</td><td class="r">129件</td><td class="r"><strong style="color:var(--danger);">22.7%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥1,293,000</td><td class="r">241件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥3,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--danger)">¥140,000</td><td class="r">36件</td><td class="r"><strong style="color:var(--danger);">9.8%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥1,141,000</td><td class="r">204件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--danger)">¥144,000</td><td class="r">29件</td><td class="r"><strong style="color:var(--danger);">11.2%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥1,042,600</td><td class="r">177件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥21,600<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--danger)">¥125,000</td><td class="r">9件</td><td class="r"><strong style="color:var(--danger);">10.7%</strong></td></tr></tbody></table></div></div>
-          <div id="mrrP0Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥998,600</td><td class="r">169件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥70,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥27,000</td><td class="r">9件</td><td class="r"><strong style="color:var(--success);">2.6%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥952,600</td><td class="r">158件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--danger)">¥71,000</td><td class="r">13件</td><td class="r"><strong style="color:var(--danger);">6.9%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥1,160,600</td><td class="r">185件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥170,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">24件</span></td><td class="r" style="color:var(--success)">¥24,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">2.0%</strong></td></tr><tr><td><strong>2026年4月</strong><span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></td><td class="r">¥426,000</td><td class="r">30件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP0Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年1月</strong></td><td class="r">¥3,124,296</td><td class="r">372件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥147,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">49件</span></td><td class="r" style="color:var(--warn)">¥143,546</td><td class="r">15件</td><td class="r"><strong style="color:var(--warn);">4.6%</strong></td></tr><tr><td><strong>2025年2月</strong></td><td class="r">¥2,865,830</td><td class="r">381件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥120,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">28件</span></td><td class="r" style="color:var(--warn)">¥112,000</td><td class="r">8件</td><td class="r"><strong style="color:var(--warn);">3.9%</strong></td></tr><tr><td><strong>2025年3月</strong></td><td class="r">¥2,516,760</td><td class="r">398件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥203,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">29件</span></td><td class="r" style="color:var(--success)">¥73,000</td><td class="r">3件</td><td class="r"><strong style="color:var(--success);">2.9%</strong></td></tr><tr><td><strong>2025年4月</strong></td><td class="r">¥2,630,480</td><td class="r">414件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥75,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">18件</span></td><td class="r" style="color:var(--success)">¥59,000</td><td class="r">5件</td><td class="r"><strong style="color:var(--success);">2.2%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥2,862,480</td><td class="r">433件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥85,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">25件</span></td><td class="r" style="color:var(--success)">¥59,000</td><td class="r">8件</td><td class="r"><strong style="color:var(--success);">2.1%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥2,801,080</td><td class="r">439件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥93,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">16件</span></td><td class="r" style="color:var(--success)">¥78,000</td><td class="r">26件</td><td class="r"><strong style="color:var(--success);">2.8%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥2,758,940</td><td class="r">412件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥2,457,270</td><td class="r">304件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥15,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--success)">¥40,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">1.6%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥2,659,870</td><td class="r">410件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥348,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">110件</span></td><td class="r" style="color:var(--danger)">¥468,000</td><td class="r">135件</td><td class="r"><strong style="color:var(--danger);">17.6%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥2,323,980</td><td class="r">277件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥3,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--danger)">¥143,000</td><td class="r">37件</td><td class="r"><strong style="color:var(--danger);">6.2%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥2,387,980</td><td class="r">240件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--warn)">¥143,000</td><td class="r">31件</td><td class="r"><strong style="color:var(--warn);">6.0%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥2,363,180</td><td class="r">211件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥21,600<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--danger)">¥194,000</td><td class="r">31件</td><td class="r"><strong style="color:var(--danger);">8.2%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP0Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥2,224,810</td><td class="r">181件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥70,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥48,000</td><td class="r">16件</td><td class="r"><strong style="color:var(--success);">2.2%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥2,018,810</td><td class="r">163件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--warn)">¥74,000</td><td class="r">14件</td><td class="r"><strong style="color:var(--warn);">3.7%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥2,175,210</td><td class="r">189件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥250,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">40件</span></td><td class="r" style="color:var(--success)">¥24,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.1%</strong></td></tr><tr><td><strong>2026年4月</strong></td><td class="r">¥2,059,510</td><td class="r">186件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥68,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">7件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年5月</strong></td><td class="r">¥2,214,610</td><td class="r">206件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥195,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">28件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年6月</strong></td><td class="r">¥2,247,291</td><td class="r">213件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥70,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">8件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年7月</strong></td><td class="r">¥2,311,790</td><td class="r">224件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥70,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">10件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年8月</strong></td><td class="r">¥2,513,790</td><td class="r">230件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥255,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">8件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年9月</strong></td><td class="r">¥2,464,790</td><td class="r">208件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥50,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年10月<span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></strong></td><td class="r">¥497,000</td><td class="r">40件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥60,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">6件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr></tbody></table></div></div>
         </div>
         <!-- 田中 -->
         <div id="mrrP1" style="display:none;">
@@ -588,8 +588,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
             <button class="tab-btn active" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP1Y25','mrrP1YRow')">2025年</button>
             <button class="tab-btn" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP1Y26','mrrP1YRow')">2026年</button>
           </div>
-          <div id="mrrP1Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年4月</strong></td><td class="r">¥2,001,766</td><td class="r">99件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥48,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥2,058,766</td><td class="r">101件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥57,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥35,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.7%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥2,132,766</td><td class="r">108件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥84,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">3件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥2,194,766</td><td class="r">102件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥92,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">3件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥2,335,858</td><td class="r">108件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥136,092<span style="font-size:10px;color:var(--muted);margin-left:3px;">5件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥2,357,858</td><td class="r">108件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥2,482,858</td><td class="r">117件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥125,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">9件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥2,479,858</td><td class="r">117件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥2,577,358</td><td class="r">121件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥67,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">3件</span></td><td class="r" style="color:var(--success)">¥30,000</td><td class="r">6件</td><td class="r"><strong style="color:var(--success);">1.2%</strong></td></tr></tbody></table></div></div>
-          <div id="mrrP1Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥2,604,658</td><td class="r">122件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,300<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥2,698,658</td><td class="r">121件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥153,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">5件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥2,741,658</td><td class="r">122件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥13,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--success)">¥10,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">0.4%</strong></td></tr><tr><td><strong>2026年4月</strong><span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></td><td class="r">¥1,199,592</td><td class="r">45件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--danger)">¥108,000</td><td class="r">4件</td><td class="r"><strong style="color:var(--danger);">8.3%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP1Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年1月</strong></td><td class="r">¥1,858,566</td><td class="r">88件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥10,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年2月</strong></td><td class="r">¥2,136,566</td><td class="r">110件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥278,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">19件</span></td><td class="r" style="color:var(--success)">¥27,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.3%</strong></td></tr><tr><td><strong>2025年3月</strong></td><td class="r">¥2,188,566</td><td class="r">113件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥79,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--success)">¥55,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">2.5%</strong></td></tr><tr><td><strong>2025年4月</strong></td><td class="r">¥2,249,966</td><td class="r">108件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥60,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥27,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.2%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥2,305,566</td><td class="r">109件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥57,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥62,500</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">2.7%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥2,275,466</td><td class="r">115件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥114,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">9件</span></td><td class="r" style="color:var(--warn)">¥74,000</td><td class="r">4件</td><td class="r"><strong style="color:var(--warn);">3.3%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥2,296,266</td><td class="r">104件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥122,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--success)">¥27,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.2%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥2,392,158</td><td class="r">108件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥136,092<span style="font-size:10px;color:var(--muted);margin-left:3px;">5件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥2,443,258</td><td class="r">110件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥2,677,058</td><td class="r">125件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥125,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">9件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥2,672,858</td><td class="r">125件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--success)">¥69,000</td><td class="r">3件</td><td class="r"><strong style="color:var(--success);">2.6%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥2,698,158</td><td class="r">125件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥97,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--success)">¥55,000</td><td class="r">7件</td><td class="r"><strong style="color:var(--success);">2.0%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP1Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥2,673,158</td><td class="r">124件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥27,300<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥2,740,758</td><td class="r">123件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥154,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">6件</span></td><td class="r" style="color:var(--success)">¥31,500</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">1.1%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥2,753,658</td><td class="r">122件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥43,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥10,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">0.4%</strong></td></tr><tr><td><strong>2026年4月</strong></td><td class="r">¥2,701,858</td><td class="r">120件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--warn)">¥108,000</td><td class="r">4件</td><td class="r"><strong style="color:var(--warn);">4.0%</strong></td></tr><tr><td><strong>2026年5月</strong></td><td class="r">¥2,597,658</td><td class="r">116件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥20,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--warn)">¥114,000</td><td class="r">4件</td><td class="r"><strong style="color:var(--warn);">4.4%</strong></td></tr><tr><td><strong>2026年6月</strong></td><td class="r">¥2,513,858</td><td class="r">114件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥32,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥40,500</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">1.6%</strong></td></tr><tr><td><strong>2026年7月</strong></td><td class="r">¥2,437,658</td><td class="r">112件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥1,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--danger)">¥189,592</td><td class="r">8件</td><td class="r"><strong style="color:var(--danger);">7.8%</strong></td></tr><tr><td><strong>2026年8月</strong></td><td class="r">¥2,251,266</td><td class="r">104件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥42,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥5,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">0.2%</strong></td></tr><tr><td><strong>2026年9月</strong></td><td class="r">¥2,327,266</td><td class="r">107件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥70,500<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--success)">¥13,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">0.6%</strong></td></tr><tr><td><strong>2026年10月<span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></strong></td><td class="r">¥1,034,000</td><td class="r">38件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--warn)">¥35,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--warn);">3.4%</strong></td></tr></tbody></table></div></div>
         </div>
         <!-- 中岡 -->
         <div id="mrrP2" style="display:none;">
@@ -597,8 +597,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
             <button class="tab-btn active" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP2Y25','mrrP2YRow')">2025年</button>
             <button class="tab-btn" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP2Y26','mrrP2YRow')">2026年</button>
           </div>
-          <div id="mrrP2Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年4月</strong></td><td class="r">¥2,215,730</td><td class="r">81件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥54,273<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥2,335,730</td><td class="r">85件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥120,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥2,363,730</td><td class="r">86件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥28,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥2,440,730</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥77,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">3件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥2,440,730</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥35,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.4%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥2,470,730</td><td class="r">90件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥65,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥2,435,730</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥35,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.4%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥2,678,130</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥312,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥30,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.1%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥2,683,130</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr></tbody></table></div></div>
-          <div id="mrrP2Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥2,678,630</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥20,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--success)">¥70,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">2.5%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥2,608,630</td><td class="r">87件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥2,326,230</td><td class="r">86件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年4月</strong><span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></td><td class="r">¥1,609,503</td><td class="r">56件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥62,273<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥35,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">2.1%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP2Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年1月</strong></td><td class="r">¥2,087,457</td><td class="r">77件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年2月</strong></td><td class="r">¥2,302,457</td><td class="r">84件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥215,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">7件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年3月</strong></td><td class="r">¥2,454,457</td><td class="r">85件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥30,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--success)">¥25,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.0%</strong></td></tr><tr><td><strong>2025年4月</strong></td><td class="r">¥2,383,730</td><td class="r">86件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥54,273<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥30,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.3%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥2,491,730</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥130,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥2,511,230</td><td class="r">90件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥28,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥2,592,230</td><td class="r">94件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥77,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">3件</span></td><td class="r" style="color:var(--success)">¥37,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">1.4%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥2,627,864</td><td class="r">91件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥35,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.3%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥2,813,230</td><td class="r">92件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥65,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥2,757,730</td><td class="r">99件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥45,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">1.6%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥3,035,630</td><td class="r">99件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥342,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">3件</span></td><td class="r" style="color:var(--warn)">¥125,000</td><td class="r">5件</td><td class="r"><strong style="color:var(--warn);">4.1%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥3,003,630</td><td class="r">94件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥35,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--success)">¥45,500</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">1.5%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP2Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥2,808,630</td><td class="r">92件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥20,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--warn)">¥135,000</td><td class="r">4件</td><td class="r"><strong style="color:var(--warn);">4.8%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥2,683,630</td><td class="r">88件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥35,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.3%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥2,608,630</td><td class="r">87件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年4月</strong></td><td class="r">¥2,819,903</td><td class="r">93件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥246,273<span style="font-size:10px;color:var(--muted);margin-left:3px;">7件</span></td><td class="r" style="color:var(--success)">¥77,000</td><td class="r">5件</td><td class="r"><strong style="color:var(--success);">2.7%</strong></td></tr><tr><td><strong>2026年5月</strong></td><td class="r">¥2,927,903</td><td class="r">89件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥27,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">0.9%</strong></td></tr><tr><td><strong>2026年6月</strong></td><td class="r">¥2,877,903</td><td class="r">91件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥175,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">5件</span></td><td class="r" style="color:var(--warn)">¥112,500</td><td class="r">5件</td><td class="r"><strong style="color:var(--warn);">3.9%</strong></td></tr><tr><td><strong>2026年7月</strong></td><td class="r">¥2,753,403</td><td class="r">85件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥35,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--success)">¥29,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">1.1%</strong></td></tr><tr><td><strong>2026年8月</strong></td><td class="r">¥2,794,403</td><td class="r">85件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥70,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥60,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">2.1%</strong></td></tr><tr><td><strong>2026年9月</strong></td><td class="r">¥2,734,403</td><td class="r">84件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥30,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--warn)">¥116,546</td><td class="r">4件</td><td class="r"><strong style="color:var(--warn);">4.3%</strong></td></tr><tr><td><strong>2026年10月<span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></strong></td><td class="r">¥1,534,957</td><td class="r">50件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr></tbody></table></div></div>
         </div>
         <!-- 高橋 -->
         <div id="mrrP3" style="display:none;">
@@ -606,8 +606,8 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
             <button class="tab-btn active" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP3Y25','mrrP3YRow')">2025年</button>
             <button class="tab-btn" style="font-size:11px;padding:7px 16px;" onclick="mrrSwYear('mrrP3Y26','mrrP3YRow')">2026年</button>
           </div>
-          <div id="mrrP3Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年4月</strong></td><td class="r">¥814,500</td><td class="r">38件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥811,300</td><td class="r">36件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥813,700</td><td class="r">36件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥12,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.5%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥826,100</td><td class="r">37件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥814,500</td><td class="r">38件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥834,500</td><td class="r">37件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥12,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥874,300</td><td class="r">41件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥35,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥873,900</td><td class="r">40件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥870,700</td><td class="r">39件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr></tbody></table></div></div>
-          <div id="mrrP3Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥870,300</td><td class="r">38件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥881,500</td><td class="r">40件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥10,800<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥926,500</td><td class="r">49件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥45,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">9件</span></td><td class="r" style="color:var(--danger)">¥98,600</td><td class="r">5件</td><td class="r"><strong style="color:var(--danger);">9.6%</strong></td></tr><tr><td><strong>2026年4月</strong><span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></td><td class="r">¥365,200</td><td class="r">13件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP3Y25"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2025年1月</strong></td><td class="r">¥1,770,200</td><td class="r">40件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年2月</strong></td><td class="r">¥1,878,200</td><td class="r">41件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年3月</strong></td><td class="r">¥1,898,700</td><td class="r">42件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥22,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年4月</strong></td><td class="r">¥1,919,200</td><td class="r">42件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥30,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年5月</strong></td><td class="r">¥1,968,700</td><td class="r">42件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥30,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.5%</strong></td></tr><tr><td><strong>2025年6月</strong></td><td class="r">¥2,002,700</td><td class="r">42件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年7月</strong></td><td class="r">¥1,992,200</td><td class="r">42件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥30,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.5%</strong></td></tr><tr><td><strong>2025年8月</strong></td><td class="r">¥1,963,700</td><td class="r">41件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥30,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年9月</strong></td><td class="r">¥1,923,200</td><td class="r">41件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--danger)">¥120,000</td><td class="r">4件</td><td class="r"><strong style="color:var(--danger);">6.2%</strong></td></tr><tr><td><strong>2025年10月</strong></td><td class="r">¥2,103,400</td><td class="r">58件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥40,600<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--success)">¥30,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.4%</strong></td></tr><tr><td><strong>2025年11月</strong></td><td class="r">¥2,114,700</td><td class="r">57件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2025年12月</strong></td><td class="r">¥2,034,000</td><td class="r">52件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--success)">¥40,000</td><td class="r">2件</td><td class="r"><strong style="color:var(--success);">2.0%</strong></td></tr></tbody></table></div></div>
+          <div id="mrrP3Y26" style="display:none;"><div class="tws"><table class="dt"><thead><tr><th>月</th><th class="r">稼働MRR</th><th class="r">件数</th><th class="r" style="color:var(--primary);">新規MRR</th><th class="r">解約MRR</th><th class="r">解約件数</th><th class="r">チャーン率</th></tr></thead><tbody><tr><td><strong>2026年1月</strong></td><td class="r">¥1,983,900</td><td class="r">49件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年2月</strong></td><td class="r">¥1,933,600</td><td class="r">51件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥2,400<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--success)">¥20,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.0%</strong></td></tr><tr><td><strong>2026年3月</strong></td><td class="r">¥1,929,000</td><td class="r">50件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--warn)">¥98,600</td><td class="r">5件</td><td class="r"><strong style="color:var(--warn);">5.1%</strong></td></tr><tr><td><strong>2026年4月</strong></td><td class="r">¥1,863,000</td><td class="r">47件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥400<span style="font-size:10px;color:var(--muted);margin-left:3px;">1件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年5月</strong></td><td class="r">¥1,919,600</td><td class="r">49件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥46,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">4件</span></td><td class="r" style="color:var(--success)">¥22,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">1.1%</strong></td></tr><tr><td><strong>2026年6月</strong></td><td class="r">¥1,921,800</td><td class="r">52件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥53,200<span style="font-size:10px;color:var(--muted);margin-left:3px;">5件</span></td><td class="r" style="color:var(--warn)">¥74,000</td><td class="r">3件</td><td class="r"><strong style="color:var(--warn);">3.9%</strong></td></tr><tr><td><strong>2026年7月</strong></td><td class="r">¥1,853,200</td><td class="r">50件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥1,600<span style="font-size:10px;color:var(--muted);margin-left:3px;">2件</span></td><td class="r" style="color:var(--muted)">¥0</td><td class="r">0件</td><td class="r"><strong style="color:var(--success);">0.0%</strong></td></tr><tr><td><strong>2026年8月</strong></td><td class="r">¥1,855,800</td><td class="r">53件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥30,000<span style="font-size:10px;color:var(--muted);margin-left:3px;">6件</span></td><td class="r" style="color:var(--success)">¥5,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">0.3%</strong></td></tr><tr><td><strong>2026年9月</strong></td><td class="r">¥1,916,000</td><td class="r">57件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥66,800<span style="font-size:10px;color:var(--muted);margin-left:3px;">5件</span></td><td class="r" style="color:var(--success)">¥5,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--success);">0.3%</strong></td></tr><tr><td><strong>2026年10月<span style="font-size:10px;color:var(--muted);margin-left:4px;">集計途中</span></strong></td><td class="r">¥393,200</td><td class="r">13件</td><td class="r" style="color:var(--primary);font-weight:700;">+¥0<span style="font-size:10px;color:var(--muted);margin-left:3px;">0件</span></td><td class="r" style="color:var(--danger)">¥30,000</td><td class="r">1件</td><td class="r"><strong style="color:var(--danger);">7.6%</strong></td></tr></tbody></table></div></div>
         </div>
 
       </div><!-- /mrrByPerson -->
@@ -1292,37 +1292,37 @@ function processBilling(){
 // MRR 概算/確定ロジック
 // ============================================================
 const MRR_RECORD_CNT = {
-  "2024/04": 267,
-  "2024/05": 264,
-  "2024/06": 281,
-  "2024/07": 319,
-  "2024/08": 366,
-  "2024/09": 421,
-  "2024/10": 461,
-  "2024/11": 506,
-  "2024/12": 541,
-  "2025/01": 577,
-  "2025/02": 616,
-  "2025/03": 638,
-  "2025/04": 650,
-  "2025/05": 673,
-  "2025/06": 686,
-  "2025/07": 652,
-  "2025/08": 544,
-  "2025/09": 653,
-  "2025/10": 559,
-  "2025/11": 521,
-  "2025/12": 482,
-  "2026/01": 446,
-  "2026/02": 425,
-  "2026/03": 448,
-  "2026/04": 446,
-  "2026/05": 460,
-  "2026/06": 470,
-  "2026/07": 471,
-  "2026/08": 473,
-  "2026/09": 456,
-  "2026/10": 141
+  "2024-04": 428,
+  "2024-05": 421,
+  "2024-06": 423,
+  "2024-07": 451,
+  "2024-08": 491,
+  "2024-09": 542,
+  "2024-10": 578,
+  "2024-11": 622,
+  "2024-12": 653,
+  "2025-01": 684,
+  "2025-02": 714,
+  "2025-03": 727,
+  "2025-04": 733,
+  "2025-05": 750,
+  "2025-06": 760,
+  "2025-07": 719,
+  "2025-08": 602,
+  "2025-09": 706,
+  "2025-10": 570,
+  "2025-11": 529,
+  "2025-12": 487,
+  "2026-01": 449,
+  "2026-02": 425,
+  "2026-03": 448,
+  "2026-04": 446,
+  "2026-05": 460,
+  "2026-06": 470,
+  "2026-07": 471,
+  "2026-08": 472,
+  "2026-09": 456,
+  "2026-10": 141
 };
 
 function isMrrConfirmed(m) {
@@ -1335,98 +1335,100 @@ function isMrrConfirmed(m) {
 
 const MRR_ESTIMATE_APR = {
   "persons": {
-    "中岡世里菜": {
-      "mrr": 1534957,
-      "cnt": 50,
-      "churn_mrr": 0,
-      "churn_cnt": 0
-    },
-    "南原龍司": {
-      "mrr": 497000,
-      "cnt": 40,
-      "churn_mrr": 0,
-      "churn_cnt": 0
-    },
-    "高橋広輝": {
-      "mrr": 393200,
-      "cnt": 13,
-      "churn_mrr": 30000,
-      "churn_cnt": 1
-    },
-    "田中莉奈": {
-      "mrr": 1034000,
-      "cnt": 38,
-      "churn_mrr": 70000,
-      "churn_cnt": 2
-    }
-  },
-  "total": {
-    "mrr": 3459157,
-    "cnt": 141,
-    "churn_mrr": 100000,
-    "churn_cnt": 3
-  }
-};
-const MRR_CONFIRMED_APR = {
-  "persons": {
-    "高橋広輝": {
-      "mrr": 1916000,
-      "cnt": 57,
-      "churn_mrr": 5000,
-      "churn_cnt": 1
-    },
     "南原龍司": {
       "mrr": 2464790,
       "cnt": 208,
       "churn_mrr": 0,
       "churn_cnt": 0
     },
+    "田中莉奈": {
+      "mrr": 2292266,
+      "cnt": 106,
+      "churn_mrr": 35000,
+      "churn_cnt": 1
+    },
     "中岡世里菜": {
       "mrr": 2734403,
       "cnt": 84,
-      "churn_mrr": 146546,
-      "churn_cnt": 5
+      "churn_mrr": 0,
+      "churn_cnt": 0
+    },
+    "高橋広輝": {
+      "mrr": 1886000,
+      "cnt": 56,
+      "churn_mrr": 30000,
+      "churn_cnt": 1
+    }
+  },
+  "total": {
+    "mrr": 9377459,
+    "cnt": 454,
+    "churn_mrr": 65000,
+    "churn_cnt": 2
+  }
+};
+const MRR_CONFIRMED_APR = {
+  "persons": {
+    "南原龍司": {
+      "mrr": 2464790,
+      "cnt": 208,
+      "churn_mrr": 0,
+      "churn_cnt": 0
     },
     "田中莉奈": {
       "mrr": 2327266,
       "cnt": 107,
-      "churn_mrr": 45000,
+      "churn_mrr": 13000,
+      "churn_cnt": 1
+    },
+    "中岡世里菜": {
+      "mrr": 2734403,
+      "cnt": 84,
+      "churn_mrr": 116546,
       "churn_cnt": 4
+    },
+    "高橋広輝": {
+      "mrr": 1916000,
+      "cnt": 57,
+      "churn_mrr": 5000,
+      "churn_cnt": 1
     }
   },
   "total": {
     "mrr": 9442459,
     "cnt": 456,
-    "churn_mrr": 196546,
-    "churn_cnt": 10
+    "churn_mrr": 134546,
+    "churn_cnt": 6
   }
 };
-const CHURN_DETAIL_ALL = {"2026-10": {"高橋広輝": ["RV Parking & Grab a Bite Jubilations|¥30,000"], "田中莉奈": ["Gala青い海|¥35,000"]}, "2026-09": {"高橋広輝": ["あんぼ歯科クリニック|¥5,000"], "中岡世里菜": ["クレール歯科クリニック|¥27,000", "ヤマダ不動産西宮甲子園店 株式会社MyHomeDo|¥27,273", "ビューティープラス（BEAUTY PLUS）|¥35,000", "ヤマダ不動産 京都伏見店|¥27,273"], "田中莉奈": ["居酒屋リンカーン 町田店|¥13,000"]}, "2026-08": {"高橋広輝": ["RIDE WORKS|¥5,000"], "中岡世里菜": ["創作韓国居酒屋 カブキヤ|¥30,000", "焼肉 千久左|¥30,000"], "田中莉奈": ["シャングリラズシークレット六本木店|¥5,000"]}, "2026-07": {"田中莉奈": ["POPCORN KOBE|¥13,500", "伝統鍼灸一滴庵|¥24,000", "おざわ歯科・矯正歯科|¥18,000", "健康堂中医鍼灸整体院|¥25,000", "癒しサロン唯|¥27,273", "タイ古式マッサージ 手もみ職人 名古屋 錦・栄 本店|¥27,273", "手もみ職人 錦・栄 本店|¥27,273", "ワンランク上の整体院 名古屋栄店|¥27,273"], "中岡世里菜": ["ランチボックスいわき南店|¥15,000", "山梨カイロプラクティック整体|¥14,000"]}, "2026-05": {"高橋広輝": ["MUA Oral Este Studio|¥22,000"], "田中莉奈": ["植村美容外科|¥27,000", "錦糸テーラー|¥30,000", "太美歯科クリニック|¥27,000", "GARDEN BISTRO&WINE|¥30,000"], "中岡世里菜": ["ぐり虎 Home Made Noodle イオンモール岡山店|¥27,000"]}, "2026-06": {"高橋広輝": ["パティスリープラネッツ江古田店|¥12,000", "百合ヶ丘家族葬ホール|¥35,000", "根岸いちくら|¥27,000"], "中岡世里菜": ["有限会社糸島モータース|¥24,500", "はっとり歯科・矯正歯科|¥27,000", "パーソナルトレーニングジムWAKE|¥27,000", "メンズカット専門店 GRAND 本八幡店|¥24,000", "エイペックス吉野校|¥10,000"], "田中莉奈": ["アモーレヴォレ・サンマルコ|¥13,500", "SOBA cafe dining TAKIHAMA（そば たきはま）|¥27,000"]}, "2026-04": {"中岡世里菜": ["メルコヘアデザイン|¥35,000", "和麺ぐり虎 Okayama|¥27,000", "麺処ぐり虎 出雲店|¥5,000", "麺処ぐり虎 海老名店|¥5,000", "麺処 ぐり虎 本店|¥5,000"], "田中莉奈": ["MOGU|¥30,000", "createur miju【クレアトゥール ミジュ】|¥13,000", "CLOUDNINE 烏丸御池 パーソナルトレーニングジム|¥35,000", "健康堂整骨院 蒲田院|¥30,000"]}, "2026-03": {"南原龍司": ["KX Pilates 東新宿店|¥24,000"], "高橋広輝": ["旭川味噌ラーメン ばんから上野店|¥12,400", "旭川味噌ばんからラーメン 池袋西口店|¥8,800", "東京豚骨拉麺ばんから 新宿歌舞伎町店|¥12,400", "nicole affetto|¥35,000", "One’s Remake|¥30,000"], "田中莉奈": ["いちかわ皮フ科|¥10,000"]}, "2026-02": {"南原龍司": ["Hair salon Chelsea Omotesando|¥35,000", "locca|¥3,000", "五感　仙川店|¥3,000", "株式会社高松商事|¥3,000", "株式会社ホロニック　セトレ ハイランドヴィラ姫路|¥3,000", "ヘアーサロン ひらかわ|¥3,000", "D-light|¥3,000", "ハロー！パソコン教室 トナリエクレオ つくば校|¥3,000", "試食BARアサクサ|¥3,000", "pico ricci|¥3,000", "寿司居酒屋 純|¥3,000", "峠の釜飯食堂鶏と卵|¥3,000", "BRACERIA CACTUS|¥3,000", "iki|¥3,000"], "田中莉奈": ["ラヴィスヴィラスイート|¥13,500", "太陽学院 西神奈川校|¥18,000"], "高橋広輝": ["SHIROホワイトニング|¥20,000"], "中岡世里菜": ["おたからや鶴ヶ丘店|¥35,000"]}, "2026-01": {"南原龍司": ["salon Flower|¥3,000", "プライベートサウナKIZAMI|¥3,000", "フェイシャルワックス専門店 WHITE WAX つくば店|¥3,000", "毛穴・ニキビケア・ハーブピーリング【韓国肌管理専門店】WHITE AQUA つくば店|¥3,000", "CASA tres 3 カーサトレス|¥3,000", "CASA grande|¥3,000", "おいもい|¥3,000", "伊豆稲取MINAMO|¥3,000", "ケールの王様 JIYUGAOKA|¥3,000", "tsumugi|¥3,000", "NATURAL BEAUTY & ESTHETIC ZIN|¥3,000", "Nails 4U|¥3,000", "いづつ屋　先斗町店|¥3,000", "LIFE TIME|¥3,000", "HIMAWARI|¥3,000", "grill&Italian Falo'会津若松店|¥3,000"], "中岡世里菜": ["富士交通株式会社|¥35,000", "買取専門店 玉光堂 ドン・キホーテ柏駅前店|¥30,000", "買取大吉 上石神井駅前店|¥35,000", "Nishiazabu RTD|¥35,000"]}, "2025-12": {"田中莉奈": ["LATTE GRAPHIC 自由が丘店|¥5,000", "LATTE GRAPHIC 町田店|¥5,000", "ラテグラフィック海老名店|¥5,000", "LATTE GRAPHIC たまプラーザ店|¥5,000", "LATTEGRAPHIC 武蔵小杉店|¥5,000", "LATTE GRAPHIC 聖蹟桜ヶ丘|¥5,000", "鉄板焼き&月島もんじゃ 梵天丸|¥25,000"], "南原龍司": ["おおうら眼科|¥40,000", "千住ジンギスカン海月|¥3,000", "studio mirth【スタジオ マース】|¥3,000", "HARILANCE|¥3,000", "cafe restaurant moto 1（紅さんざし店）|¥3,000", "千葉蜂駆除センター船橋店|¥6,000", "四天王寺茶屋|¥3,000", "en ROSE|¥3,000", "中華そば 流川|¥3,000", "瑞江steak&barハックルベリー|¥3,000", "鮨・おか林|¥3,000", "WASAKE Sake Experience|¥3,000", "BARBERSHOP ONFLEEK|¥3,000", "aLLパーソナルジム|¥3,000", "ZAB鍼灸整骨院|¥3,000", "AGLAIA personal gym 表参道本店|¥3,000", "牛清　五ヶ所店|¥3,000", "牛清　鵜方店|¥3,000", "牛清　伊勢店|¥3,000", "台湾タンパオ三宮生田ロード店|¥3,000", "hei coffee|¥3,000", "焼肉牛炭|¥3,000", "和酒立呑　明後日|¥3,000", "ステーキ屋King|¥3,000", "五稜農園|¥3,000", "79LINA SPA　|¥3,000", "からだ屋　博多店|¥3,000", "DLIGHT|¥3,000", "ユアースポーツクラブ 船堀|¥20,000", "スパ＆スポーツ ユアー南流山|¥20,000", "はた歯科クリニック|¥30,000"], "中岡世里菜": ["整体院 福|¥15,500", "買取専門店 玉光堂 長野駅前店|¥30,000"], "高橋広輝": ["鉄板焼Bar 7|¥35,000", "personal studio Route|¥5,000"]}, "2025-11": {"南原龍司": ["元祖ニュータンタンメン本舗白楽店|¥24,000", "OLD SKOOL 4 U|¥3,000", "もつ鍋居酒屋ばか正直|¥3,000", "八百屋＆Cafe はっぴ〜べじたぶる|¥3,000", "Echarity Naha|¥3,000", "ヒカリヤ　ニシ|¥3,000", "焼肉TAKATOEN　貴闘炎|¥3,000", "酒処ぷるーたん。|¥3,000", "尾山屋|¥3,000", "食道 いし川|¥3,000", "SABAR 徳山銀座店|¥3,000", "佐藤写真館|¥3,000", "ザ・パイホール・ロサンゼルス  小金井公園店|¥3,000", "gaプログラミング徳島|¥3,000", "シェリールスクール|¥3,000", "2539kitchen|¥3,000", "Cerbea|¥3,000", "MALo|¥3,000", "大海庵|¥3,000", "SeeK|¥3,000", "モーダ・ガレリア|¥3,000", "yourself|¥3,000", "Cork|¥3,000", "cocoregene|¥3,000", "ちゅら肌|¥3,000", "Rei kjavik spa&kea|¥3,000", "神楽坂鮨こんこん|¥3,000", "ローゲンマイヤーJR芦屋店|¥3,000", "大衆ビストロJIN|¥3,000", "ぐり虎 Ocean Club|¥30,000", "麺処ぐり虎 名古屋栄|¥5,000"], "中岡世里菜": ["人類みな辛さが全て　練馬店|¥30,000", "Tamaya池袋東武店|¥30,000", "Ritz 　幸せの選択【リッツ】|¥30,000", "スマホファクトリー ドン・キホーテ柏駅前店|¥30,000", "焼き鳥と名古屋めし 宅飲み居酒屋ぐっさん家|¥5,000"], "田中莉奈": ["Shisha cafe & bar 赤坂煙研究所|¥10,000", "健康堂整骨院 大岡山院|¥24,000", "CrossFit Nishi Azabu|¥35,000"]}, "2025-09": {"高橋広輝": ["ビストロチック六本木|¥35,000", "占いの館ウィル東京渋谷店|¥30,000", "Pullulant Esthe Himeji|¥30,000", "ホワイトニング専門店 Petite Salon elMo.|¥30,000", "Pullulant Esthe Kobe|¥30,000"], "南原龍司": ["株式会社くるまや中山|¥12,000", "Food Bar JAM|¥3,000", "N portal hair salon|¥3,000", "オアシス南房総|¥3,000", "オアシス南雪谷|¥3,000", "オアシス和田浦|¥3,000", "フセヤ エステティック アロマアンドヨガ|¥3,000", "大衆音楽酒場WAKASU|¥3,000", "六花園|¥3,000", "くるみ写真|¥3,000", "Morethan Paradise|¥3,000", "北海道ソウルフード|¥3,000", "F|¥3,000", "ミセスステーキ|¥3,000", "マツヤニ＆ヒーリングこころとお肌の専門家SalonYaco|¥3,000", "野菜ダイニングほんのちょっとパレスビル店|¥3,000", "焼きたて食パン専門店　一本堂|¥3,000", "鳥笑|¥3,000", "アートスタジオ チェリーブロッサム|¥3,000", "南千住駅前整骨院・鍼灸院|¥3,000", "nanacolors|¥3,000", "らぁめんぐうたら|¥3,000", "濃厚タンメン無双家加古川店|¥3,000", "トリコミート名古屋店|¥3,000", "C gam|¥3,000", "BRIMFULnail|¥3,000", "ギリシャキッチン&ベーカリー バクロ|¥3,000", "Light-fit|¥3,000", "seule et coco|¥3,000", "ANALOG CRAFT CHOCOLATE|¥3,000", "ＤＡＨＬＩＡ　|¥3,000", "G-tle（ジートル）|¥3,000", "串カツもんじゃひまわり　江坂店|¥3,000", "鮨しん IN THE MUSEUM|¥3,000", "本格炭焼とりいち|¥3,000", "三依渓流つり場|¥3,000", "boutique muguet|¥3,000", "メンズ脱毛サロンBOSS　名古屋店|¥3,000", "こい希|¥3,000", "黒田越中餃子研究所|¥3,000", "Your,GURT&GRANOLA|¥3,000", "お好み焼き ふくちゃん|¥3,000", "居酒屋漁火|¥3,000", "髪きり処もくれん|¥3,000", "カプリティオ|¥3,000", "東洋経絡整体院|¥3,000", "BAR LUXE|¥3,000", "リラクゼーションスペース　my time|¥3,000", "Mexican foods Amigo|¥3,000", "女性専用リラクゼーション整体ルームな〜る|¥3,000", "だるまや新宿三丁目店|¥3,000", "だるまや新宿西口店|¥3,000", "炭火焼生ラムジンギスカン味楽来|¥3,000", "鮨　むろ橋|¥3,000", "WARUNG KAKI LIMA|¥3,000", "クレープ&カフェ くるくる|¥3,000", "ジョンシェ|¥3,000", "kaiko hair&art studio|¥3,000", "sika|¥3,000", "meza|¥3,000", "バード 賢島ベイマリーナ|¥3,000", "ラ・カミオ|¥3,000", "居酒屋 るいじんえん|¥3,000", "心の憩場美容室ひかり|¥3,000", "海辺のかくれ家　雪中花|¥3,000", "JUDE（ジュード）|¥3,000", "HaLe Resort 京都河原町店|¥3,000", "PlanetariumCafe&BarMisora|¥3,000", "「珀」デニッシュ食パン専門店HAKU 京都|¥3,000", "おばん菜民宿 みそら|¥3,000", "FourCornersCutShop favey’s|¥3,000", "grin 栄|¥3,000", "NICOLI|¥3,000", "MINORI CAFE|¥3,000", "Le Bois |¥3,000", "セリア美容室|¥3,000", "CROWN hair lounge|¥3,000", "プリン堂|¥3,000", "あ ないすでい|¥3,000", "THE HARUMAKI CLUB KOBE|¥3,000", "株式会社ノビアス|¥3,000", "Lacl'e博多店|¥3,000", "Lacl'e香椎店|¥3,000", "酒と釜飯ひろき|¥3,000", "Dive Star|¥3,000", "NailsalonSOROR|¥3,000", "Manaリンパ|¥3,000", "Barbier Adi【バルビエーレ アーディ】|¥3,000", "IRIS|¥3,000", "マカロニキッチン|¥3,000", "ヘアメイク＆フォトスタジオ パトリック大阪|¥3,000", "鹿峰(かほう)ゆらり|¥3,000", "いやし工房　もみ丸|¥3,000", "te-te melty|¥3,000", "門前仲町イエティ鍼灸整骨院|¥3,000", "福寿司|¥3,000", "和伊和伊酒場きくぞう|¥6,000", "海鮮網焼き 海ほたる|¥3,000", "アラモード洋菓子店|¥3,000", "Sushi on La Cienega|¥3,000", "矢落|¥3,000", "Eclat.|¥3,000", "大正焼肉ホルモン　K2+|¥3,000", "Rin5Life 〜りんごらいふ〜　|¥3,000", "ダイヤモンドボディ|¥3,000", "Beauty salon Lovina 長野駅前店|¥3,000", "BOOMER|¥3,000", "プライベートサロンｋｕｓａｋａ|¥3,000", "Concept 淡路|¥3,000", "髪質改善専門店 艶美|¥3,000", "やきとり居酒屋どぼーず|¥3,000", "M fleur nail&beauty|¥3,000", "黒毛和牛ホルモン 大衆焼肉しんすけ 鍛冶屋町店|¥3,000", "Matilda【マチルダ】|¥3,000", "YOSHIDA KITCHEN'S|¥3,000", "理容チョッキンズPLUS|¥3,000", "commercial office TOMATO|¥3,000", "Private salon Belle|¥3,000", "PGcafe|¥3,000", "nail&eyelash ROI|¥3,000", "喫茶久遠|¥3,000", "Glam up Sapporo|¥3,000", "bi.send|¥3,000", "REVISHOP伊勢店|¥3,000", "笑食居酒屋つむぎ家|¥3,000", "骨盤矯正ネコの手|¥3,000", "T-SHIPS|¥3,000", "ちぢみ屋|¥3,000", "たかつきレバー|¥3,000", "Karaoke&Darts Bar TIA|¥3,000", "玉島プレイランド|¥3,000", "ひよこちゃん 中島店|¥3,000", "ぽちたま 水玉店|¥3,000", "ぐり虎　HOME MADE NOODLE|¥30,000", "ホテルドルフィン|¥27,000"]}, "2025-10": {"高橋広輝": ["e'clat【エクラ】|¥30,000"], "南原龍司": ["岡本整骨院|¥3,000", "ガル　エデン|¥3,000", "LE-BA SURF|¥3,000", "GUESTHOUSE|¥3,000", "iki-粋- Retreat Villa|¥3,000", "万屋Stand|¥3,000", "あやのはりきゅう整骨院|¥3,000", "GoodJob!センター香芝|¥3,000", "Mrs.saison Bakery|¥3,000", "手打ち蕎麦きさく|¥3,000", "居酒屋 ゆえん-結縁-|¥3,000", "yuimo　yoga|¥3,000", "食酒場ハッチ|¥3,000", "private salon Re'Anela|¥3,000", "Bar WHITE NUTS|¥3,000", "日々と、珈琲|¥3,000", "Ｈ２|¥3,000", "SlowRushCoffee|¥3,000", "フォトコザカ|¥3,000", "有限会社熊野蒲鉾店|¥3,000", "鰻の成瀬 札幌店|¥3,000", "焼肉好牛|¥3,000", "美月|¥3,000", "vend|¥3,000", "髪ふうせん|¥3,000", "ハイボールバージャンボリー|¥3,000", "パラム韓|¥3,000", "焼鳥酒場 鳥◯|¥3,000", "鳥勝|¥3,000", "はんばぁぐそう|¥3,000", "ポジティブスキンサロン一MIYu一【美癒】|¥3,000", "にじのわ|¥3,000", "Saku 二十世紀が丘店|¥3,000", "リストランテ デュラム|¥6,000", "王記厨房|¥3,000", "セレモニーホール掬水苑 太白|¥30,000", "和麺ぐり虎 名古屋店|¥5,000"], "中岡世里菜": ["田中モータース|¥10,000", "金乃竹 茶寮|¥35,000"]}, "2025-08": {"田中莉奈": ["ワンライフ|¥35,000"], "中岡世里菜": ["青木歯科医院|¥35,000"], "南原龍司": ["ゼン・デザインワークス株式会社 一級建築士事務所|¥35,000", "岩沢住設|¥5,000"]}, "2025-07": {"中岡世里菜": ["北新地はらみ別邸|¥25,000", "ヘアカット専門店Story下総中山店|¥12,000"], "高橋広輝": ["占いの館ウィル名古屋栄店|¥30,000"], "田中莉奈": ["BARとなり|¥27,000"]}, "2025-05": {"高橋広輝": ["KAITOLOGY 広島本通店|¥30,000"], "南原龍司": ["焼肉じゅらく|¥3,000", "沖縄ヨット体験セーリング|¥6,000", "日本酒居酒屋拉麺|¥3,000", "Cirque du HAT|¥3,000", "アジアの小さな食卓 祐祐|¥3,000", "小さなタルトのお店S|¥3,000", "焼肉食堂こやま|¥3,000", "FROG GYM|¥35,000"], "田中莉奈": ["GRAND|¥35,000", "&STORIES原宿|¥27,500"]}, "2025-06": {"南原龍司": ["HappierLife＋α　（ハピアライフプラスアルファ）|¥3,000", "IN VIAGGIO|¥3,000", "MOTOSUKO DIVE RESORT|¥3,000", "よなが|¥3,000", "VOUL|¥3,000", "名山VOUL|¥3,000", "スポラックス大和|¥3,000", "やきとりこころ 栗東西店|¥3,000", "やきとりこころ 本店|¥3,000", "minimam|¥3,000", "チキンプレイス ロティサリーズ 合羽橋店|¥3,000", "整体院もみのき　つちうら横丁店|¥3,000", "sakura 愛|¥3,000", "カフェルクスゆめタウン佐賀店|¥3,000", "カフェルクス熊本浜線店|¥3,000", "カフェルクス諫早店|¥3,000", "bar Jiro|¥3,000", "Total Beauty Salon Cherir|¥3,000", "ウェルネスきしもと整骨院|¥3,000", "Enjoy relaxation|¥3,000", "センダイ和バル WAO|¥3,000", "Hair by PROVE|¥3,000", "串坊主|¥3,000", "GolFair|¥3,000", "ワイン食堂ビオワルン|¥3,000", "パン・ド・パルテール|¥3,000"], "田中莉奈": ["伊勢原デポ(デリバリーセンター)|¥18,500", "キッチンファクトリー湘南|¥18,500", "キッチンファクトリー大和|¥18,500", "キッチンファクトリー相模原|¥18,500"]}, "2025-04": {"田中莉奈": ["ESPACIO 梅田店|¥27,000"], "南原龍司": ["HANAHOU|¥3,000", "オステリア・イル・ぴあっと・ヌォーボ|¥3,000", "Street Kitchen Taco Shop|¥3,000", "大阪焼肉･ホルモン ふたご 赤羽店|¥25,000", "大阪焼肉・ホルモン ふたご本川越店|¥25,000"], "中岡世里菜": ["ひなたCafe|¥30,000"]}};
+const CHURN_DETAIL_ALL = {"2024-04": {"南原龍司": ["おそうじ王国　川崎支店|¥35,000"], "中岡世里菜": ["とんかつ・洋食専門店 味の店一番 千日前店|¥35,000"], "高橋広輝": ["Pullulant Esthe Kyoto|¥30,000"]}, "2024-05": {"田中莉奈": ["BBQ PARK THE B’NC 上大岡京急店|¥30,000"]}, "2024-06": {"南原龍司": ["イオンスポーツクラブ盛岡南店|¥15,000", "赤から 青森浜館店|¥27,000", "CO-WORKING&JAZZCLUB EXPRESSION|¥5,000"], "高橋広輝": ["NICOLY Beauty & Cafe Bar|¥30,000"]}, "2024-07": {"南原龍司": ["ラグズ建築|¥35,000", "麺処ぐり虎 高知店|¥30,000"], "田中莉奈": ["BAR MOOR|¥25,000"], "中岡世里菜": ["肉酒場おたけ（旧 北新地はらみ 天満店）|¥25,000"]}, "2024-08": {"南原龍司": ["セレモニーホール掬水苑 いずみ/ほこだて仏光堂|¥30,000", "A・vail建設株式会社|¥30,000", "医療法人社団彩清会 いがり歯科医院|¥30,000"], "田中莉奈": ["会席料理　仕出し　一濱|¥27,000"]}, "2024-09": {"南原龍司": ["寿司割烹みやもと|¥3,000", "パーソナルジム アンカー 高知店|¥35,000", "株式会社中川工務店|¥35,000"]}, "2024-10": {"南原龍司": ["肉と地酒 結 高崎駅前店|¥3,000", "肉と地酒 蓮 熊谷駅前店|¥3,000", "フェムケア【リスブラン麻布十番】|¥27,000", "株式会社 富士美容機|¥30,000"], "中岡世里菜": ["とんかつ・洋食専門店 味の店一番 谷町店|¥35,000"]}, "2024-11": {"南原龍司": ["とまとランド|¥3,000", "サニーサイド尾道|¥3,000", "甘味処鎌倉 函館赤レンガ倉庫店|¥3,000", "Bar Eau-de-Vie|¥3,000", "BELLAISOLA|¥3,000", "肉と地酒 結 成田駅前店|¥3,000", "京都つゆしゃぶCHIRIRI 梅田茶屋町店|¥30,000", "おそうじ本舗 加須|¥30,000", "おそうじ本舗境坂東店|¥30,000"]}, "2024-12": {"南原龍司": ["KARAKARA池下店|¥3,000", "幸盛丸|¥3,000", "美容鍼灸salon Yusaku|¥3,000", "ソーセージスタンド　ボンズカフェ|¥3,000", "JIZO pudding|¥3,000", "G.O.D|¥3,000", "焼肉　熱帯夜|¥3,000", "Bistro akari|¥3,000", "小川カイロプラクティック相模大野整体院|¥3,000", "タヒーノ|¥3,000", "C for me|¥3,000", "ビューティーサロンディア（Ｄｉａｒ）|¥3,000", "慶珍楼|¥3,000", "美肌脱毛サロン SPICA|¥3,000"]}, "2025-01": {"南原龍司": ["こころみ整骨院|¥2,000", "BARPolaris|¥3,000", "カフェ オープンハート金町|¥3,000", "くろだ整骨院|¥3,000", "金丸農園直営　野菜居酒屋ルンゴカーニバル 札幌駅北口店|¥3,000", "check coffee|¥3,000", "パークレストラン花|¥3,000", "tano 【タノ】|¥3,000", "ままみぃや|¥3,000", "メンズサロンDOPE|¥3,000", "かくれ家バルBijou|¥3,000", "ハウスクリーニング浦和|¥27,000", "Labowork株式会社|¥30,000", "完全個室居酒屋 肉と魚和バル八 心斎橋店|¥27,273", "肉と天ぷらとちょこっと海鮮酒場七福|¥27,273"]}, "2025-02": {"南原龍司": ["Trattoria R|¥3,000", "Izakaya 和-R|¥3,000", "Pizzeria R Niseko|¥3,000", "some.【サム】|¥3,000", "吉坊庵|¥3,000", "アンカー|¥35,000", "学習塾 町子屋|¥27,000", "ミュゼレストラン善|¥35,000"], "田中莉奈": ["ぶ器用中華シェイシェイ|¥27,000"]}, "2025-03": {"南原龍司": ["CITTA' ALTA|¥3,000", "伝承焼肉TUWAMONO|¥35,000", "横浜家系ラーメン頂家|¥35,000"], "田中莉奈": ["リビングホール和光|¥25,000", "うなぎいもストア上野桜木店|¥30,000"], "中岡世里菜": ["北新地はらみ新大宮店|¥25,000"]}, "2025-04": {"南原龍司": ["HANAHOU|¥3,000", "オステリア・イル・ぴあっと・ヌォーボ|¥3,000", "Street Kitchen Taco Shop|¥3,000", "大阪焼肉･ホルモン ふたご 赤羽店|¥25,000", "大阪焼肉・ホルモン ふたご本川越店|¥25,000"], "田中莉奈": ["ESPACIO 梅田店|¥27,000"], "中岡世里菜": ["ひなたCafe|¥30,000"]}, "2025-05": {"南原龍司": ["焼肉じゅらく|¥3,000", "沖縄ヨット体験セーリング|¥6,000", "日本酒居酒屋拉麺|¥3,000", "Cirque du HAT|¥3,000", "アジアの小さな食卓 祐祐|¥3,000", "小さなタルトのお店S|¥3,000", "焼肉食堂こやま|¥3,000", "FROG GYM|¥35,000"], "田中莉奈": ["GRAND|¥35,000", "&STORIES原宿|¥27,500"], "高橋広輝": ["KAITOLOGY 広島本通店|¥30,000"]}, "2025-06": {"南原龍司": ["HappierLife＋α　（ハピアライフプラスアルファ）|¥3,000", "IN VIAGGIO|¥3,000", "MOTOSUKO DIVE RESORT|¥3,000", "よなが|¥3,000", "VOUL|¥3,000", "名山VOUL|¥3,000", "スポラックス大和|¥3,000", "やきとりこころ 栗東西店|¥3,000", "やきとりこころ 本店|¥3,000", "minimam|¥3,000", "チキンプレイス ロティサリーズ 合羽橋店|¥3,000", "整体院もみのき　つちうら横丁店|¥3,000", "sakura 愛|¥3,000", "カフェルクスゆめタウン佐賀店|¥3,000", "カフェルクス熊本浜線店|¥3,000", "カフェルクス諫早店|¥3,000", "bar Jiro|¥3,000", "Total Beauty Salon Cherir|¥3,000", "ウェルネスきしもと整骨院|¥3,000", "Enjoy relaxation|¥3,000", "センダイ和バル WAO|¥3,000", "Hair by PROVE|¥3,000", "串坊主|¥3,000", "GolFair|¥3,000", "ワイン食堂ビオワルン|¥3,000", "パン・ド・パルテール|¥3,000"], "田中莉奈": ["伊勢原デポ(デリバリーセンター)|¥18,500", "キッチンファクトリー湘南|¥18,500", "キッチンファクトリー大和|¥18,500", "キッチンファクトリー相模原|¥18,500"]}, "2025-07": {"田中莉奈": ["BARとなり|¥27,000"], "中岡世里菜": ["北新地はらみ別邸|¥25,000", "ヘアカット専門店Story下総中山店|¥12,000"], "高橋広輝": ["占いの館ウィル名古屋栄店|¥30,000"]}, "2025-08": {"南原龍司": ["ゼン・デザインワークス株式会社 一級建築士事務所|¥35,000", "岩沢住設|¥5,000"], "中岡世里菜": ["青木歯科医院|¥35,000"]}, "2025-09": {"南原龍司": ["Food Bar JAM|¥3,000", "N portal hair salon|¥3,000", "オアシス南房総|¥3,000", "オアシス南雪谷|¥3,000", "オアシス和田浦|¥3,000", "フセヤ エステティック アロマアンドヨガ|¥3,000", "大衆音楽酒場WAKASU|¥3,000", "六花園|¥3,000", "くるみ写真|¥3,000", "Morethan Paradise|¥3,000", "北海道ソウルフード|¥3,000", "F|¥3,000", "ミセスステーキ|¥3,000", "マツヤニ＆ヒーリングこころとお肌の専門家SalonYaco|¥3,000", "野菜ダイニングほんのちょっとパレスビル店|¥3,000", "焼きたて食パン専門店　一本堂|¥3,000", "鳥笑|¥3,000", "アートスタジオ チェリーブロッサム|¥3,000", "南千住駅前整骨院・鍼灸院|¥3,000", "nanacolors|¥3,000", "らぁめんぐうたら|¥3,000", "濃厚タンメン無双家加古川店|¥3,000", "トリコミート名古屋店|¥3,000", "C gam|¥3,000", "BRIMFULnail|¥3,000", "ギリシャキッチン&ベーカリー バクロ|¥3,000", "Light-fit|¥3,000", "seule et coco|¥3,000", "ANALOG CRAFT CHOCOLATE|¥3,000", "ＤＡＨＬＩＡ|¥3,000", "G-tle（ジートル）|¥3,000", "串カツもんじゃひまわり　江坂店|¥3,000", "鮨しん IN THE MUSEUM|¥3,000", "本格炭焼とりいち|¥3,000", "三依渓流つり場|¥3,000", "boutique muguet|¥3,000", "メンズ脱毛サロンBOSS　名古屋店|¥3,000", "こい希|¥3,000", "黒田越中餃子研究所|¥3,000", "Your,GURT&GRANOLA|¥3,000", "お好み焼き ふくちゃん|¥3,000", "居酒屋漁火|¥3,000", "髪きり処もくれん|¥3,000", "カプリティオ|¥3,000", "東洋経絡整体院|¥3,000", "BAR LUXE|¥3,000", "リラクゼーションスペース　my time|¥3,000", "Mexican foods Amigo|¥3,000", "女性専用リラクゼーション整体ルームな～る|¥3,000", "だるまや新宿三丁目店|¥3,000", "だるまや新宿西口店|¥3,000", "炭火焼生ラムジンギスカン味楽来|¥3,000", "鮨　むろ橋|¥3,000", "WARUNG KAKI LIMA|¥3,000", "クレープ&カフェ くるくる|¥3,000", "ジョンシェ|¥3,000", "kaiko hair&art studio|¥3,000", "sika|¥3,000", "meza|¥3,000", "バード 賢島ベイマリーナ|¥3,000", "ラ・カミオ|¥3,000", "居酒屋 るいじんえん|¥3,000", "心の憩場美容室ひかり|¥3,000", "海辺のかくれ家　雪中花|¥3,000", "JUDE（ジュード）|¥3,000", "HaLe Resort 京都河原町店|¥3,000", "PlanetariumCafe&BarMisora|¥3,000", "「珀」デニッシュ食パン専門店HAKU 京都|¥3,000", "おばん菜民宿 みそら|¥3,000", "FourCornersCutShop favey’s|¥3,000", "grin 栄|¥3,000", "NICOLI|¥3,000", "MINORI CAFE|¥3,000", "Le Bois|¥3,000", "セリア美容室|¥3,000", "CROWN hair lounge|¥3,000", "プリン堂|¥3,000", "あ ないすでい|¥3,000", "THE HARUMAKI CLUB KOBE|¥3,000", "株式会社ノビアス|¥3,000", "Lacl'e博多店|¥3,000", "Lacl'e香椎店|¥3,000", "酒と釜飯ひろき|¥3,000", "Dive Star|¥3,000", "NailsalonSOROR|¥3,000", "Manaリンパ|¥3,000", "Barbier Adi【バルビエーレ アーディ】|¥3,000", "IRIS|¥3,000", "マカロニキッチン|¥3,000", "ヘアメイク＆フォトスタジオ パトリック大阪|¥3,000", "鹿峰(かほう)ゆらり|¥3,000", "いやし工房　もみ丸|¥3,000", "te-te melty|¥3,000", "門前仲町イエティ鍼灸整骨院|¥3,000", "福寿司|¥3,000", "和伊和伊酒場きくぞう|¥6,000", "海鮮網焼き 海ほたる|¥3,000", "アラモード洋菓子店|¥3,000", "Sushi on La Cienega|¥3,000", "矢落|¥3,000", "Eclat.|¥3,000", "大正焼肉ホルモン　K2+|¥3,000", "Rin5Life ～りんごらいふ～|¥3,000", "ダイヤモンドボディ|¥3,000", "Beauty salon Lovina 長野駅前店|¥3,000", "BOOMER|¥3,000", "プライベートサロンｋｕｓａｋａ|¥3,000", "Concept 淡路|¥3,000", "髪質改善専門店 艶美|¥3,000", "やきとり居酒屋どぼーず|¥3,000", "M fleur nail&beauty|¥3,000", "黒毛和牛ホルモン 大衆焼肉しんすけ 鍛冶屋町店|¥3,000", "Matilda【マチルダ】|¥3,000", "YOSHIDA KITCHEN'S|¥3,000", "理容チョッキンズPLUS|¥3,000", "commercial office TOMATO|¥3,000", "Private salon Belle|¥3,000", "PGcafe|¥3,000", "nail&eyelash ROI|¥3,000", "喫茶久遠|¥3,000", "Glam up Sapporo|¥3,000", "bi.send|¥3,000", "REVISHOP伊勢店|¥3,000", "笑食居酒屋つむぎ家|¥3,000", "骨盤矯正ネコの手|¥3,000", "T-SHIPS|¥3,000", "ちぢみ屋|¥3,000", "たかつきレバー|¥3,000", "Karaoke&Darts Bar TIA|¥3,000", "玉島プレイランド|¥3,000", "ひよこちゃん 中島店|¥3,000", "ぽちたま 水玉店|¥3,000", "ぐり虎　HOME MADE NOODLE|¥30,000", "株式会社くるまや中山|¥12,000", "ホテルドルフィン|¥27,000"], "高橋広輝": ["占いの館ウィル東京渋谷店|¥30,000", "Pullulant Esthe Himeji|¥30,000", "ホワイトニング専門店 Petite Salon elMo.|¥30,000", "Pullulant Esthe Kobe|¥30,000"]}, "2025-10": {"南原龍司": ["岡本整骨院|¥3,000", "ガル　エデン|¥3,000", "LE-BA SURF|¥3,000", "GUESTHOUSE|¥3,000", "iki-粋- Retreat Villa|¥3,000", "万屋Stand|¥3,000", "あやのはりきゅう整骨院|¥3,000", "GoodJob!センター香芝|¥3,000", "Mrs.saison Bakery|¥3,000", "手打ち蕎麦きさく|¥3,000", "居酒屋 ゆえん-結縁-|¥3,000", "yuimo　yoga|¥3,000", "食酒場ハッチ|¥3,000", "private salon Re'Anela|¥3,000", "Bar WHITE NUTS|¥3,000", "日々と、珈琲|¥3,000", "Ｈ２|¥3,000", "SlowRushCoffee|¥3,000", "フォトコザカ|¥3,000", "有限会社熊野蒲鉾店|¥3,000", "鰻の成瀬 札幌店|¥3,000", "焼肉好牛|¥3,000", "美月|¥3,000", "vend|¥3,000", "髪ふうせん|¥3,000", "ハイボールバージャンボリー|¥3,000", "パラム韓|¥3,000", "焼鳥酒場 鳥◯|¥3,000", "鳥勝|¥3,000", "はんばぁぐそう|¥3,000", "ポジティブスキンサロン一MIYu一【美癒】|¥3,000", "にじのわ|¥3,000", "Saku 二十世紀が丘店|¥3,000", "リストランテ デュラム|¥6,000", "王記厨房|¥3,000", "セレモニーホール掬水苑 太白|¥30,000", "和麺ぐり虎 名古屋店|¥5,000"], "中岡世里菜": ["田中モータース|¥10,000", "金乃竹 茶寮|¥35,000"], "高橋広輝": ["e'clat【エクラ】|¥30,000"]}, "2025-11": {"南原龍司": ["OLD SKOOL 4 U|¥3,000", "もつ鍋居酒屋ばか正直|¥3,000", "八百屋＆Cafe はっぴ～べじたぶる|¥3,000", "Echarity Naha|¥3,000", "ヒカリヤ　ニシ|¥3,000", "焼肉TAKATOEN　貴闘炎|¥3,000", "酒処ぷるーたん。|¥3,000", "尾山屋|¥3,000", "食道 いし川|¥3,000", "SABAR 徳山銀座店|¥3,000", "佐藤写真館|¥3,000", "ザ・パイホール・ロサンゼルス  小金井公園店|¥3,000", "gaプログラミング徳島|¥3,000", "シェリールスクール|¥3,000", "2539kitchen|¥3,000", "Cerbea|¥3,000", "MALo|¥3,000", "大海庵|¥3,000", "SeeK|¥3,000", "モーダ・ガレリア|¥3,000", "yourself|¥3,000", "Cork|¥3,000", "cocoregene|¥3,000", "ちゅら肌|¥3,000", "Rei kjavik spa&kea|¥3,000", "神楽坂鮨こんこん|¥3,000", "ローゲンマイヤーJR芦屋店|¥3,000", "大衆ビストロJIN|¥3,000", "元祖ニュータンタンメン本舗白楽店|¥24,000", "ぐり虎 Ocean Club|¥30,000", "麺処ぐり虎 名古屋栄|¥5,000"], "田中莉奈": ["Shisha cafe & bar 赤坂煙研究所|¥10,000", "健康堂整骨院 大岡山院|¥24,000", "CrossFit Nishi Azabu|¥35,000"], "中岡世里菜": ["人類みな辛さが全て　練馬店|¥30,000", "Tamaya池袋東武店|¥30,000", "Ritz 　幸せの選択【リッツ】|¥30,000", "スマホファクトリー ドン・キホーテ柏駅前店|¥30,000", "焼き鳥と名古屋めし 宅飲み居酒屋ぐっさん家|¥5,000"]}, "2025-12": {"南原龍司": ["千住ジンギスカン海月|¥3,000", "studio mirth【スタジオ マース】|¥3,000", "HARILANCE|¥3,000", "cafe restaurant moto 1（紅さんざし店）|¥3,000", "千葉蜂駆除センター船橋店|¥6,000", "四天王寺茶屋|¥3,000", "en ROSE|¥3,000", "中華そば 流川|¥3,000", "瑞江steak&barハックルベリー|¥3,000", "鮨・おか林|¥3,000", "WASAKE Sake Experience|¥3,000", "BARBERSHOP ONFLEEK|¥3,000", "aLLパーソナルジム|¥3,000", "ZAB鍼灸整骨院|¥3,000", "AGLAIA personal gym 表参道本店|¥3,000", "牛清　五ヶ所店|¥3,000", "牛清　鵜方店|¥3,000", "牛清　伊勢店|¥3,000", "台湾タンパオ三宮生田ロード店|¥3,000", "hei coffee|¥3,000", "焼肉牛炭|¥3,000", "和酒立呑　明後日|¥3,000", "ステーキ屋King|¥3,000", "五稜農園|¥3,000", "79LINA SPA|¥3,000", "からだ屋　博多店|¥3,000", "DLIGHT|¥3,000", "ユアースポーツクラブ 船堀|¥20,000", "スパ＆スポーツ ユアー南流山|¥20,000", "はた歯科クリニック|¥30,000", "おおうら眼科|¥40,000"], "田中莉奈": ["鉄板焼き&月島もんじゃ 梵天丸|¥25,000", "LATTE GRAPHIC 自由が丘店|¥5,000", "LATTE GRAPHIC 町田店|¥5,000", "ラテグラフィック海老名店|¥5,000", "LATTE GRAPHIC たまプラーザ店|¥5,000", "LATTEGRAPHIC 武蔵小杉店|¥5,000", "LATTE GRAPHIC 聖蹟桜ヶ丘|¥5,000"], "中岡世里菜": ["整体院 福|¥15,500", "買取専門店 玉光堂 長野駅前店|¥30,000"], "高橋広輝": ["鉄板焼Bar 7|¥35,000", "personal studio Route|¥5,000"]}, "2026-01": {"南原龍司": ["salon Flower|¥3,000", "プライベートサウナKIZAMI|¥3,000", "フェイシャルワックス専門店 WHITE WAX つくば店|¥3,000", "毛穴・ニキビケア・ハーブピーリング【韓国肌管理専門店】WHITE AQUA つくば店|¥3,000", "CASA tres 3 カーサトレス|¥3,000", "CASA grande|¥3,000", "おいもい|¥3,000", "伊豆稲取MINAMO|¥3,000", "ケールの王様 JIYUGAOKA|¥3,000", "tsumugi|¥3,000", "NATURAL BEAUTY & ESTHETIC ZIN|¥3,000", "Nails 4U|¥3,000", "いづつ屋　先斗町店|¥3,000", "LIFE TIME|¥3,000", "HIMAWARI|¥3,000", "grill&Italian Falo'会津若松店|¥3,000"], "中岡世里菜": ["富士交通株式会社|¥35,000", "買取専門店 玉光堂 ドン・キホーテ柏駅前店|¥30,000", "買取大吉 上石神井駅前店|¥35,000", "Nishiazabu RTD|¥35,000"]}, "2026-02": {"南原龍司": ["locca|¥3,000", "五感　仙川店|¥3,000", "株式会社高松商事|¥3,000", "株式会社ホロニック　セトレ ハイランドヴィラ姫路|¥3,000", "ヘアーサロン ひらかわ|¥3,000", "D-light|¥3,000", "ハロー！パソコン教室 トナリエクレオ つくば校|¥3,000", "試食BARアサクサ|¥3,000", "pico ricci|¥3,000", "寿司居酒屋 純|¥3,000", "峠の釜飯食堂鶏と卵|¥3,000", "BRACERIA CACTUS|¥3,000", "iki|¥3,000", "Hair salon Chelsea Omotesando|¥35,000"], "田中莉奈": ["ラヴィスヴィラスイート|¥13,500", "太陽学院 西神奈川校|¥18,000"], "中岡世里菜": ["おたからや鶴ヶ丘店|¥35,000"], "高橋広輝": ["SHIROホワイトニング|¥20,000"]}, "2026-03": {"南原龍司": ["KX Pilates 東新宿店|¥24,000"], "田中莉奈": ["いちかわ皮フ科|¥10,000"], "高橋広輝": ["旭川味噌ラーメン ばんから上野店|¥12,400", "旭川味噌ばんからラーメン 池袋西口店|¥8,800", "東京豚骨拉麺ばんから 新宿歌舞伎町店|¥12,400", "nicole affetto|¥35,000", "One’s Remake|¥30,000"]}, "2026-04": {"田中莉奈": ["MOGU|¥30,000", "createur miju【クレアトゥール ミジュ】|¥13,000", "CLOUDNINE 烏丸御池 パーソナルトレーニングジム|¥35,000", "健康堂整骨院 蒲田院|¥30,000"], "中岡世里菜": ["和麺ぐり虎 Okayama|¥27,000", "麺処ぐり虎 出雲店|¥5,000", "麺処ぐり虎 海老名店|¥5,000", "麺処 ぐり虎 本店|¥5,000", "メルコヘアデザイン|¥35,000"]}, "2026-05": {"田中莉奈": ["植村美容外科|¥27,000", "錦糸テーラー|¥30,000", "太美歯科クリニック|¥27,000", "GARDEN BISTRO&WINE|¥30,000"], "中岡世里菜": ["ぐり虎 Home Made Noodle イオンモール岡山店|¥27,000"], "高橋広輝": ["MUA Oral Este Studio|¥22,000"]}, "2026-06": {"田中莉奈": ["アモーレヴォレ・サンマルコ|¥13,500", "SOBA cafe dining TAKIHAMA（そば たきはま）|¥27,000"], "中岡世里菜": ["有限会社糸島モータース|¥24,500", "はっとり歯科・矯正歯科|¥27,000", "パーソナルトレーニングジムWAKE|¥27,000", "メンズカット専門店 GRAND 本八幡店|¥24,000", "エイペックス吉野校|¥10,000"], "高橋広輝": ["パティスリープラネッツ江古田店|¥12,000", "百合ヶ丘家族葬ホール|¥35,000", "根岸いちくら|¥27,000"]}, "2026-07": {"田中莉奈": ["POPCORN KOBE|¥13,500", "伝統鍼灸一滴庵|¥24,000", "おざわ歯科・矯正歯科|¥18,000", "健康堂中医鍼灸整体院|¥25,000", "癒しサロン唯|¥27,273", "タイ古式マッサージ 手もみ職人 名古屋 錦・栄 本店|¥27,273", "手もみ職人 錦・栄 本店|¥27,273", "ワンランク上の整体院 名古屋栄店|¥27,273"], "中岡世里菜": ["ランチボックスいわき南店|¥15,000", "山梨カイロプラクティック整体|¥14,000"]}, "2026-08": {"田中莉奈": ["シャングリラズシークレット六本木店|¥5,000"], "中岡世里菜": ["創作韓国居酒屋 カブキヤ|¥30,000", "焼肉 千久左|¥30,000"], "高橋広輝": ["RIDE WORKS|¥5,000"]}, "2026-09": {"田中莉奈": ["居酒屋リンカーン 町田店|¥13,000"], "中岡世里菜": ["クレール歯科クリニック|¥27,000", "ヤマダ不動産西宮甲子園店 株式会社MyHomeDo|¥27,273", "ビューティープラス（BEAUTY PLUS）|¥35,000", "ヤマダ不動産 京都伏見店|¥27,273"], "高橋広輝": ["あんぼ歯科クリニック|¥5,000"]}, "2026-10": {"田中莉奈": ["Gala青い海|¥35,000"], "高橋広輝": ["RV Parking & Grab a Bite Jubilations|¥30,000"]}};
 
 function renderMrrSummary() {
   var curM='2026-10';
   var chk=isMrrConfirmed(curM);
   var isEst=!chk.confirmed;
   var D=isEst?MRR_ESTIMATE_APR:MRR_CONFIRMED_APR;
+  var curLbl=parseInt(curM.split('-')[1])+'月';
+  var pList=Object.keys(D.persons).filter(function(p){return D.persons[p].churn_cnt>0;}).map(function(p){return p.slice(0,2)+D.persons[p].churn_cnt+'件';}).join('・');
   var totalMrr=D.total.mrr,totalCnt=D.total.cnt,churnMrr=D.total.churn_mrr,churnCnt=D.total.churn_cnt;
-  var chRate=(churnMrr/(totalMrr+churnMrr)*100).toFixed(1);
+  var chRate=(totalMrr>0?churnMrr/totalMrr*100:0).toFixed(1);
   var badge=isEst
     ?'<span class="est-badge est">⚡概算 '+chk.rate+'%</span>'
     :'<span class="est-badge confirmed">✅ 確定</span>';
   var note=isEst
-    ?'<div class="mrr-status-note">概算 = 前月稼働―当月解約<br>入力率 '+chk.rate+'%（90%以上で確定に切替）</div>'
+    ?'<div class="mrr-status-note">概算 = 前月（9月）稼働 − 当月解約<br>入力率 '+chk.rate+'%（90%以上で確定に切替）</div>'
     :'<div class="mrr-status-note">入力率 '+chk.rate+'% ― 確定値として表示中</div>';
 
   var wrap=document.getElementById('mrrSummaryWrap');
   if(!wrap)return;
   wrap.innerHTML='<div class="mrr-grid" style="margin-bottom:16px;">'
-    +'<div class="mrr-c"><div class="mrr-lbl">6月 保有MRR'+badge+'</div>'
+    +'<div class="mrr-c"><div class="mrr-lbl">'+curLbl+' 保有MRR'+badge+'</div>'
     +'<div class="mrr-val">¥'+totalMrr.toLocaleString()+'</div>'
     +'<div class="mrr-sub">'+totalCnt+'店舗</div>'+note+'</div>'
-    +'<div class="mrr-c"><div class="mrr-lbl">4月 解約MRR</div>'
+    +'<div class="mrr-c"><div class="mrr-lbl">'+curLbl+' 解約MRR</div>'
     +'<div class="mrr-val" style="color:var(--danger);">¥'+churnMrr.toLocaleString()+'</div>'
-    +'<div class="mrr-sub">'+churnCnt+'件（田中4件・中岡１件）</div></div>'
-    +'<div class="mrr-c"><div class="mrr-lbl">当月チャーンレート（4月）</div>'
+    +'<div class="mrr-sub">'+churnCnt+'件'+(pList?'（'+pList+'）':'')+'</div></div>'
+    +'<div class="mrr-c"><div class="mrr-lbl">当月チャーンレート（'+curLbl+'）</div>'
     +'<div class="mrr-val" style="color:var(--success);">'+chRate+'%</div>'
     +'<div class="mrr-sub">解約MRR ÷ 保有MRR</div></div>'
     +'</div>';
@@ -1487,37 +1489,1184 @@ const TENJ_DATA = {"total_leads": 96, "tenj_leads": 91, "toss": 90, "apo": 6, "r
 const STATIC_SWW_DATA = {"2026-07": {"total": 1, "seika": 0, "taisho_gai": 0, "seika_amt": 0, "cases": [{"name": "株式会社報徳自動車学校", "status": "商談NG", "rank": "C", "price": 0, "term": 12, "sww_seika": "", "seika_amt": 0, "shodan_d": "2026/07/08", "shodan_yotei": "2026/07/08", "ans_d": "2026/07/23"}]}, "2026-05": {"total": 6, "seika": 2, "taisho_gai": 4, "seika_amt": 0, "cases": [{"name": "アスタースクエア", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "2026/05/28", "shodan_yotei": "2026/05/28", "ans_d": ""}, {"name": "ヤマハピアノサービス株式会社", "status": "時期改め", "rank": "D", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/05/28", "shodan_yotei": "2026/05/28", "ans_d": "2026/06/25"}, {"name": "株式会社飛鳥", "status": "前確NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "", "shodan_yotei": "2026/05/18", "ans_d": ""}, {"name": "リラクゼーションサロンHANABI熊本", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "2026/05/01", "shodan_yotei": "2026/05/01", "ans_d": ""}, {"name": "MONAL nail&eyebrow", "status": "アポ戻し", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "", "shodan_yotei": "2026/05/01", "ans_d": ""}, {"name": "トライプラス仙台落合校", "status": "時期改め", "rank": "C", "price": 30000, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/05/20", "shodan_yotei": "2026/05/20", "ans_d": "2026/05/27"}]}, "2026-06": {"total": 2, "seika": 2, "taisho_gai": 0, "seika_amt": 0, "cases": [{"name": "MODE K's amyu 厚木店", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/06/12", "shodan_yotei": "2026/05/25", "ans_d": ""}, {"name": "にっこりん", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/06/12", "shodan_yotei": "2026/05/25", "ans_d": ""}]}, "2026-04": {"total": 13, "seika": 10, "taisho_gai": 3, "seika_amt": 120000, "cases": [{"name": "株式会社コモンズ不動産", "status": "商談NG", "rank": "C", "price": 40000, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/04/27", "shodan_yotei": "2026/04/27", "ans_d": "2026/05/15"}, {"name": "有限会社ミケーネ", "status": "前確NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "", "shodan_yotei": "2026/04/21", "ans_d": ""}, {"name": "株式会社シーエスケイ放課後等デイサービスあじさい浜町", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/04/23", "shodan_yotei": "2026/04/21", "ans_d": ""}, {"name": "ホグレルスペース横浜阪東橋店", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "2026/04/23", "shodan_yotei": "2026/04/23", "ans_d": ""}, {"name": "株式会社OZPLAN", "status": "商談NG", "rank": "C", "price": 50000, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/04/27", "shodan_yotei": "2026/04/27", "ans_d": "2026/05/29"}, {"name": "株式会社プロスパーサンダ", "status": "商談NG", "rank": "C", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/04/20", "shodan_yotei": "2026/04/20", "ans_d": "2026/04/27"}, {"name": "beauty salon CREER", "status": "契約完了", "rank": "S", "price": 10000, "term": 12, "sww_seika": "30000", "seika_amt": 120000, "shodan_d": "2026/04/23", "shodan_yotei": "2026/04/23", "ans_d": "2026/05/28"}, {"name": "有限会社阪本進学教室", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/04/16", "shodan_yotei": "2026/04/16", "ans_d": ""}, {"name": "櫻井釣漁具株式会社", "status": "商談NG", "rank": "B", "price": 20000, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/04/17", "shodan_yotei": "2026/04/17", "ans_d": "2026/05/01"}, {"name": "株式会社アスクリエイト", "status": "時期改め", "rank": "C", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/04/20", "shodan_yotei": "2026/04/20", "ans_d": "2026/05/29"}, {"name": "学研CAIスクール Study Funユーミー鵠沼校", "status": "商談NG", "rank": "C", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/04/14", "shodan_yotei": "2026/04/14", "ans_d": "2026/04/22"}, {"name": "酒場845新宿3丁目店", "status": "商談NG", "rank": "D", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "2026/04/08", "shodan_yotei": "2026/04/08", "ans_d": "2026/04/21"}, {"name": "丸の内　相馬庵", "status": "商談NG", "rank": "C", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/04/06", "shodan_yotei": "2026/04/06", "ans_d": "2026/04/14"}]}, "2026-03": {"total": 13, "seika": 9, "taisho_gai": 4, "seika_amt": 0, "cases": [{"name": "だるまや有限会社(炭火焼き生ラムジンギスカンだるまや新宿三丁目店)", "status": "アポ戻し", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "", "shodan_yotei": "2026/03/26", "ans_d": ""}, {"name": "MISEREL大村", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/03/27", "shodan_yotei": "2026/03/27", "ans_d": ""}, {"name": "うなじ矯正専門店ミース　新宿店", "status": "商談NG", "rank": "C", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/03/24", "shodan_yotei": "2026/03/24", "ans_d": ""}, {"name": "wagyu yakiniku shogun-将軍-", "status": "商談NG", "rank": "C", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/03/19", "shodan_yotei": "2026/03/19", "ans_d": "2026/04/14"}, {"name": "焼肉 99BBQ", "status": "商談NG", "rank": "C", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/03/16", "shodan_yotei": "2026/03/16", "ans_d": "2026/03/23"}, {"name": "ホテル日本橋サイボー", "status": "商談NG", "rank": "C", "price": 15000, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/03/11", "shodan_yotei": "2026/03/11", "ans_d": "2026/03/19"}, {"name": "東横ＩＮＮ京橋桜ノ宮", "status": "前確NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "2026/03/23", "shodan_yotei": "2026/03/30", "ans_d": ""}, {"name": "東横ＩＮＮ大阪天神橋筋六丁目", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "2026/03/17", "shodan_yotei": "2026/03/17", "ans_d": ""}, {"name": "根岸町接骨院", "status": "商談NG", "rank": "B", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/03/12", "shodan_yotei": "2026/03/12", "ans_d": "2026/03/30"}, {"name": "ホテルサンライフ", "status": "商談NG", "rank": "C", "price": 35000, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/03/09", "shodan_yotei": "2026/03/09", "ans_d": "2026/04/23"}, {"name": "ダイワロイネットホテル四ツ橋", "status": "商談NG", "rank": "D", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/03/09", "shodan_yotei": "2026/02/26", "ans_d": "2026/04/14"}, {"name": "アーバンホテル京都四条プレミアム", "status": "前確NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "", "shodan_yotei": "2026/03/03", "ans_d": ""}, {"name": "名鉄イン新大阪駅東口", "status": "時期改め", "rank": "", "price": 35000, "term": 6, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/03/05", "shodan_yotei": "2026/03/05", "ans_d": ""}]}, "2026-02": {"total": 12, "seika": 8, "taisho_gai": 4, "seika_amt": 0, "cases": [{"name": "大阪鶴橋亭ホテル　Ａｓａｈｉ　ｇｒｏｕｐ", "status": "商談NG", "rank": "B+", "price": 35000, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/02/18", "shodan_yotei": "2026/02/18", "ans_d": "2026/03/03"}, {"name": "ホテル マイステイズ 新大阪コンファレンスセンター", "status": "前確NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "2026/02/17", "shodan_yotei": "2026/02/16", "ans_d": ""}, {"name": "ホテル マイステイズ 堺筋本町", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "2026/02/16", "shodan_yotei": "2026/02/16", "ans_d": ""}, {"name": "ベストウェスタン 大阪塚本", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/02/26", "shodan_yotei": "2026/02/26", "ans_d": ""}, {"name": "ホテル 法華クラブ大阪", "status": "商談NG", "rank": "B", "price": 3000, "term": 3, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/02/18", "shodan_yotei": "2026/02/18", "ans_d": "2026/03/16"}, {"name": "新大阪 サニー ストン ホテル", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/02/12", "shodan_yotei": "2026/02/12", "ans_d": ""}, {"name": "ダイワロイネットホテル京都テラス八条ＰＲＥＭＩＥＲ", "status": "商談NG", "rank": "B", "price": 35000, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/02/17", "shodan_yotei": "2026/02/17", "ans_d": "2026/04/14"}, {"name": "アスティルホテル新大阪プレシャス", "status": "商談NG", "rank": "D", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/02/09", "shodan_yotei": "2026/02/09", "ans_d": "2026/03/16"}, {"name": "ダイワロイネットホテル京都駅前ＰＲＥＭＩＥＲ", "status": "商談NG", "rank": "B", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/02/12", "shodan_yotei": "2026/02/12", "ans_d": "2026/07/02"}, {"name": "東横ＩＮＮ新大阪駅東口", "status": "前確NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "", "shodan_yotei": "2026/02/26", "ans_d": ""}, {"name": "ホテルトレンド高槻", "status": "商談NG", "rank": "", "price": 0, "term": 12, "sww_seika": "30000", "seika_amt": 0, "shodan_d": "2026/02/17", "shodan_yotei": "2026/02/17", "ans_d": ""}, {"name": "サニーストンホテル", "status": "前確NG", "rank": "", "price": 0, "term": 12, "sww_seika": "対象外", "seika_amt": 0, "shodan_d": "", "shodan_yotei": "2026/02/09", "ans_d": ""}]}};
 const STATIC_ROUTE_DATA = [{"person": "南原龍司", "route": "問い合わせ", "status": "見込み", "name": "片山 清光", "rank": "C", "price": 18000, "shodan_d": "2026/10/19", "shodan_yotei": "2026/10/19", "ans_d": "2026/10/19"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "梅田 スカイ うめきたグリーンプレイス", "rank": "S", "price": 10000, "shodan_d": "2026/09/11", "shodan_yotei": "2026/09/11", "ans_d": "2026/09/11"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "喫茶東京果実", "rank": "S", "price": 5000, "shodan_d": "2026/09/10", "shodan_yotei": "2026/09/10", "ans_d": "2026/09/10"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "昼だけうなぎ屋 池袋店", "rank": "S", "price": 5000, "shodan_d": "2026/09/10", "shodan_yotei": "2026/09/10", "ans_d": "2026/09/10"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "昼だけうなぎ屋 新宿御苑店", "rank": "S", "price": 5000, "shodan_d": "2026/09/10", "shodan_yotei": "2026/09/10", "ans_d": "2026/09/10"}, {"person": "高橋広輝", "route": "問い合わせ", "status": "契約完了", "name": "ハウスデザイン株式会社", "rank": "S", "price": 50000, "shodan_d": "2026/08/19", "shodan_yotei": "2026/08/19", "ans_d": "2026/08/19"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "松坂屋名古屋店（南館1階）", "rank": "A", "price": 50000, "shodan_d": "2026/08/03", "shodan_yotei": "2026/08/03", "ans_d": "2026/08/21"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "阪急西宮ガーデンズ店", "rank": "A", "price": 50000, "shodan_d": "2026/08/03", "shodan_yotei": "2026/08/03", "ans_d": "2026/08/21"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "有楽町マルイ店", "rank": "A", "price": 50000, "shodan_d": "2026/08/03", "shodan_yotei": "2026/08/03", "ans_d": "2026/08/21"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "焼鳥　鳥つばめ", "rank": "S", "price": 35000, "shodan_d": "2026/07/21", "shodan_yotei": "2026/07/21", "ans_d": "2026/07/22"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "株式会社オールディッシュ", "rank": "S", "price": 5000, "shodan_d": "2026/06/29", "shodan_yotei": "2026/06/29", "ans_d": "2026/07/10"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "株式会社報徳自動車学校", "rank": "C", "price": 0, "shodan_d": "2026/07/08", "shodan_yotei": "2026/07/08", "ans_d": "2026/07/23"}, {"person": "高橋広輝", "route": "SWW", "status": "商談NG", "name": "アスタースクエア", "rank": "", "price": 0, "shodan_d": "2026/05/28", "shodan_yotei": "2026/05/28", "ans_d": ""}, {"person": "南原龍司", "route": "問い合わせ", "status": "時期改め", "name": "レンタルドレスのルルティ", "rank": "C", "price": 85000, "shodan_d": "2026/05/21", "shodan_yotei": "2026/05/21", "ans_d": "2026/06/19"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "シェアカメ", "rank": "B+", "price": 10000, "shodan_d": "2026/06/01", "shodan_yotei": "2026/06/01", "ans_d": "2026/06/05"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "東京カメラ機材レンタル 汐留店", "rank": "B+", "price": 10000, "shodan_d": "2026/06/01", "shodan_yotei": "2026/06/01", "ans_d": "2026/06/05"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "東京カメラ機材レンタル 四谷店", "rank": "B+", "price": 10000, "shodan_d": "2026/06/01", "shodan_yotei": "2026/06/01", "ans_d": "2026/06/05"}, {"person": "南原龍司", "route": "SWW", "status": "時期改め", "name": "ヤマハピアノサービス株式会社", "rank": "D", "price": 0, "shodan_d": "2026/05/28", "shodan_yotei": "2026/05/28", "ans_d": "2026/06/25"}, {"person": "南原龍司", "route": "SWW", "status": "前確NG", "name": "株式会社飛鳥", "rank": "", "price": 0, "shodan_d": "", "shodan_yotei": "2026/05/18", "ans_d": ""}, {"person": "高橋広輝", "route": "SWW", "status": "商談NG", "name": "MODE K's amyu 厚木店", "rank": "", "price": 0, "shodan_d": "2026/06/12", "shodan_yotei": "2026/05/25", "ans_d": ""}, {"person": "高橋広輝", "route": "SWW", "status": "商談NG", "name": "にっこりん", "rank": "", "price": 0, "shodan_d": "2026/06/12", "shodan_yotei": "2026/05/25", "ans_d": ""}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "石原 和成", "rank": "C", "price": 35000, "shodan_d": "2026/05/18", "shodan_yotei": "2026/05/18", "ans_d": "2026/07/10"}, {"person": "南原龍司", "route": "問い合わせ", "status": "時期改め", "name": "鰻々亭", "rank": "", "price": 0, "shodan_d": "2026/05/11", "shodan_yotei": "2026/05/11", "ans_d": ""}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "TOY(トイ)鍼灸接骨院 壬生おもちゃのまち本院", "rank": "C", "price": 0, "shodan_d": "2026/05/13", "shodan_yotei": "2026/05/13", "ans_d": "2026/06/25"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "ルーフトップBBQ なんばパークス", "rank": "S", "price": 10000, "shodan_d": "2026/05/11", "shodan_yotei": "2026/05/11", "ans_d": "2026/05/28"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "小籠包と本格中華 堀江ブルー", "rank": "S", "price": 10000, "shodan_d": "2026/05/11", "shodan_yotei": "2026/05/11", "ans_d": "2026/05/28"}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "ハチタイニ", "rank": "C", "price": 50000, "shodan_d": "2026/05/01", "shodan_yotei": "2026/05/01", "ans_d": "2026/05/11"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "株式会社コモンズ不動産", "rank": "C", "price": 40000, "shodan_d": "2026/04/27", "shodan_yotei": "2026/04/27", "ans_d": "2026/05/15"}, {"person": "中岡世里菜", "route": "問い合わせ", "status": "契約完了", "name": "東京千住・胃と大腸の消化器内視鏡クリニック", "rank": "S", "price": 45000, "shodan_d": "2026/04/22", "shodan_yotei": "2026/04/22", "ans_d": ""}, {"person": "中岡世里菜", "route": "問い合わせ", "status": "契約完了", "name": "東京千住・尚視会クリニック 健診プラザ", "rank": "S", "price": 45000, "shodan_d": "2026/04/22", "shodan_yotei": "2026/04/22", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "リラクゼーションサロンHANABI熊本", "rank": "", "price": 0, "shodan_d": "2026/05/01", "shodan_yotei": "2026/05/01", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "アポ戻し", "name": "MONAL nail&eyebrow", "rank": "", "price": 0, "shodan_d": "", "shodan_yotei": "2026/05/01", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "時期改め", "name": "トライプラス仙台落合校", "rank": "C", "price": 30000, "shodan_d": "2026/05/20", "shodan_yotei": "2026/05/20", "ans_d": "2026/05/27"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "CHILL kagurazaka", "rank": "S", "price": 40000, "shodan_d": "2026/04/20", "shodan_yotei": "2026/04/20", "ans_d": "2026/04/29"}, {"person": "南原龍司", "route": "SWW", "status": "前確NG", "name": "有限会社ミケーネ", "rank": "", "price": 0, "shodan_d": "", "shodan_yotei": "2026/04/21", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "株式会社シーエスケイ放課後等デイサービスあじさい浜町", "rank": "", "price": 0, "shodan_d": "2026/04/23", "shodan_yotei": "2026/04/21", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "ホグレルスペース横浜阪東橋店", "rank": "", "price": 0, "shodan_d": "2026/04/23", "shodan_yotei": "2026/04/23", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "株式会社OZPLAN", "rank": "C", "price": 50000, "shodan_d": "2026/04/27", "shodan_yotei": "2026/04/27", "ans_d": "2026/05/29"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "株式会社プロスパーサンダ", "rank": "C", "price": 0, "shodan_d": "2026/04/20", "shodan_yotei": "2026/04/20", "ans_d": "2026/04/27"}, {"person": "南原龍司", "route": "SWW", "status": "契約完了", "name": "beauty salon CREER", "rank": "S", "price": 10000, "shodan_d": "2026/04/23", "shodan_yotei": "2026/04/23", "ans_d": "2026/05/28"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "有限会社阪本進学教室", "rank": "", "price": 0, "shodan_d": "2026/04/16", "shodan_yotei": "2026/04/16", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "櫻井釣漁具株式会社", "rank": "B", "price": 20000, "shodan_d": "2026/04/17", "shodan_yotei": "2026/04/17", "ans_d": "2026/05/01"}, {"person": "南原龍司", "route": "SWW", "status": "時期改め", "name": "株式会社アスクリエイト", "rank": "C", "price": 0, "shodan_d": "2026/04/20", "shodan_yotei": "2026/04/20", "ans_d": "2026/05/29"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "学研CAIスクール Study Funユーミー鵠沼校", "rank": "C", "price": 0, "shodan_d": "2026/04/14", "shodan_yotei": "2026/04/14", "ans_d": "2026/04/22"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "株式会社オペレーションファクトリー", "rank": "S", "price": 30000, "shodan_d": "2026/04/06", "shodan_yotei": "2026/04/06", "ans_d": "2026/04/23"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "梅田ワーフ", "rank": "S", "price": 10000, "shodan_d": "2026/04/06", "shodan_yotei": "2026/04/06", "ans_d": "2026/04/23"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "梅田 カナリス -canaris-", "rank": "S", "price": 10000, "shodan_d": "2026/04/06", "shodan_yotei": "2026/04/06", "ans_d": "2026/04/23"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "酒場845新宿3丁目店", "rank": "D", "price": 0, "shodan_d": "2026/04/08", "shodan_yotei": "2026/04/08", "ans_d": "2026/04/21"}, {"person": "南原龍司", "route": "問い合わせ", "status": "時期改め", "name": "横浜みなと呼吸器内科・内科クリニック", "rank": "C", "price": 50000, "shodan_d": "2026/04/30", "shodan_yotei": "2026/04/30", "ans_d": "2026/08/24"}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "株式会社エムアンドアール", "rank": "D", "price": 100000, "shodan_d": "2026/03/31", "shodan_yotei": "2026/03/31", "ans_d": "2026/04/29"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "丸の内　相馬庵", "rank": "C", "price": 0, "shodan_d": "2026/04/06", "shodan_yotei": "2026/04/06", "ans_d": "2026/04/14"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "しゃぶしゃぶ食べ放題 御前様", "rank": "S", "price": 40000, "shodan_d": "2026/03/23", "shodan_yotei": "2026/03/23", "ans_d": "2026/04/03"}, {"person": "南原龍司", "route": "SWW", "status": "アポ戻し", "name": "だるまや有限会社(炭火焼き生ラムジンギスカンだるまや新宿三丁目店)", "rank": "", "price": 0, "shodan_d": "", "shodan_yotei": "2026/03/26", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "MISEREL大村", "rank": "", "price": 0, "shodan_d": "2026/03/27", "shodan_yotei": "2026/03/27", "ans_d": ""}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "おおうえこどもクリニック", "rank": "C", "price": 0, "shodan_d": "2026/03/12", "shodan_yotei": "2026/03/12", "ans_d": "2026/03/23"}, {"person": "高橋広輝", "route": "SWW", "status": "商談NG", "name": "うなじ矯正専門店ミース　新宿店", "rank": "C", "price": 0, "shodan_d": "2026/03/24", "shodan_yotei": "2026/03/24", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "wagyu yakiniku shogun-将軍-", "rank": "C", "price": 0, "shodan_d": "2026/03/19", "shodan_yotei": "2026/03/19", "ans_d": "2026/04/14"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "焼肉 99BBQ", "rank": "C", "price": 0, "shodan_d": "2026/03/16", "shodan_yotei": "2026/03/16", "ans_d": "2026/03/23"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "ホテル日本橋サイボー", "rank": "C", "price": 15000, "shodan_d": "2026/03/11", "shodan_yotei": "2026/03/11", "ans_d": "2026/03/19"}, {"person": "南原龍司", "route": "SWW", "status": "前確NG", "name": "東横ＩＮＮ京橋桜ノ宮", "rank": "", "price": 0, "shodan_d": "2026/03/23", "shodan_yotei": "2026/03/30", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "東横ＩＮＮ大阪天神橋筋六丁目", "rank": "", "price": 0, "shodan_d": "2026/03/17", "shodan_yotei": "2026/03/17", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "根岸町接骨院", "rank": "B", "price": 0, "shodan_d": "2026/03/12", "shodan_yotei": "2026/03/12", "ans_d": "2026/03/30"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "ホテルサンライフ", "rank": "C", "price": 35000, "shodan_d": "2026/03/09", "shodan_yotei": "2026/03/09", "ans_d": "2026/04/23"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "ダイワロイネットホテル四ツ橋", "rank": "D", "price": 0, "shodan_d": "2026/03/09", "shodan_yotei": "2026/02/26", "ans_d": "2026/04/14"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "大阪鶴橋亭ホテル　Ａｓａｈｉ　ｇｒｏｕｐ", "rank": "B+", "price": 35000, "shodan_d": "2026/02/18", "shodan_yotei": "2026/02/18", "ans_d": "2026/03/03"}, {"person": "南原龍司", "route": "SWW", "status": "前確NG", "name": "ホテル マイステイズ 新大阪コンファレンスセンター", "rank": "", "price": 0, "shodan_d": "2026/02/17", "shodan_yotei": "2026/02/16", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "ホテル マイステイズ 堺筋本町", "rank": "", "price": 0, "shodan_d": "2026/02/16", "shodan_yotei": "2026/02/16", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "ベストウェスタン 大阪塚本", "rank": "", "price": 0, "shodan_d": "2026/02/26", "shodan_yotei": "2026/02/26", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "ホテル 法華クラブ大阪", "rank": "B", "price": 3000, "shodan_d": "2026/02/18", "shodan_yotei": "2026/02/18", "ans_d": "2026/03/16"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "新大阪 サニー ストン ホテル", "rank": "", "price": 0, "shodan_d": "2026/02/12", "shodan_yotei": "2026/02/12", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "ダイワロイネットホテル京都テラス八条ＰＲＥＭＩＥＲ", "rank": "B", "price": 35000, "shodan_d": "2026/02/17", "shodan_yotei": "2026/02/17", "ans_d": "2026/04/14"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "アスティルホテル新大阪プレシャス", "rank": "D", "price": 0, "shodan_d": "2026/02/09", "shodan_yotei": "2026/02/09", "ans_d": "2026/03/16"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "SPSエンタープライズ株式会社", "rank": "S", "price": 35000, "shodan_d": "2026/02/09", "shodan_yotei": "2026/02/09", "ans_d": "2026/02/26"}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "ダイワロイネットホテル京都駅前ＰＲＥＭＩＥＲ", "rank": "B", "price": 0, "shodan_d": "2026/02/12", "shodan_yotei": "2026/02/12", "ans_d": "2026/07/02"}, {"person": "南原龍司", "route": "SWW", "status": "前確NG", "name": "東横ＩＮＮ新大阪駅東口", "rank": "", "price": 0, "shodan_d": "", "shodan_yotei": "2026/02/26", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "前確NG", "name": "アーバンホテル京都四条プレミアム", "rank": "", "price": 0, "shodan_d": "", "shodan_yotei": "2026/03/03", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "商談NG", "name": "ホテルトレンド高槻", "rank": "", "price": 0, "shodan_d": "2026/02/17", "shodan_yotei": "2026/02/17", "ans_d": ""}, {"person": "南原龍司", "route": "SWW", "status": "時期改め", "name": "名鉄イン新大阪駅東口", "rank": "", "price": 35000, "shodan_d": "2026/03/05", "shodan_yotei": "2026/03/05", "ans_d": ""}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "ミライフ東日本株式会社", "rank": "C", "price": 150000, "shodan_d": "2026/02/10", "shodan_yotei": "2026/02/10", "ans_d": "2026/03/13"}, {"person": "南原龍司", "route": "SWW", "status": "前確NG", "name": "サニーストンホテル", "rank": "", "price": 0, "shodan_d": "", "shodan_yotei": "2026/02/09", "ans_d": ""}, {"person": "田中莉奈", "route": "問い合わせ", "status": "契約完了", "name": "とねり皮膚科・形成外科", "rank": "S", "price": 20000, "shodan_d": "2026/04/02", "shodan_yotei": "2025/12/22", "ans_d": ""}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "mana.OKINAWA本店", "rank": "S", "price": 27000, "shodan_d": "2025/12/24", "shodan_yotei": "2025/12/24", "ans_d": "2026/01/09"}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "プザ アジアンダイニング＆バー", "rank": "C", "price": 0, "shodan_d": "2025/12/16", "shodan_yotei": "2025/12/16", "ans_d": "2025/12/25"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "ノストス", "rank": "A", "price": 24000, "shodan_d": "2025/12/12", "shodan_yotei": "2025/12/12", "ans_d": "2025/12/16"}, {"person": "田中莉奈", "route": "問い合わせ", "status": "商談NG", "name": "米澤紀伊國屋", "rank": "", "price": 0, "shodan_d": "2025/12/04", "shodan_yotei": "2025/12/04", "ans_d": ""}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "チェルシー表参道", "rank": "A", "price": 35000, "shodan_d": "2025/11/25", "shodan_yotei": "2025/11/27", "ans_d": "2025/12/19"}, {"person": "高橋広輝", "route": "問い合わせ", "status": "商談NG", "name": "ワールドウィング東戸塚", "rank": "C", "price": 0, "shodan_d": "2025/11/11", "shodan_yotei": "2025/11/11", "ans_d": "2025/11/28"}, {"person": "高橋広輝", "route": "問い合わせ", "status": "時期改め", "name": "トリム NATURAL WINE IZAKAYA", "rank": "C", "price": 35000, "shodan_d": "2025/10/14", "shodan_yotei": "2025/10/14", "ans_d": ""}, {"person": "田中莉奈", "route": "問い合わせ", "status": "商談NG", "name": "同愛会病院", "rank": "B", "price": 30000, "shodan_d": "2025/09/29", "shodan_yotei": "2025/09/29", "ans_d": "2026/01/09"}, {"person": "田中莉奈", "route": "問い合わせ", "status": "契約完了", "name": "LATTE GRAPHIC 自由が丘店", "rank": "", "price": 5000, "shodan_d": "2025/09/22", "shodan_yotei": "2025/09/22", "ans_d": "2025/09/22"}, {"person": "田中莉奈", "route": "問い合わせ", "status": "契約完了", "name": "LATTE GRAPHIC 町田店", "rank": "", "price": 5000, "shodan_d": "2025/09/22", "shodan_yotei": "2025/09/22", "ans_d": "2025/09/22"}, {"person": "田中莉奈", "route": "問い合わせ", "status": "契約完了", "name": "ラテグラフィック海老名店", "rank": "", "price": 5000, "shodan_d": "2025/09/22", "shodan_yotei": "2025/09/22", "ans_d": "2025/09/22"}, {"person": "田中莉奈", "route": "問い合わせ", "status": "契約完了", "name": "LATTE GRAPHIC たまプラーザ店", "rank": "", "price": 5000, "shodan_d": "2025/09/22", "shodan_yotei": "2025/09/22", "ans_d": "2025/09/22"}, {"person": "田中莉奈", "route": "問い合わせ", "status": "契約完了", "name": "LATTEGRAPHIC 武蔵小杉店", "rank": "", "price": 5000, "shodan_d": "2025/09/22", "shodan_yotei": "2025/09/22", "ans_d": "2025/09/22"}, {"person": "田中莉奈", "route": "問い合わせ", "status": "契約完了", "name": "LATTE GRAPHIC 聖蹟桜ヶ丘", "rank": "", "price": 5000, "shodan_d": "2025/09/22", "shodan_yotei": "2025/09/22", "ans_d": "2025/09/22"}, {"person": "高橋広輝", "route": "問い合わせ", "status": "アポ戻し", "name": "にじいろ整体整骨院", "rank": "", "price": 0, "shodan_d": "", "shodan_yotei": "2025/10/03", "ans_d": ""}, {"person": "田中莉奈", "route": "問い合わせ", "status": "契約完了", "name": "LATTE GRAPHIC麻布台", "rank": "B+", "price": 30000, "shodan_d": "2025/09/11", "shodan_yotei": "2025/09/11", "ans_d": "2025/09/19"}, {"person": "高橋広輝", "route": "問い合わせ", "status": "契約完了", "name": "nicole cifeito(ニコルアフェット)", "rank": "S", "price": 35000, "shodan_d": "2025/09/05", "shodan_yotei": "2025/09/05", "ans_d": "2025/09/29"}, {"person": "中岡世里菜", "route": "問い合わせ", "status": "契約完了", "name": "焼肉 千久左", "rank": "S", "price": 30000, "shodan_d": "2025/08/22", "shodan_yotei": "2025/08/22", "ans_d": "2025/08/22"}, {"person": "中岡世里菜", "route": "問い合わせ", "status": "商談NG", "name": "多摩メディカルクリニック", "rank": "C", "price": 0, "shodan_d": "2025/08/28", "shodan_yotei": "2025/08/28", "ans_d": ""}, {"person": "田中莉奈", "route": "問い合わせ", "status": "商談NG", "name": "株式会社linkwin", "rank": "C", "price": 0, "shodan_d": "2025/08/18", "shodan_yotei": "2025/08/18", "ans_d": "2025/11/28"}, {"person": "田中莉奈", "route": "問い合わせ", "status": "契約完了", "name": "shisha cafe kuma", "rank": "S", "price": 27000, "shodan_d": "2025/07/28", "shodan_yotei": "2025/07/28", "ans_d": ""}, {"person": "中岡世里菜", "route": "問い合わせ", "status": "商談NG", "name": "株式会社サンネット", "rank": "C", "price": 0, "shodan_d": "2025/07/01", "shodan_yotei": "2025/07/01", "ans_d": ""}, {"person": "田中莉奈", "route": "問い合わせ", "status": "商談NG", "name": "（有）伊藤瓦店", "rank": "B", "price": 0, "shodan_d": "2025/05/23", "shodan_yotei": "2025/05/23", "ans_d": "2025/05/30"}, {"person": "中岡世里菜", "route": "問い合わせ", "status": "商談NG", "name": "beauty salon arce", "rank": "C", "price": 0, "shodan_d": "2025/05/21", "shodan_yotei": "2025/05/21", "ans_d": ""}, {"person": "田中莉奈", "route": "問い合わせ", "status": "契約完了", "name": "", "rank": "", "price": 0, "shodan_d": "2025/05/15", "shodan_yotei": "2025/05/15", "ans_d": ""}, {"person": "高橋広輝", "route": "問い合わせ", "status": "商談NG", "name": "IRODORI TABLE", "rank": "C", "price": 0, "shodan_d": "2025/03/31", "shodan_yotei": "2025/04/02", "ans_d": ""}, {"person": "田中莉奈", "route": "問い合わせ", "status": "契約完了", "name": "クラウドナイン", "rank": "B+", "price": 35000, "shodan_d": "2025/03/26", "shodan_yotei": "2025/03/26", "ans_d": "2025/03/31"}, {"person": "田中莉奈", "route": "問い合わせ", "status": "仮アポ", "name": "", "rank": "", "price": 0, "shodan_d": "", "shodan_yotei": "2025/03/10", "ans_d": ""}, {"person": "田中莉奈", "route": "問い合わせ", "status": "商談NG", "name": "エヌエス・テック株式会社", "rank": "", "price": 0, "shodan_d": "2025/03/05", "shodan_yotei": "2025/03/05", "ans_d": ""}, {"person": "中岡世里菜", "route": "問い合わせ", "status": "商談NG", "name": "株式会社ブレインスリープ", "rank": "C", "price": 0, "shodan_d": "2025/02/20", "shodan_yotei": "2025/02/20", "ans_d": ""}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "横山和樹", "rank": "", "price": 0, "shodan_d": "2025/02/20", "shodan_yotei": "2025/02/20", "ans_d": ""}, {"person": "中岡世里菜", "route": "問い合わせ", "status": "商談NG", "name": "銀座屋高槻センター街店", "rank": "B", "price": 0, "shodan_d": "2024/12/23", "shodan_yotei": "2024/12/23", "ans_d": ""}, {"person": "田中莉奈", "route": "問い合わせ", "status": "商談NG", "name": "パーソナルマシンピラティスSAKURA高田馬場・西早稲田店", "rank": "C", "price": 0, "shodan_d": "2024/12/05", "shodan_yotei": "2024/12/05", "ans_d": "2024/12/13"}, {"person": "中岡世里菜", "route": "問い合わせ", "status": "契約完了", "name": "アスピカ邸宅葬ゆら音 西開発", "rank": "S", "price": 35000, "shodan_d": "2024/11/21", "shodan_yotei": "2024/11/28", "ans_d": ""}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "ハルフウェイ", "rank": "D", "price": 27000, "shodan_d": "2024/07/11", "shodan_yotei": "2024/07/11", "ans_d": "2024/07/31"}, {"person": "南原龍司", "route": "問い合わせ", "status": "契約完了", "name": "セレモニーホール掬水苑 太白", "rank": "A", "price": 30000, "shodan_d": "2024/07/03", "shodan_yotei": "2024/07/03", "ans_d": "2024/07/31"}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "アットビジネスセンター", "rank": "C", "price": 0, "shodan_d": "2024/06/05", "shodan_yotei": "2024/06/05", "ans_d": "2024/08/20"}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "センチュリー21三巧商事", "rank": "D", "price": 0, "shodan_d": "2024/06/10", "shodan_yotei": "2024/06/10", "ans_d": "2024/07/29"}, {"person": "南原龍司", "route": "問い合わせ", "status": "商談NG", "name": "株式会社アール", "rank": "C", "price": 0, "shodan_d": "2024/06/03", "shodan_yotei": "2024/06/03", "ans_d": "2024/08/02"}, {"person": "南原龍司", "route": "問い合わせ", "status": "時期改め", "name": "株式会社SEEDS", "rank": "", "price": 0, "shodan_d": "2024/05/30", "shodan_yotei": "2024/05/30", "ans_d": "2024/08/05"}];
 const MRR_DATA = {
-  "2024/04": 7389435,
-  "2024/05": 7688837,
-  "2024/06": 7523645,
-  "2024/07": 7723325,
-  "2024/08": 7891419,
-  "2024/09": 7998249,
-  "2024/10": 8340849,
-  "2024/11": 8455789,
-  "2024/12": 8790519,
-  "2025/01": 8840519,
-  "2025/02": 9183053,
-  "2025/03": 9058483,
-  "2025/04": 9183376,
-  "2025/05": 9628476,
-  "2025/06": 9590476,
-  "2025/07": 9639636,
-  "2025/08": 9440992,
-  "2025/09": 9839558,
-  "2025/10": 9862168,
-  "2025/11": 10211168,
-  "2025/12": 10098968,
-  "2026/01": 9690498,
-  "2026/02": 9376798,
-  "2026/03": 9466498,
-  "2026/04": 9444271,
-  "2026/05": 9659771,
-  "2026/06": 9560852,
-  "2026/07": 9356051,
-  "2026/08": 9450259,
-  "2026/09": 9442459,
-  "2026/10": 3459157
+  "2024-04": {
+    "南原龍司": {
+      "mrr": 1774846,
+      "cnt": 73,
+      "new_mrr": 1495546,
+      "new_cnt": 72,
+      "churn_mrr": 35000,
+      "churn_cnt": 1,
+      "rate": 2.0
+    },
+    "田中莉奈": {
+      "mrr": 1927266,
+      "cnt": 86,
+      "new_mrr": 1927266,
+      "new_cnt": 86,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "中岡世里菜": {
+      "mrr": 1898623,
+      "cnt": 66,
+      "new_mrr": 1898623,
+      "new_cnt": 66,
+      "churn_mrr": 35000,
+      "churn_cnt": 1,
+      "rate": 1.8
+    },
+    "高橋広輝": {
+      "mrr": 1788700,
+      "cnt": 42,
+      "new_mrr": 2239000,
+      "new_cnt": 31,
+      "churn_mrr": 30000,
+      "churn_cnt": 1,
+      "rate": 1.7
+    }
+  },
+  "2024-05": {
+    "南原龍司": {
+      "mrr": 1727266,
+      "cnt": 70,
+      "new_mrr": 27000,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "田中莉奈": {
+      "mrr": 1954748,
+      "cnt": 86,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 30000,
+      "churn_cnt": 1,
+      "rate": 1.5
+    },
+    "中岡世里菜": {
+      "mrr": 2171623,
+      "cnt": 67,
+      "new_mrr": 35000,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 1835200,
+      "cnt": 41,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2024-06": {
+    "南原龍司": {
+      "mrr": 1905256,
+      "cnt": 87,
+      "new_mrr": 174000,
+      "new_cnt": 17,
+      "churn_mrr": 47000,
+      "churn_cnt": 3,
+      "rate": 2.5
+    },
+    "田中莉奈": {
+      "mrr": 1867066,
+      "cnt": 85,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "中岡世里菜": {
+      "mrr": 1907623,
+      "cnt": 68,
+      "new_mrr": 100000,
+      "new_cnt": 3,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 1843700,
+      "cnt": 41,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 30000,
+      "churn_cnt": 1,
+      "rate": 1.6
+    }
+  },
+  "2024-07": {
+    "南原龍司": {
+      "mrr": 2035436,
+      "cnt": 123,
+      "new_mrr": 176000,
+      "new_cnt": 40,
+      "churn_mrr": 65000,
+      "churn_cnt": 2,
+      "rate": 3.2
+    },
+    "田中莉奈": {
+      "mrr": 1895566,
+      "cnt": 86,
+      "new_mrr": 60000,
+      "new_cnt": 2,
+      "churn_mrr": 25000,
+      "churn_cnt": 1,
+      "rate": 1.3
+    },
+    "中岡世里菜": {
+      "mrr": 1962623,
+      "cnt": 70,
+      "new_mrr": 55000,
+      "new_cnt": 2,
+      "churn_mrr": 25000,
+      "churn_cnt": 1,
+      "rate": 1.3
+    },
+    "高橋広輝": {
+      "mrr": 1829700,
+      "cnt": 40,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2024-08": {
+    "南原龍司": {
+      "mrr": 2208196,
+      "cnt": 168,
+      "new_mrr": 204000,
+      "new_cnt": 47,
+      "churn_mrr": 90000,
+      "churn_cnt": 3,
+      "rate": 4.1
+    },
+    "田中莉奈": {
+      "mrr": 1965066,
+      "cnt": 87,
+      "new_mrr": 57000,
+      "new_cnt": 2,
+      "churn_mrr": 27000,
+      "churn_cnt": 1,
+      "rate": 1.4
+    },
+    "中岡世里菜": {
+      "mrr": 1907957,
+      "cnt": 71,
+      "new_mrr": 70000,
+      "new_cnt": 2,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 1810200,
+      "cnt": 40,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2024-09": {
+    "南原龍司": {
+      "mrr": 2271626,
+      "cnt": 222,
+      "new_mrr": 236000,
+      "new_cnt": 58,
+      "churn_mrr": 73000,
+      "churn_cnt": 3,
+      "rate": 3.2
+    },
+    "田中莉奈": {
+      "mrr": 1952966,
+      "cnt": 86,
+      "new_mrr": 27000,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "中岡世里菜": {
+      "mrr": 1955957,
+      "cnt": 73,
+      "new_mrr": 65000,
+      "new_cnt": 2,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 1817700,
+      "cnt": 40,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2024-10": {
+    "南原龍司": {
+      "mrr": 2589126,
+      "cnt": 260,
+      "new_mrr": 156000,
+      "new_cnt": 42,
+      "churn_mrr": 63000,
+      "churn_cnt": 4,
+      "rate": 2.4
+    },
+    "田中莉奈": {
+      "mrr": 1959066,
+      "cnt": 87,
+      "new_mrr": 500,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "中岡世里菜": {
+      "mrr": 1982457,
+      "cnt": 74,
+      "new_mrr": 35000,
+      "new_cnt": 1,
+      "churn_mrr": 35000,
+      "churn_cnt": 1,
+      "rate": 1.8
+    },
+    "高橋広輝": {
+      "mrr": 1810200,
+      "cnt": 40,
+      "new_mrr": 12000,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2024-11": {
+    "南原龍司": {
+      "mrr": 2736366,
+      "cnt": 306,
+      "new_mrr": 201000,
+      "new_cnt": 50,
+      "churn_mrr": 108000,
+      "churn_cnt": 9,
+      "rate": 3.9
+    },
+    "田中莉奈": {
+      "mrr": 1952766,
+      "cnt": 86,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "中岡世里菜": {
+      "mrr": 1970457,
+      "cnt": 74,
+      "new_mrr": 35000,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 1796200,
+      "cnt": 40,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2024-12": {
+    "南原龍司": {
+      "mrr": 3020796,
+      "cnt": 338,
+      "new_mrr": 153000,
+      "new_cnt": 41,
+      "churn_mrr": 42000,
+      "churn_cnt": 14,
+      "rate": 1.4
+    },
+    "田中莉奈": {
+      "mrr": 1905566,
+      "cnt": 86,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "中岡世里菜": {
+      "mrr": 2077457,
+      "cnt": 77,
+      "new_mrr": 95000,
+      "new_cnt": 3,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 1786700,
+      "cnt": 40,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2025-01": {
+    "南原龍司": {
+      "mrr": 3124296,
+      "cnt": 372,
+      "new_mrr": 147000,
+      "new_cnt": 49,
+      "churn_mrr": 143546,
+      "churn_cnt": 15,
+      "rate": 4.6
+    },
+    "田中莉奈": {
+      "mrr": 1858566,
+      "cnt": 88,
+      "new_mrr": 10000,
+      "new_cnt": 2,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "中岡世里菜": {
+      "mrr": 2087457,
+      "cnt": 77,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 1770200,
+      "cnt": 40,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2025-02": {
+    "南原龍司": {
+      "mrr": 2865830,
+      "cnt": 381,
+      "new_mrr": 120000,
+      "new_cnt": 28,
+      "churn_mrr": 112000,
+      "churn_cnt": 8,
+      "rate": 3.9
+    },
+    "田中莉奈": {
+      "mrr": 2136566,
+      "cnt": 110,
+      "new_mrr": 278000,
+      "new_cnt": 19,
+      "churn_mrr": 27000,
+      "churn_cnt": 1,
+      "rate": 1.3
+    },
+    "中岡世里菜": {
+      "mrr": 2302457,
+      "cnt": 84,
+      "new_mrr": 215000,
+      "new_cnt": 7,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 1878200,
+      "cnt": 41,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2025-03": {
+    "南原龍司": {
+      "mrr": 2516760,
+      "cnt": 398,
+      "new_mrr": 203000,
+      "new_cnt": 29,
+      "churn_mrr": 73000,
+      "churn_cnt": 3,
+      "rate": 2.9
+    },
+    "田中莉奈": {
+      "mrr": 2188566,
+      "cnt": 113,
+      "new_mrr": 79000,
+      "new_cnt": 4,
+      "churn_mrr": 55000,
+      "churn_cnt": 2,
+      "rate": 2.5
+    },
+    "中岡世里菜": {
+      "mrr": 2454457,
+      "cnt": 85,
+      "new_mrr": 30000,
+      "new_cnt": 1,
+      "churn_mrr": 25000,
+      "churn_cnt": 1,
+      "rate": 1.0
+    },
+    "高橋広輝": {
+      "mrr": 1898700,
+      "cnt": 42,
+      "new_mrr": 22000,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2025-04": {
+    "南原龍司": {
+      "mrr": 2630480,
+      "cnt": 414,
+      "new_mrr": 75000,
+      "new_cnt": 18,
+      "churn_mrr": 59000,
+      "churn_cnt": 5,
+      "rate": 2.2
+    },
+    "田中莉奈": {
+      "mrr": 2249966,
+      "cnt": 108,
+      "new_mrr": 60000,
+      "new_cnt": 2,
+      "churn_mrr": 27000,
+      "churn_cnt": 1,
+      "rate": 1.2
+    },
+    "中岡世里菜": {
+      "mrr": 2383730,
+      "cnt": 86,
+      "new_mrr": 54273,
+      "new_cnt": 2,
+      "churn_mrr": 30000,
+      "churn_cnt": 1,
+      "rate": 1.3
+    },
+    "高橋広輝": {
+      "mrr": 1919200,
+      "cnt": 42,
+      "new_mrr": 30000,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2025-05": {
+    "南原龍司": {
+      "mrr": 2862480,
+      "cnt": 433,
+      "new_mrr": 85000,
+      "new_cnt": 25,
+      "churn_mrr": 59000,
+      "churn_cnt": 8,
+      "rate": 2.1
+    },
+    "田中莉奈": {
+      "mrr": 2305566,
+      "cnt": 109,
+      "new_mrr": 57000,
+      "new_cnt": 2,
+      "churn_mrr": 62500,
+      "churn_cnt": 2,
+      "rate": 2.7
+    },
+    "中岡世里菜": {
+      "mrr": 2491730,
+      "cnt": 89,
+      "new_mrr": 130000,
+      "new_cnt": 4,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 1968700,
+      "cnt": 42,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 30000,
+      "churn_cnt": 1,
+      "rate": 1.5
+    }
+  },
+  "2025-06": {
+    "南原龍司": {
+      "mrr": 2801080,
+      "cnt": 439,
+      "new_mrr": 93000,
+      "new_cnt": 16,
+      "churn_mrr": 78000,
+      "churn_cnt": 26,
+      "rate": 2.8
+    },
+    "田中莉奈": {
+      "mrr": 2275466,
+      "cnt": 115,
+      "new_mrr": 114000,
+      "new_cnt": 9,
+      "churn_mrr": 74000,
+      "churn_cnt": 4,
+      "rate": 3.3
+    },
+    "中岡世里菜": {
+      "mrr": 2511230,
+      "cnt": 90,
+      "new_mrr": 28000,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 2002700,
+      "cnt": 42,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2025-07": {
+    "南原龍司": {
+      "mrr": 2758940,
+      "cnt": 412,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "田中莉奈": {
+      "mrr": 2296266,
+      "cnt": 104,
+      "new_mrr": 122000,
+      "new_cnt": 4,
+      "churn_mrr": 27000,
+      "churn_cnt": 1,
+      "rate": 1.2
+    },
+    "中岡世里菜": {
+      "mrr": 2592230,
+      "cnt": 94,
+      "new_mrr": 77000,
+      "new_cnt": 3,
+      "churn_mrr": 37000,
+      "churn_cnt": 2,
+      "rate": 1.4
+    },
+    "高橋広輝": {
+      "mrr": 1992200,
+      "cnt": 42,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 30000,
+      "churn_cnt": 1,
+      "rate": 1.5
+    }
+  },
+  "2025-08": {
+    "南原龍司": {
+      "mrr": 2457270,
+      "cnt": 304,
+      "new_mrr": 15000,
+      "new_cnt": 1,
+      "churn_mrr": 40000,
+      "churn_cnt": 2,
+      "rate": 1.6
+    },
+    "田中莉奈": {
+      "mrr": 2392158,
+      "cnt": 108,
+      "new_mrr": 136092,
+      "new_cnt": 5,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "中岡世里菜": {
+      "mrr": 2627864,
+      "cnt": 91,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 35000,
+      "churn_cnt": 1,
+      "rate": 1.3
+    },
+    "高橋広輝": {
+      "mrr": 1963700,
+      "cnt": 41,
+      "new_mrr": 30000,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2025-09": {
+    "南原龍司": {
+      "mrr": 2659870,
+      "cnt": 410,
+      "new_mrr": 348000,
+      "new_cnt": 110,
+      "churn_mrr": 468000,
+      "churn_cnt": 135,
+      "rate": 17.6
+    },
+    "田中莉奈": {
+      "mrr": 2443258,
+      "cnt": 110,
+      "new_mrr": 27000,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "中岡世里菜": {
+      "mrr": 2813230,
+      "cnt": 92,
+      "new_mrr": 65000,
+      "new_cnt": 2,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 1923200,
+      "cnt": 41,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 120000,
+      "churn_cnt": 4,
+      "rate": 6.2
+    }
+  },
+  "2025-10": {
+    "南原龍司": {
+      "mrr": 2323980,
+      "cnt": 277,
+      "new_mrr": 3000,
+      "new_cnt": 1,
+      "churn_mrr": 143000,
+      "churn_cnt": 37,
+      "rate": 6.2
+    },
+    "田中莉奈": {
+      "mrr": 2677058,
+      "cnt": 125,
+      "new_mrr": 125000,
+      "new_cnt": 9,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "中岡世里菜": {
+      "mrr": 2757730,
+      "cnt": 99,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 45000,
+      "churn_cnt": 2,
+      "rate": 1.6
+    },
+    "高橋広輝": {
+      "mrr": 2103400,
+      "cnt": 58,
+      "new_mrr": 40600,
+      "new_cnt": 4,
+      "churn_mrr": 30000,
+      "churn_cnt": 1,
+      "rate": 1.4
+    }
+  },
+  "2025-11": {
+    "南原龍司": {
+      "mrr": 2387980,
+      "cnt": 240,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 143000,
+      "churn_cnt": 31,
+      "rate": 6.0
+    },
+    "田中莉奈": {
+      "mrr": 2672858,
+      "cnt": 125,
+      "new_mrr": 27000,
+      "new_cnt": 1,
+      "churn_mrr": 69000,
+      "churn_cnt": 3,
+      "rate": 2.6
+    },
+    "中岡世里菜": {
+      "mrr": 3035630,
+      "cnt": 99,
+      "new_mrr": 342400,
+      "new_cnt": 3,
+      "churn_mrr": 125000,
+      "churn_cnt": 5,
+      "rate": 4.1
+    },
+    "高橋広輝": {
+      "mrr": 2114700,
+      "cnt": 57,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2025-12": {
+    "南原龍司": {
+      "mrr": 2363180,
+      "cnt": 211,
+      "new_mrr": 21600,
+      "new_cnt": 1,
+      "churn_mrr": 194000,
+      "churn_cnt": 31,
+      "rate": 8.2
+    },
+    "田中莉奈": {
+      "mrr": 2698158,
+      "cnt": 125,
+      "new_mrr": 97500,
+      "new_cnt": 4,
+      "churn_mrr": 55000,
+      "churn_cnt": 7,
+      "rate": 2.0
+    },
+    "中岡世里菜": {
+      "mrr": 3003630,
+      "cnt": 94,
+      "new_mrr": 35000,
+      "new_cnt": 1,
+      "churn_mrr": 45500,
+      "churn_cnt": 2,
+      "rate": 1.5
+    },
+    "高橋広輝": {
+      "mrr": 2034000,
+      "cnt": 52,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 40000,
+      "churn_cnt": 2,
+      "rate": 2.0
+    }
+  },
+  "2026-01": {
+    "南原龍司": {
+      "mrr": 2224810,
+      "cnt": 181,
+      "new_mrr": 70000,
+      "new_cnt": 2,
+      "churn_mrr": 48000,
+      "churn_cnt": 16,
+      "rate": 2.2
+    },
+    "田中莉奈": {
+      "mrr": 2673158,
+      "cnt": 124,
+      "new_mrr": 27300,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "中岡世里菜": {
+      "mrr": 2808630,
+      "cnt": 92,
+      "new_mrr": 20000,
+      "new_cnt": 1,
+      "churn_mrr": 135000,
+      "churn_cnt": 4,
+      "rate": 4.8
+    },
+    "高橋広輝": {
+      "mrr": 1983900,
+      "cnt": 49,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2026-02": {
+    "南原龍司": {
+      "mrr": 2018810,
+      "cnt": 163,
+      "new_mrr": 27000,
+      "new_cnt": 1,
+      "churn_mrr": 74000,
+      "churn_cnt": 14,
+      "rate": 3.7
+    },
+    "田中莉奈": {
+      "mrr": 2740758,
+      "cnt": 123,
+      "new_mrr": 154000,
+      "new_cnt": 6,
+      "churn_mrr": 31500,
+      "churn_cnt": 2,
+      "rate": 1.1
+    },
+    "中岡世里菜": {
+      "mrr": 2683630,
+      "cnt": 88,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 35000,
+      "churn_cnt": 1,
+      "rate": 1.3
+    },
+    "高橋広輝": {
+      "mrr": 1933600,
+      "cnt": 51,
+      "new_mrr": 2400,
+      "new_cnt": 2,
+      "churn_mrr": 20000,
+      "churn_cnt": 1,
+      "rate": 1.0
+    }
+  },
+  "2026-03": {
+    "南原龍司": {
+      "mrr": 2175210,
+      "cnt": 189,
+      "new_mrr": 250000,
+      "new_cnt": 40,
+      "churn_mrr": 24000,
+      "churn_cnt": 1,
+      "rate": 1.1
+    },
+    "田中莉奈": {
+      "mrr": 2753658,
+      "cnt": 122,
+      "new_mrr": 43500,
+      "new_cnt": 2,
+      "churn_mrr": 10000,
+      "churn_cnt": 1,
+      "rate": 0.4
+    },
+    "中岡世里菜": {
+      "mrr": 2608630,
+      "cnt": 87,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 1929000,
+      "cnt": 50,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 98600,
+      "churn_cnt": 5,
+      "rate": 5.1
+    }
+  },
+  "2026-04": {
+    "南原龍司": {
+      "mrr": 2059510,
+      "cnt": 186,
+      "new_mrr": 68000,
+      "new_cnt": 7,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "田中莉奈": {
+      "mrr": 2701858,
+      "cnt": 120,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 108000,
+      "churn_cnt": 4,
+      "rate": 4.0
+    },
+    "中岡世里菜": {
+      "mrr": 2819903,
+      "cnt": 93,
+      "new_mrr": 246273,
+      "new_cnt": 7,
+      "churn_mrr": 77000,
+      "churn_cnt": 5,
+      "rate": 2.7
+    },
+    "高橋広輝": {
+      "mrr": 1863000,
+      "cnt": 47,
+      "new_mrr": 400,
+      "new_cnt": 1,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2026-05": {
+    "南原龍司": {
+      "mrr": 2214610,
+      "cnt": 206,
+      "new_mrr": 195000,
+      "new_cnt": 28,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "田中莉奈": {
+      "mrr": 2597658,
+      "cnt": 116,
+      "new_mrr": 20000,
+      "new_cnt": 1,
+      "churn_mrr": 114000,
+      "churn_cnt": 4,
+      "rate": 4.4
+    },
+    "中岡世里菜": {
+      "mrr": 2927903,
+      "cnt": 89,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 27000,
+      "churn_cnt": 1,
+      "rate": 0.9
+    },
+    "高橋広輝": {
+      "mrr": 1919600,
+      "cnt": 49,
+      "new_mrr": 46000,
+      "new_cnt": 4,
+      "churn_mrr": 22000,
+      "churn_cnt": 1,
+      "rate": 1.1
+    }
+  },
+  "2026-06": {
+    "南原龍司": {
+      "mrr": 2247291,
+      "cnt": 213,
+      "new_mrr": 70000,
+      "new_cnt": 8,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "田中莉奈": {
+      "mrr": 2513858,
+      "cnt": 114,
+      "new_mrr": 32000,
+      "new_cnt": 2,
+      "churn_mrr": 40500,
+      "churn_cnt": 2,
+      "rate": 1.6
+    },
+    "中岡世里菜": {
+      "mrr": 2877903,
+      "cnt": 91,
+      "new_mrr": 175000,
+      "new_cnt": 5,
+      "churn_mrr": 112500,
+      "churn_cnt": 5,
+      "rate": 3.9
+    },
+    "高橋広輝": {
+      "mrr": 1921800,
+      "cnt": 52,
+      "new_mrr": 53200,
+      "new_cnt": 5,
+      "churn_mrr": 74000,
+      "churn_cnt": 3,
+      "rate": 3.9
+    }
+  },
+  "2026-07": {
+    "南原龍司": {
+      "mrr": 2311790,
+      "cnt": 224,
+      "new_mrr": 70000,
+      "new_cnt": 10,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "田中莉奈": {
+      "mrr": 2437658,
+      "cnt": 112,
+      "new_mrr": 1000,
+      "new_cnt": 1,
+      "churn_mrr": 189592,
+      "churn_cnt": 8,
+      "rate": 7.8
+    },
+    "中岡世里菜": {
+      "mrr": 2753403,
+      "cnt": 85,
+      "new_mrr": 35000,
+      "new_cnt": 1,
+      "churn_mrr": 29000,
+      "churn_cnt": 2,
+      "rate": 1.1
+    },
+    "高橋広輝": {
+      "mrr": 1853200,
+      "cnt": 50,
+      "new_mrr": 1600,
+      "new_cnt": 2,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    }
+  },
+  "2026-08": {
+    "南原龍司": {
+      "mrr": 2513790,
+      "cnt": 230,
+      "new_mrr": 255000,
+      "new_cnt": 8,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "田中莉奈": {
+      "mrr": 2251266,
+      "cnt": 104,
+      "new_mrr": 42500,
+      "new_cnt": 2,
+      "churn_mrr": 5000,
+      "churn_cnt": 1,
+      "rate": 0.2
+    },
+    "中岡世里菜": {
+      "mrr": 2794403,
+      "cnt": 85,
+      "new_mrr": 70000,
+      "new_cnt": 2,
+      "churn_mrr": 60000,
+      "churn_cnt": 2,
+      "rate": 2.1
+    },
+    "高橋広輝": {
+      "mrr": 1855800,
+      "cnt": 53,
+      "new_mrr": 30000,
+      "new_cnt": 6,
+      "churn_mrr": 5000,
+      "churn_cnt": 1,
+      "rate": 0.3
+    }
+  },
+  "2026-09": {
+    "南原龍司": {
+      "mrr": 2464790,
+      "cnt": 208,
+      "new_mrr": 50000,
+      "new_cnt": 4,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "田中莉奈": {
+      "mrr": 2327266,
+      "cnt": 107,
+      "new_mrr": 70500,
+      "new_cnt": 4,
+      "churn_mrr": 13000,
+      "churn_cnt": 1,
+      "rate": 0.6
+    },
+    "中岡世里菜": {
+      "mrr": 2734403,
+      "cnt": 84,
+      "new_mrr": 30000,
+      "new_cnt": 1,
+      "churn_mrr": 116546,
+      "churn_cnt": 4,
+      "rate": 4.3
+    },
+    "高橋広輝": {
+      "mrr": 1916000,
+      "cnt": 57,
+      "new_mrr": 66800,
+      "new_cnt": 5,
+      "churn_mrr": 5000,
+      "churn_cnt": 1,
+      "rate": 0.3
+    }
+  },
+  "2026-10": {
+    "南原龍司": {
+      "mrr": 497000,
+      "cnt": 40,
+      "new_mrr": 60000,
+      "new_cnt": 6,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "田中莉奈": {
+      "mrr": 1034000,
+      "cnt": 38,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 35000,
+      "churn_cnt": 1,
+      "rate": 3.4
+    },
+    "中岡世里菜": {
+      "mrr": 1534957,
+      "cnt": 50,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 0,
+      "churn_cnt": 0,
+      "rate": 0.0
+    },
+    "高橋広輝": {
+      "mrr": 393200,
+      "cnt": 13,
+      "new_mrr": 0,
+      "new_cnt": 0,
+      "churn_mrr": 30000,
+      "churn_cnt": 1,
+      "rate": 7.6
+    }
+  }
 };
 const MRR_MAIN=['南原龍司','田中莉奈','中岡世里菜','高橋広輝'];
 const MRR_DCLS=['d1','d2','d3','d4'];
@@ -1971,10 +3120,10 @@ function buildMrrMonthSel(){
   var sel=document.getElementById('mrrMonthSel');
   if(!sel)return;
   var months=Object.keys(MRR_DATA).sort();
-  var latest=months[months.length-1];
+  var latest=months.filter(function(m){return isMrrConfirmed(m).confirmed;}).pop()||months[months.length-1];
   sel.innerHTML=months.map(function(m){
     var parts=m.split('-');
-    var label=parts[0]+'年'+parseInt(parts[1])+'月';
+    var label=parts[0]+'年'+parseInt(parts[1])+'月'+(isMrrConfirmed(m).confirmed?'':'（集計途中）');
     return '<option value="'+m+'"'+(m===latest?' selected':'')+'>'+label+'</option>';
   }).join('');
   renderMrrMonth();
