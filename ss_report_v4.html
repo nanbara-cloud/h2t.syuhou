@@ -11,6 +11,8 @@ body{font-family:'Meiryo','メイリオ','Hiragino Kaku Gothic Pro',sans-serif;b
 .hdr{background:var(--white);border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:200;}
 .hdr-ttl{font-size:14px;font-weight:700;display:flex;align-items:center;gap:9px;}
 .hdr-badge{background:var(--primary);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;}
+.hdr-right a{white-space:nowrap;}
+@media(max-width:1000px){.hdr{height:auto;min-height:52px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px;row-gap:6px;}.hdr-right{flex-wrap:wrap;justify-content:flex-end;margin-left:auto;row-gap:6px;}.hdr-right #updAt{order:-1;flex-basis:100%;text-align:right;background:none !important;border:none !important;padding:0 !important;}}
 .upbar{background:var(--white);border-bottom:1px solid var(--border);padding:10px 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
 .up-lbl{font-size:11px;color:var(--muted);font-weight:700;}
 .upz{display:flex;align-items:center;gap:6px;border:1.5px dashed var(--border);border-radius:5px;padding:5px 12px;cursor:pointer;background:var(--bg);}
@@ -102,7 +104,7 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
 <body>
 <header class="hdr">
   <div class="hdr-ttl"><span class="hdr-badge">SS</span>SS事業部　営業ダッシュボード</div>
-  <div style="display:flex;align-items:center;gap:12px;">
+  <div class="hdr-right" style="display:flex;align-items:center;gap:12px;">
     <a href="https://nanbara-cloud.github.io/cf/cashflow.html" target="_blank"
        style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:#7c3aed;color:#fff;border-radius:5px;font-size:12px;font-weight:700;text-decoration:none;">
       💹 キャッシュフロー
@@ -111,7 +113,7 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
        style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--primary);color:#fff;border-radius:5px;font-size:12px;font-weight:700;text-decoration:none;">
       📊 予算進捗
     </a>
-    <span style="font-size:12px;font-weight:700;color:#fff;background:rgba(255,255,255,0.18);border-radius:6px;padding:3px 10px;letter-spacing:.02em;" id="updAt">🗓 最終更新: —</span>
+    <span style="font-size:12px;font-weight:700;color:#1e293b;background:#eef2f7;border:1px solid #cbd5e1;border-radius:6px;padding:4px 10px;letter-spacing:.02em;white-space:nowrap;flex-shrink:0;" id="updAt">🗓 最終更新: —</span>
   </div>
 </header>
 <div class="upbar">
@@ -689,7 +691,7 @@ function parseCSV(txt){const rows=[];let hdr=null;for(let ln of txt.split('\n'))
 function readF(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsText(f,'shift-jis');});}
 function showSt(msg,t){const e=document.getElementById('cst');e.textContent=msg;e.className='cst '+t;e.style.display='inline-block';if(t==='ok')setTimeout(()=>e.style.display='none',4000);}
 async function loadSalesCSV(inp){try{const txt=await readF(inp.files[0]);const rows=parseCSV(txt);processSales(rows);document.getElementById('z1').classList.add('loaded');document.getElementById('z1l').textContent='✓ '+inp.files[0].name;var hdrUpd=document.getElementById('hdrUpdAt');if(hdrUpd)hdrUpd.textContent='🗓 最終更新：2026年5月26日';
-document.getElementById('updAt').textContent='最終更新: '+new Date().toLocaleDateString('ja-JP');showSt('✓ 営業データ '+rows.length+'件 読み込み完了','ok');}catch(e){showSt('❌ '+e.message,'err');}}
+document.getElementById('updAt').textContent='🗓 最終更新: '+new Date().toLocaleDateString('ja-JP');showSt('✓ 営業データ '+rows.length+'件 読み込み完了','ok');}catch(e){showSt('❌ '+e.message,'err');}}
 async function loadBillingCSV(inp){try{const txt=await readF(inp.files[0]);billingData=parseCSV(txt);document.getElementById('z2').classList.add('loaded');document.getElementById('z2l').textContent='✓ '+inp.files[0].name;showSt('✓ 請求データ '+billingData.length+'件 読み込み完了','ok');processBilling();}catch(e){showSt('❌ '+e.message,'err');}}
 
 function pD(s){if(!s)return null;try{return new Date(s.slice(0,10).replace(/\//g,'-'));}catch(e){return null;}}
@@ -3367,7 +3369,7 @@ function setWeek(){const now=new Date();const mon=new Date(now);mon.setDate(now.
 function fmtN(n){if(n>=10000)return(n/10000).toFixed(1)+'万';return n.toLocaleString();}
 months=Object.keys(kpiData).sort();currentMonth=months[months.length-1];
 setWeek();boot();
-document.getElementById('updAt').textContent='最終更新: 2026年11月18日（自動更新）';
+document.getElementById('updAt').textContent='🗓 最終更新: 2026年11月18日（自動更新）';
 </script>
 </body>
 </html>
