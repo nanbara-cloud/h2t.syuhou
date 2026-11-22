@@ -5,6 +5,7 @@
 #   %USERPROFILE%\.claude\skills\ui-ux-pro-max   … UI UX Pro Max（公式CLI）
 #   %USERPROFILE%\.claude\skills\motion-design   … LottieFiles motion-design（公式 skills CLI）
 #   %USERPROFILE%\.claude\skills\lp-maker        … LP作成手順（このリポジトリ同梱）
+#   %USERPROFILE%\.claude\CLAUDE.md              … サイト制作の決まりごとを追記（記憶）
 $ErrorActionPreference = "Stop"
 $Here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Skills = Join-Path $env:USERPROFILE ".claude\skills"
@@ -35,6 +36,18 @@ $Lp = Join-Path $Skills "lp-maker"
 New-Item -ItemType Directory -Force -Path $Lp | Out-Null
 Copy-Item -Recurse -Force (Join-Path $Here "skills\lp-maker\*") $Lp
 Copy-Item -Force (Join-Path $Here "templates\lp-request.md") (Join-Path $Lp "lp-request.md")
+
+Write-Host "== 記憶（.claude\CLAUDE.md）=="
+$Mem = Join-Path $env:USERPROFILE ".claude\CLAUDE.md"
+$Add = Get-Content -Raw -Encoding UTF8 (Join-Path $Here "memory\global-memory.md")
+$Cur = ""
+if (Test-Path $Mem) { $Cur = Get-Content -Raw -Encoding UTF8 $Mem }
+if ($null -eq $Cur) { $Cur = "" }
+# 古い記憶を新しい内容に置き換える（ほかの記述はそのまま）
+$Cur = [regex]::Replace($Cur, '(?s)\r?\n?<!-- h2t-site-kit:start -->.*?<!-- h2t-site-kit:end -->\r?\n?', '')
+$Utf8 = New-Object System.Text.UTF8Encoding($false)
+[System.IO.File]::WriteAllText($Mem, ($Cur.TrimEnd() + "`n`n" + $Add), $Utf8)
+Write-Host "OK  $Mem に追記しました"
 
 Write-Host "== 確認 =="
 $ok = $true
