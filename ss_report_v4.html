@@ -504,17 +504,18 @@ table.dt tbody tr:last-child td{border-bottom:none;} table.dt tbody tr:hover td{
     <div class="tp-card" style="display:flex;flex-direction:column;gap:16px;">
       <div>
         <div class="tp-lbl">📋 今週のトピック</div>
-        <div class="tp-text" id="tp1">1. 展示会案件：補助金対応申請中（10店舗分）
-2. イオン銀行 前進（簡易初期対策 280万、2月以降ツールで簡易管理 480万を予定）
-3. ウェビナー準備：①階層分けして毎週配信 ②他社協業
-4. コール開始（11/2〜）：3日間で41コール・1アポ　<a href="https://docs.google.com/spreadsheets/d/1re_vmAnlxJCAQJH6HOvqBQ6ES6bn2WNdnhseb1vfy-g/edit?gid=1356709565#gid=1356709565" target="_blank" style="color:var(--primary);">管理シート</a></div>
+        <div class="tp-text" id="tp1">1. 京都勝牛（口コミ返信代行）：11/19打合せ→70店舗×1,500円＝月額10.5万円で見積・契約書を送付。Mappy一括返信の開発工数を確認中
+2. 受注：LIXILリフォームショップ高砂 HP契約（116.6万円・税込／中岡）、有限会社ちゅら MAppy＋（12/1開始）
+3. イオン銀行：入稿フォーマット外のサービス項目は1月のMappy導入後に全拠点へ一括反映で合意。AI／目視チェックは11/25打合せで決定
+4. 東弘案件：茨城4候補のGoogleマップ対策方針を整理（12/3までに初期構築）。新規商談：五料橋クリニック・エキサイト・タクキ
+5. コール（11/16〜11/19）：98コール・1アポ・商談1／月累計 264コール・5アポ（目標608・20）※11/20は未入力　<a href="https://docs.google.com/spreadsheets/d/1re_vmAnlxJCAQJH6HOvqBQ6ES6bn2WNdnhseb1vfy-g/edit?gid=1356709565#gid=1356709565" target="_blank" style="color:var(--primary);">管理シート</a></div>
       </div>
       <div style="border-top:1px solid var(--border);padding-top:14px;">
         <div class="tp-lbl">🎯 次週アクション</div>
-        <div class="tp-text" id="tp2">1. コール量の向上（目標 1日50件・週250件）
-2. ウェビナー開催準備
-3. イオン銀行 契約・譲渡準備
-4. HP＋AIO セット販売の広告予定</div>
+        <div class="tp-text" id="tp2">1. 京都勝牛：契約書確認のフォローと一括返信の工数確定→開始時期を案内
+2. イオン銀行：11/25打合せでチェック方式（AI／目視）を決定、テスト環境を準備
+3. 商談・定例：11/24 OKB（AIO）、11/25 ゲンダイエージェンシー、11/27 小手川さん・シンコム定例。エキサイトの契約期間の相談に回答
+4. コール：月目標まで残り344件（11/24〜11/30の5営業日）。日次目標32件の確実な消化と実績の当日入力</div>
       </div>
       <div style="border-top:1px solid var(--border);padding-top:14px;">
         <div class="tp-lbl">💬 その他相談事項</div>
@@ -2835,7 +2836,7 @@ const TK_CALL={
   focus:'時期改め・MEO解約1〜2年・留守',
   days:[
     {d:'11/2(月)',  t:32, calls:3,  apo:1, hours:1,   shodan:0, note:''},
-    {d:'11/4(水)',  t:32, calls:16, apo:0, hours:3,   shodan:0, note:''},
+    {d:'11/4(水)',  t:32, calls:16, apo:0, hours:3,   shodan:1, note:''},
     {d:'11/5(木)',  t:32, calls:22, apo:1, hours:4,   shodan:0, note:''},
     {d:'11/6(金)',  t:32, calls:18, apo:0, hours:3,   shodan:0, note:''},
     {d:'11/9(月)',  t:32, calls:24, apo:1, hours:4,   shodan:0, note:''},
@@ -2845,7 +2846,9 @@ const TK_CALL={
     {d:'11/13(金)', t:32, calls:33, apo:0, hours:4,   shodan:0, note:'展示会リスト'},
     {d:'11/16(月)', t:32, calls:30, apo:0, hours:4,   shodan:0, note:'展示会リスト'},
     {d:'11/17(火)', t:32, calls:26, apo:1, hours:4,   shodan:1, note:'展示会リスト'},
-    {d:'11/18(水)', t:32}, {d:'11/19(木)', t:32}, {d:'11/20(金)', t:32},
+    {d:'11/18(水)', t:32, calls:31, apo:0, hours:3.5, shodan:0, note:'展示会リスト（終了）・留守・時期改めリスト'},
+    {d:'11/19(木)', t:32, calls:11, apo:0, hours:1.5, shodan:0, note:''},
+    {d:'11/20(金)', t:32},
     {d:'11/24(火)', t:32}, {d:'11/25(水)', t:32}, {d:'11/26(木)', t:32}, {d:'11/27(金)', t:32}, {d:'11/30(月)', t:32, ta:2}
   ]
 };
