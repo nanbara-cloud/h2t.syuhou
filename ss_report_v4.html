@@ -2870,6 +2870,9 @@ function renderTkCall(){
   }
   var cCol=pct(calls,tgtSoFar)>=90?'var(--success)':pct(calls,tgtSoFar)>=60?'var(--warn)':'var(--danger)';
   var aCol=apo>=apoTgtSoFar?'var(--success)':'var(--warn)';
+  // kintone（営業マスタ）由来：商談者=高橋の当月 商談数（商談日時）・受注数（締結譲渡完了日）
+  var _now=new Date(Date.now()+9*3600000), _ym=_now.getUTCFullYear()+'-'+('0'+(_now.getUTCMonth()+1)).slice(-2), _mn=(_now.getUTCMonth()+1)+'月';
+  var tkK=(typeof STATIC_KPI!=='undefined'&&STATIC_KPI[_ym]&&STATIC_KPI[_ym]['高橋広輝'])||{shodan:0,keiyaku:0,price_sum:0};
   document.getElementById('tkHead').innerHTML=
     '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:10px;">'+
       '<div style="font-size:12px;font-weight:700;color:var(--text);">'+TK_CALL.month+'　架電・アポ進捗 <span style="font-weight:400;color:var(--muted);margin-left:6px;">営業日'+T.biz_days+'日／'+done.length+'日経過・残り'+remainDays+'日</span></div>'+
@@ -2879,6 +2882,8 @@ function renderTkCall(){
       card('アポ獲得',apo+'<span style="font-size:12px;font-weight:400;color:var(--muted);"> / '+T.apo_month+'件</span>','経過日目標 '+apoTgtSoFar+'件・残り'+needApo+'件',pct(apo,T.apo_month),aCol)+
       card('アポ率',rate.toFixed(1)+'%','想定 '+T.apo_rate.toFixed(1)+'%（'+(rate>=T.apo_rate?'想定以上':'想定未満')+'）',undefined,rate>=T.apo_rate?'var(--success)':'var(--warn)')+
       card('商談（下半期）',shodan+'<span style="font-size:12px;font-weight:400;color:var(--muted);"> / '+T.shodan_half+'件</span>','コール起点の商談。10〜3月で10件目標',pct(shodan,T.shodan_half),'var(--primary)')+
+      card('商談数（'+_mn+'）',tkK.shodan+'<span style="font-size:12px;font-weight:400;color:var(--muted);"> 件</span>','kintone：高橋が商談者・商談日が'+_mn,undefined,'var(--primary)')+
+      card('受注数（'+_mn+'）',tkK.keiyaku+'<span style="font-size:12px;font-weight:400;color:var(--muted);"> 件</span>','kintone：締結譲渡完了日が'+_mn+(tkK.price_sum?'・月額計 '+tkK.price_sum.toLocaleString()+'円':''),undefined,tkK.keiyaku?'var(--success)':'var(--text)')+
       card('稼働時間',hours+'h','1時間あたり '+perH.toFixed(1)+'コール／'+(hours?(apo/hours).toFixed(2):'0')+'アポ')+
     '</div>';
   // chart
@@ -3375,7 +3380,7 @@ function setWeek(){const now=new Date();const mon=new Date(now);mon.setDate(now.
 function fmtN(n){if(n>=10000)return(n/10000).toFixed(1)+'万';return n.toLocaleString();}
 months=Object.keys(kpiData).sort();currentMonth=months[months.length-1];
 setWeek();boot();
-document.getElementById('updAt').textContent='🗓 最終更新: 2026年11月24日 12:31（自動更新）';
+document.getElementById('updAt').textContent='🗓 最終更新: 2026年11月24日 12:54（自動更新）';
 </script>
 </body>
 </html>
