@@ -82,17 +82,24 @@ def term(r):
 
 
 # ---------- builders ----------
+def is_hp(r):
+    return rank(r['見込みランク']) == 'HP受注'
+
+
 def in_juchu(r):
+    """課金開始日が今期以降、または見込みランクが「HP受注」なら受注。"""
+    if is_hp(r):
+        return True
     return bool(r['課金開始日']) and ymd(r['課金開始日']) >= JUCHU_FROM.replace('-', '/')
 
 
 def build_juchu(S):
-    """課金開始日が入っていれば受注（ステータスは問わない）。"""
+    """課金開始日が入っていれば受注（ステータスは問わない）。見込みランク「HP受注」も受注に含め hp=True を付ける。"""
     rows = [r for r in S if in_juchu(r)]
     rows.sort(key=lambda r: int(r['$id']), reverse=True)
     return [{'person': sp(r['商談者']), 'name': (r['法人名'] or '').strip(), 'price': num(r['月額単価']),
              'kakin_d': ymd(r['課金開始日']), 'keiyaku_d': ymd(r['締結譲渡完了日']),
-             'route': r['アポ経路'] or '', 'term': term(r)} for r in rows]
+             'route': r['アポ経路'] or '', 'term': term(r), 'hp': is_hp(r)} for r in rows]
 
 
 def build_pipe(S):
@@ -183,6 +190,7 @@ def main():
     mik = [p for p in data['STATIC_PIPE'] if p['status'] == '見込み']
     summary['見込み'] = len(mik)
     summary['見込み月額合計'] = sum(p['price'] for p in mik)
+    summary['HP受注'] = sum(1 for j in data['STATIC_JUCHU'] if j.get('hp'))
     print(json.dumps(summary, ensure_ascii=False))
     if a.dry_run:
         return
