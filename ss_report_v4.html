@@ -2836,6 +2836,7 @@ function onRouteYear(key) {
 }
 
 
+const STATIC_TK_SHODAN = {"since": "2026/10/01", "rows": [{"name": "THEMOSTCOFFEE", "person": "高橋 広輝", "route": "Bizcan（ビズカン）", "status": "時期改め", "shodan_d": "2026/10/16", "kind": "done"}, {"name": "ZEAL BOXING 神楽坂", "person": "高橋 広輝", "route": "FBリード", "status": "商談NG", "shodan_d": "2026/11/02", "kind": "done"}, {"name": "トライプラス仙台落合校", "person": "中岡 世里菜", "route": "直営", "status": "商談NG", "shodan_d": "2026/11/09", "kind": "done"}, {"name": "奄美愛ネット", "person": "高橋 広輝", "route": "FBリード", "status": "契約完了", "shodan_d": "2026/11/10", "kind": "done"}, {"name": "マンディル", "person": "中岡 世里菜", "route": "FBリード", "status": "時期改め", "shodan_d": "2026/11/11", "kind": "done"}, {"name": "おしろいや", "person": "高橋 広輝", "route": "直営", "status": "アポ", "shodan_d": "2026/12/02", "kind": "plan"}]};
 // ===== 高橋 コール・アポ管理（11月） =====
 // 更新方法：TK_CALL.days に日次実績（calls/apo/hours/shodan/note）を追記。目標は TK_CALL.target。
 const TK_CALL={
@@ -2855,8 +2856,11 @@ const TK_CALL={
     {d:'11/17(火)', t:32, calls:26, apo:1, hours:4,   shodan:1, note:'展示会リスト'},
     {d:'11/18(水)', t:32, calls:31, apo:0, hours:3.5, shodan:0, note:'展示会リスト（終了）・留守・時期改めリスト'},
     {d:'11/19(木)', t:32, calls:11, apo:0, hours:1.5, shodan:0, note:''},
-    {d:'11/20(金)', t:32},
-    {d:'11/24(火)', t:32}, {d:'11/25(水)', t:32}, {d:'11/26(木)', t:32}, {d:'11/27(金)', t:32}, {d:'11/30(月)', t:32, ta:2}
+    {d:'11/20(金)', t:32, calls:0,  apo:0, hours:0,   shodan:0, note:'休み'},
+    {d:'11/24(火)', t:32, calls:18, apo:0, hours:2.25,shodan:0, note:''},
+    {d:'11/25(水)', t:32, calls:12, apo:0, hours:1.5, shodan:0, note:''},
+    {d:'11/26(木)', t:32, calls:23, apo:1, hours:1.5, shodan:0, note:'ペイメント'},
+    {d:'11/27(金)', t:32}, {d:'11/30(月)', t:32, ta:2}
   ]
 };
 function renderTkCall(){
@@ -2876,6 +2880,7 @@ function renderTkCall(){
   var aCol=apo>=apoTgtSoFar?'var(--success)':'var(--warn)';
   // kintone（営業マスタ）由来：商談者=高橋の当月 商談数（商談日時）・受注数（締結譲渡完了日）
   var _now=new Date(Date.now()+9*3600000), _ym=_now.getUTCFullYear()+'-'+('0'+(_now.getUTCMonth()+1)).slice(-2), _mn=(_now.getUTCMonth()+1)+'月';
+  var tkS=(typeof STATIC_TK_SHODAN!=='undefined'&&STATIC_TK_SHODAN.rows)||[], tkDone=tkS.filter(function(x){return x.kind==='done';}), tkPlan=tkS.filter(function(x){return x.kind==='plan';});
   var tkK=(typeof STATIC_KPI!=='undefined'&&STATIC_KPI[_ym]&&STATIC_KPI[_ym]['高橋広輝'])||{shodan:0,keiyaku:0,price_sum:0};
   document.getElementById('tkHead').innerHTML=
     '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:10px;">'+
@@ -2885,11 +2890,13 @@ function renderTkCall(){
       card('コール実績（月間）',calls.toLocaleString()+'<span style="font-size:12px;font-weight:400;color:var(--muted);"> / '+T.call_month.toLocaleString()+'</span>','経過日目標 '+tgtSoFar+'件に対し '+pct(calls,tgtSoFar).toFixed(0)+'%・残り'+needCall+'件（'+(remainDays?Math.ceil(needCall/remainDays):0)+'件/日）',pct(calls,T.call_month),cCol)+
       card('アポ獲得',apo+'<span style="font-size:12px;font-weight:400;color:var(--muted);"> / '+T.apo_month+'件</span>','経過日目標 '+apoTgtSoFar+'件・残り'+needApo+'件',pct(apo,T.apo_month),aCol)+
       card('アポ率',rate.toFixed(1)+'%','想定 '+T.apo_rate.toFixed(1)+'%（'+(rate>=T.apo_rate?'想定以上':'想定未満')+'）',undefined,rate>=T.apo_rate?'var(--success)':'var(--warn)')+
-      card('商談（下半期）',shodan+'<span style="font-size:12px;font-weight:400;color:var(--muted);"> / '+T.shodan_half+'件</span>','コール起点の商談。10〜3月で10件目標',pct(shodan,T.shodan_half),'var(--primary)')+
+      card('商談（下半期）',tkDone.length+'<span style="font-size:12px;font-weight:400;color:var(--muted);"> / '+T.shodan_half+'件</span>','kintone：高橋がアポを取り商談した件数（問い合わせ・紹介を除く）'+(tkPlan.length?'・予定'+tkPlan.length+'件':''),pct(tkDone.length,T.shodan_half),'var(--primary)')+
       card('商談数（'+_mn+'）',tkK.shodan+'<span style="font-size:12px;font-weight:400;color:var(--muted);"> 件</span>','kintone：高橋が商談者・商談日が'+_mn,undefined,'var(--primary)')+
       card('受注数（'+_mn+'）',tkK.keiyaku+'<span style="font-size:12px;font-weight:400;color:var(--muted);"> 件</span>','kintone：締結譲渡完了日が'+_mn+(tkK.price_sum?'・月額計 '+tkK.price_sum.toLocaleString()+'円':''),undefined,tkK.keiyaku?'var(--success)':'var(--text)')+
       card('稼働時間',hours+'h','1時間あたり '+perH.toFixed(1)+'コール／'+(hours?(apo/hours).toFixed(2):'0')+'アポ')+
-    '</div>';
+    '</div>'+
+    (tkS.length?'<div style="margin-top:10px;font-size:12px;"><div style="font-weight:700;color:var(--text);margin-bottom:4px;">高橋のアポからの商談（下半期・kintone）</div><table class="dt" style="font-size:12px;"><thead><tr><th>商談日</th><th>屋号 / 法人名</th><th>商談者</th><th>アポ経路</th><th>ステータス</th></tr></thead><tbody>'+
+      tkS.map(function(x){return '<tr'+(x.kind==='plan'?' style="color:var(--muted);"':'')+'><td>'+x.shodan_d+(x.kind==='plan'?'（予定）':'')+'</td><td>'+x.name+'</td><td>'+x.person+'</td><td>'+(x.route||'—')+'</td><td>'+x.status+'</td></tr>';}).join('')+'</tbody></table></div>':'');
   // chart
   var W=960,Hh=200,L=40,R=10,Tt=14,B=34,n=D.length,bw=(W-L-R)/n,max=Math.max(40,Math.max.apply(null,D.map(function(x){return x.calls||0;})));
   var y=function(v){return Tt+(Hh-Tt-B)*(1-v/max);}, s='';
@@ -3384,7 +3391,7 @@ function setWeek(){const now=new Date();const mon=new Date(now);mon.setDate(now.
 function fmtN(n){if(n>=10000)return(n/10000).toFixed(1)+'万';return n.toLocaleString();}
 months=Object.keys(kpiData).sort();currentMonth=months[months.length-1];
 setWeek();boot();
-document.getElementById('updAt').textContent='🗓 最終更新: 2026年11月27日 15:24（自動更新）';
+document.getElementById('updAt').textContent='🗓 最終更新: 2026年11月27日 16:53（自動更新）';
 </script>
 </body>
 </html>

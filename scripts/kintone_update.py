@@ -2,7 +2,7 @@
 """週報 ss_report_v4.html の kintone 由来データ（KPI・パイプライン・受注・問い合わせ）を作り直す。
 
 kintone の営業マスタ（アプリ238）を API で読み、HTML 内の次の定数を置き換える:
-  STATIC_KPI / STATIC_PIPE / STATIC_JUCHU / STATIC_ROUTE_DATA と、ヘッダーの最終更新日時。
+  STATIC_KPI / STATIC_PIPE / STATIC_JUCHU / STATIC_ROUTE_DATA / STATIC_TK_SHODAN と、ヘッダーの最終更新日時。
 
 認証: リクエストヘッダー X-Cybozu-API-Token。クラウド環境ではプロキシが本物のトークンを
 差し込むので、環境変数 KINTONE_API_TOKEN が無ければダミー値で送る。
@@ -160,6 +160,36 @@ def build_route(S):
              'ans_d': ymd(r['回答予定日時'])} for r in rows]
 
 
+def half_start(today):
+    """今の半期の開始日（上期 4/1・下期 10/1）。"""
+    if today.month >= 10:
+        return f'{today.year}/10/01'
+    if today.month <= 3:
+        return f'{today.year - 1}/10/01'
+    return f'{today.year}/04/01'
+
+
+def build_tk_shodan(S, today):
+    """高橋がアポを取った案件のうち、今の半期に商談したもの・商談予定のもの（問い合わせ・紹介経由は除く）。"""
+    since = half_start(today)
+    out = []
+    for r in S:
+        if ns(r['アポ獲得者_プルダウン']) != '高橋広輝' or r['アポ経路'] in ('問い合わせ', '紹介'):
+            continue
+        done = ymd(r['商談日時'])
+        plan = ymd(r['商談予定日時'])
+        if done and done >= since:
+            kind = 'done'
+        elif not done and plan and plan >= today.strftime('%Y/%m/%d') and r['案件ステータス'] == 'アポ':
+            kind = 'plan'
+        else:
+            continue
+        out.append({'name': (r.get('屋号') or '').strip() or (r['法人名'] or '').strip(), 'person': sp(r['商談者']),
+                    'route': r['アポ経路'] or '', 'status': r['案件ステータス'], 'shodan_d': done or plan, 'kind': kind})
+    out.sort(key=lambda x: x['shodan_d'])
+    return {'since': since, 'rows': out}
+
+
 def replace_const(html, name, value):
     pat = re.compile(r'(const ' + name + r' = )(.*?)(;\n)', re.S)
     if not pat.search(html):
@@ -177,7 +207,8 @@ def main():
     if len(S) < 1000:
         raise SystemExit(f'営業マスタの件数が少なすぎます（{len(S)}件）。取得に失敗した可能性があるため中止します')
     data = {'STATIC_KPI': build_kpi(S), 'STATIC_PIPE': build_pipe(S),
-            'STATIC_JUCHU': build_juchu(S), 'STATIC_ROUTE_DATA': build_route(S)}
+            'STATIC_JUCHU': build_juchu(S), 'STATIC_ROUTE_DATA': build_route(S),
+            'STATIC_TK_SHODAN': build_tk_shodan(S, datetime.datetime.now(JST))}
     html = open(a.html, encoding='utf-8').read()
     new = html
     for k, v in data.items():
@@ -186,11 +217,12 @@ def main():
     new = re.sub(r"document\.getElementById\('updAt'\)\.textContent='[^']*';",
                  "document.getElementById('updAt').textContent='🗓 最終更新: %d年%d月%d日 %s（自動更新）';"
                  % (now.year, now.month, now.day, now.strftime('%H:%M')), new, count=1)
-    summary = {k: len(v) for k, v in data.items()}
+    summary = {k: len(v) for k, v in data.items() if k != 'STATIC_TK_SHODAN'}
     mik = [p for p in data['STATIC_PIPE'] if p['status'] == '見込み']
     summary['見込み'] = len(mik)
     summary['見込み月額合計'] = sum(p['price'] for p in mik)
     summary['HP受注'] = sum(1 for j in data['STATIC_JUCHU'] if j.get('hp'))
+    summary['高橋アポ商談'] = sum(1 for x in data['STATIC_TK_SHODAN']['rows'] if x['kind'] == 'done')
     print(json.dumps(summary, ensure_ascii=False))
     if a.dry_run:
         return
